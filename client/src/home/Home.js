@@ -1,4 +1,5 @@
 import Nav from "../components/nav"
+import AboutUs from "./AboutUs"
 import FeaturedProducts from "./FeaturedProducts"
 import './home.css'
 
@@ -22,6 +23,7 @@ export default function Home() {
                 <button className="bannerBtn">Catalog</button>
             </div>
             <FeaturedProducts/>
+            <AboutUs />
         </>
     )
 }

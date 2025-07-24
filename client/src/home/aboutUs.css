@@ -1,0 +1,19 @@
+.aboutUsImg{
+    max-width: 25rem;
+}
+
+.aboutUsInfo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5rem;
+}
+
+.aboutUsText{
+    font-size: 2rem;
+    max-width: 40rem;
+}
+
+.aboutUsSection{
+    margin: 2em;
+}
