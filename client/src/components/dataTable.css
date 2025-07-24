@@ -1,0 +1,21 @@
+.deleteBtn{
+    color: red;
+    background-color: transparent;
+    border: none;
+    border-right: 1px solid gray;
+}
+.deleteBtn:hover{
+    cursor: pointer;
+}
+
+.adminBtn{
+    background-color: transparent;
+    border: none;
+}
+.adminBtn:hover{
+    cursor: pointer;
+}
+
+.editBtn{
+    border-right: 1px solid gray;
+}
