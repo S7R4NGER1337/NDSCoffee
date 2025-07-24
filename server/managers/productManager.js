@@ -36,3 +36,9 @@ exports.updateProduct = async (id, data) => {
 
     return product
 }
+
+exports.getAvailable = async () => {
+    const availableProducts = await Product.find({isActive: true})
+
+    return availableProducts
+}
