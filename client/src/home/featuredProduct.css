@@ -1,0 +1,22 @@
+.featuredProduct{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.featuredProductImg{
+    height: auto;
+    max-width: 23rem;
+}
+
+.featuredProductBtn{
+    width: 100%;
+    font-size: 1.5rem;
+    padding: 0.3em 1em;
+}
+.featuredProductBtn:hover{
+    cursor: pointer;
+    font-size: 1.6em;
+    padding: 0.25em 0.7em;
+}
