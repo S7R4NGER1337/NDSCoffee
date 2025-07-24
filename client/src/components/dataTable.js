@@ -40,7 +40,7 @@ export default function DataTable({ data }) {
         const changeStatusColor = data.isActive ? 'red' : 'green'
         const changeStatus = <button className='adminBtn' style={{ color: changeStatusColor }}>{data.isActive ? 'HideProduct' : 'ShowProduct'}</button>
 
-        const editButton = <button className='adminBtn editBtn' onClick={() => navigate(`/admin/${data._id}/edit`)}> Edit Order</button>
+        const editButton = <button className='adminBtn editBtn' onClick={() => navigate(`/admin/${productId}/edit`)}> Edit Order</button>
 
         const deleteBtn = <button className='adminBtn' style={{ color: 'red' }} onClick={() => deleteProduct(productId)}>Delete Product</button>
         return <>
