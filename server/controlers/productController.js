@@ -24,6 +24,13 @@ router.get('/available', async (req, res) => {
     
     res.end()    
 })
+
+router.get('/featured', async (req, res) => {
+    const products = await productManager.getThreeProducts()
+
+    res.json(products)
+    res.end()
+})
 router.get('/:id', async (req, res) => {
     const {id} = req.params
     const product = await productManager.getProductById(id)

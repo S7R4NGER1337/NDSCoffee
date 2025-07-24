@@ -42,3 +42,9 @@ exports.getAvailable = async () => {
 
     return availableProducts
 }
+
+exports.getThreeProducts = async () => {
+    const threeProducts = await Product.find().limit(3)
+ 
+    return threeProducts
+}
