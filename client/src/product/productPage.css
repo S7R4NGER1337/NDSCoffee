@@ -1,0 +1,30 @@
+.productImage{
+    max-width: 30rem;
+    max-height: 30rem;
+}
+
+.productContainer{
+    display: flex;
+    justify-content: center;
+    margin-top: 10vh;
+    gap: 20vw;
+}
+
+.productData{
+    display: flex;
+    flex-direction: column;
+}
+
+.productName{
+    font-size: 3.5rem;
+}
+
+.productDescription{
+    font-size: 2rem;
+}
+
+.productBuy{
+    margin-top: 3rem;
+    font-size: 2rem;
+    padding: 0.2em 1em;
+}
