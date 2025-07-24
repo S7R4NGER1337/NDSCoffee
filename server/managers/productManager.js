@@ -44,7 +44,7 @@ exports.getAvailable = async () => {
 }
 
 exports.getThreeProducts = async () => {
-    const threeProducts = await Product.find().limit(3)
+    const threeProducts = await Product.find({isActive: true}).limit(3)
  
     return threeProducts
 }
