@@ -1,5 +1,6 @@
+import { Link } from "react-router-dom";
 import FeaturedProduct from "./FeaturedProduct";
-import './featuredProducts.css'
+import "./featuredProducts.css";
 
 export default function FeaturedProducts() {
   const testProducts = [
@@ -25,7 +26,9 @@ export default function FeaturedProducts() {
       <h1 className="featuredProductsHeading">FeaturedProducts</h1>
       <div className="featuredProducts">
         {testProducts.map((product) => (
-          <FeaturedProduct productData={product} />
+          <Link to={`/products/${product._id}`} style={{textDecoration: 'none', color: 'inherit'}}>
+            <FeaturedProduct productData={product} />
+          </Link>
         ))}
       </div>
     </div>
