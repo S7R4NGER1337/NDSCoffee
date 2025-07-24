@@ -20,7 +20,7 @@ export default function ProductPage() {
       setProductData(await getProductData(productId));
     }
     setData();
-  }, []);
+  }, [productId]);
 
   return (
     <>
