@@ -2,6 +2,7 @@ import {Route, Routes} from 'react-router'
 import AdminPage from './admin/adminPage.js';
 import AdminCreate from './admin/adminCreate.js';
 import OrdersPage from './admin/ordersPage.js'
+import ProductPage from './product/ProductPage.js'
 
 import './App.css';
 import Home from './home/Home.js';
@@ -14,6 +15,7 @@ function App() {
           <Route path="/admin" element={<AdminPage />} />
           <Route path="/admin/create" element={<AdminCreate />} />
           <Route path="/admin/orders" element={<OrdersPage/>} />
+          <Route path='/product/:id' element={<ProductPage />} />
         </Routes>
     </div>
   );
