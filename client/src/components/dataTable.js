@@ -51,7 +51,7 @@ export default function DataTable({ data }) {
     }
 
     const canRenderProducts = () => {
-        if(productData !== undefined && productData > 0) return false
+        if(productData !== undefined && productData.length > 0) return false
         return true
     }
 
