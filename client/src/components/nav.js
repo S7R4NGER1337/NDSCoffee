@@ -13,7 +13,7 @@ export default function Nav(navData) {
       <h1 className='navName'>{navData.navName}</h1>
       <div className="navLinks">
           {navData['navLinks'].map(link =>
-            <Link to={link.linkPath} style={{ textDecoration: 'none', color: 'inherit' }}>
+            <Link to={link.linkPath} style={{ textDecoration: 'none', color: 'inherit' }} key={link.linkPath}>
               <p className='navLink'>{link.linkName}</p>
             </Link>
           )}
