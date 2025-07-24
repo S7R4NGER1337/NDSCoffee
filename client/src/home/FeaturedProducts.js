@@ -25,7 +25,7 @@ export default function FeaturedProducts() {
       <div className="featuredProducts">
         {products.map((product) => (
           <Link
-            to={`/products/${product._id}`}
+            to={`/product/${product._id}`}
             style={{ textDecoration: "none", color: "inherit" }}
           >
             <FeaturedProduct productData={product} />
