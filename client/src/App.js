@@ -6,6 +6,7 @@ import ProductPage from './product/ProductPage.js'
 
 import './App.css';
 import Home from './home/Home.js';
+import Catalog from './catalog/Catalog.js';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/admin/create" element={<AdminCreate />} />
           <Route path="/admin/orders" element={<OrdersPage/>} />
           <Route path='/product/:id' element={<ProductPage />} />
+          <Route path='/catalog' element={<Catalog />} />
         </Routes>
     </div>
   );
