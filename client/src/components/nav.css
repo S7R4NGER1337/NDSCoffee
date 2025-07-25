@@ -25,3 +25,7 @@
 .navLink{
   margin: 0
 }
+
+.navLink:hover{
+  cursor: pointer;
+}

@@ -13,33 +13,13 @@ export default function Nav(navData) {
       <h1 className='navName'>{navData.navName}</h1>
       <div className="navLinks">
           {navData['navLinks'].map(link =>
+            link.linkPath !== '/about' ?
             <Link to={link.linkPath} style={{ textDecoration: 'none', color: 'inherit' }} key={link.linkPath}>
               <p className='navLink'>{link.linkName}</p>
-            </Link>
+            </Link> : 
+            <p className='navLink' onClick={() => navData.aboutRef.current?.scrollIntoView({ behavior: 'smooth' })}> About </p>
           )}
       </div>
     </div>
   )
-  // return (
-  //   <Box sx={{ flexGrow: 1, textAlign: 'center' }}>
-  //     <AppBar position="static">
-  //       <Toolbar style={{ display: 'flex' }}>
-  //         <Link to={'/admin'} style={{ textDecoration: 'none', color: 'inherit' }}>
-  //           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-  //             {navData.navName}
-  //           </Typography>
-  //         </Link>
-
-  //         <div style={{justifyContent: 'center'}}>
-  //           {navData.navLinks.map(link =>
-  //             <Link to={link.linkPath} style={{ textDecoration: 'none', color: 'inherit' }}>
-  //               <Button color="inherit">{link.linkName}</Button>
-  //             </Link>
-  //           )}
-  //         </div>
-
-  //       </Toolbar>
-  //     </AppBar>
-  //   </Box>
-  // )
 }
