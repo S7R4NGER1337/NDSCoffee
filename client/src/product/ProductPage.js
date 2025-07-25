@@ -2,10 +2,9 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Nav from "../components/nav";
 import "./productPage.css";
+import { setOrder } from "../App";
 
 async function getProductData(id) {
-  
-
   try {
     const response = await fetch(`http://localhost:3030/products/${id}`);
     const data = await response.json();
@@ -50,7 +49,7 @@ export default function ProductPage() {
           <h1 className="productName">{productData.name}</h1>
           <p className="productDescription">{productData.description}</p>
           <p className="productPrice">{productData.price} лв</p>
-          <button className="productBuy">Buy now</button>
+          <button className="productBuy" onClick={() => setOrder(productId)}>Buy now</button>
         </div>
       </div>
     </>
