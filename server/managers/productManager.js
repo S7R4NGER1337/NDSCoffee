@@ -6,7 +6,6 @@ exports.getAllProducts = async () => {
 }
 
 exports.createProduct = async (productData) => {
-    console.log(productData);
     try {
         
         await Product.create(productData)
