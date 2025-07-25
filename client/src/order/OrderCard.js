@@ -18,7 +18,7 @@ export default function OrderCard({ data }) {
       setQty(cartInfo[index].qty)
     }
 
-    if (qty-1 < 1) {
+    if (qty < 1) {
       cartInfo.splice(cartInfo.indexOf(cartInfo[index]), 1);
     }
     localStorage.setItem("cart", JSON.stringify(cartInfo));
@@ -40,7 +40,7 @@ export default function OrderCard({ data }) {
       }
     }
     getProduct();
-  }, []);
+  }, [data.id]);
 
   useEffect(() =>{
     setQty(data.qty)
