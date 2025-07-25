@@ -22,10 +22,6 @@ export default function ProductPage() {
       linkName: 'Home'
     },
     {
-      linkPath: "/about",
-      linkName: "About us",
-    },
-    {
       linkPath: "/catalog",
       linkName: "Catalog",
     },
