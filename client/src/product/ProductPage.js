@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import Nav from "../components/nav";
 import "./productPage.css";
 import { setOrder } from "../App";
+import { useNavigate } from "react-router";
 
 async function getProductData(id) {
   try {
@@ -15,6 +16,7 @@ async function getProductData(id) {
 }
 
 export default function ProductPage() {
+  const navigate = useNavigate()
   const linkings = [
     {
       linkPath: '/',
@@ -49,7 +51,10 @@ export default function ProductPage() {
           <h1 className="productName">{productData.name}</h1>
           <p className="productDescription">{productData.description}</p>
           <p className="productPrice">{productData.price} лв</p>
-          <button className="productBuy" onClick={() => setOrder(productId)}>Buy now</button>
+          <button className="productBuy" onClick={() => {
+            setOrder(productId)
+            navigate('/order')
+            }}>Buy now</button>
         </div>
       </div>
     </>
