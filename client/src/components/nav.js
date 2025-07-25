@@ -17,7 +17,7 @@ export default function Nav(navData) {
             <Link to={link.linkPath} style={{ textDecoration: 'none', color: 'inherit' }} key={link.linkPath}>
               <p className='navLink'>{link.linkName}</p>
             </Link> : 
-            <p className='navLink' onClick={() => navData.aboutRef.current?.scrollIntoView({ behavior: 'smooth' })}> About </p>
+            <p className='navLink' onClick={() => navData.aboutRef.current?.scrollIntoView({ behavior: 'smooth' })} key={link.linkPath}> About </p>
           )}
       </div>
     </div>
