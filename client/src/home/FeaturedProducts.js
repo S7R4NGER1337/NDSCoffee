@@ -23,14 +23,14 @@ export default function FeaturedProducts() {
     <div style={{ margin: "2em" }}>
       <h1 className="featuredProductsHeading">Featured Products</h1>
       <div className="featuredProducts">
-        {products.map((product) => (
+        {products.length > 0 ? products.map((product) => (
           <Link
             to={`/product/${product._id}`}
             style={{ textDecoration: "none", color: "inherit" }}
           >
             <FeaturedProduct productData={product} />
           </Link>
-        ))}
+        )): <h1>There are no active products</h1>}
       </div>
     </div>
   );
