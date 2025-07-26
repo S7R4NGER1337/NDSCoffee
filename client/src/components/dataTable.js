@@ -36,6 +36,16 @@ export default function DataTable({ data }) {
     return deletedProct;
   }
 
+  async function changeStatus(productId) {
+     await fetch(`http://localhost:3030/products/status/${productId}`, {
+        method: 'POST',
+    })
+    setProductData(prev => 
+      prev.map(item => item._id === productId ? { ...item, isActive: !item.isActive}: item)
+    );
+  }
+
+
   const canRenderProducts = () => {
     if (productData !== undefined && productData.length > 0) return false;
     return true;
@@ -75,7 +85,7 @@ export default function DataTable({ data }) {
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
                     <TableCell component="th" scope="row">
-                      <WhatButtonsToRender productId={product._id} data={data} pathName={pathName} deleteProduct={deleteProduct} />
+                      <WhatButtonsToRender productId={product._id} data={data} pathName={pathName} deleteProduct={deleteProduct} changeStatusFunction={changeStatus} />
                     </TableCell>
 
                     <TableCell

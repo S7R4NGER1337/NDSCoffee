@@ -1,10 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-async function ShowProduct(id) {
-    console.log(id);
-    
-}
-export function WhatButtonsToRender({productId, data, pathName, deleteProduct}) {
+export function WhatButtonsToRender({productId, data, pathName, deleteProduct, changeStatusFunction}) {
     const navigate = useNavigate();
 
     if (pathName === "/admin/orders") {
@@ -13,7 +9,7 @@ export function WhatButtonsToRender({productId, data, pathName, deleteProduct}) 
 
     const changeStatusColor = data.isActive ? "red" : "green";
     const changeStatus = (
-      <button className="adminBtn" style={{ color: changeStatusColor }} onClick={() => ShowProduct(productId)}>
+      <button className="adminBtn" style={{ color: changeStatusColor }} onClick={() => changeStatusFunction(productId)}>
         {data.isActive ? "HideProduct" : "ShowProduct"}
       </button>
     );
