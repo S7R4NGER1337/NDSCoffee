@@ -1,11 +1,15 @@
-import * as React from 'react';
 import DataTable from '../components/dataTable';
 import Nav from '../components/nav';
+import { useEffect, useState } from 'react';
 
 
-//TODO Render correct data
 export default function OrdersPage() {
+  const [orders, setOrders] = useState()
   const linkings = [
+    {
+      linkPath: '/admin',
+      linkName: 'Admin'
+    },
     {
       linkPath: '/admin/create',
       linkName: 'Create product'
@@ -15,13 +19,25 @@ export default function OrdersPage() {
       linkName: 'Orders'
     },
   ]
+
+  useEffect(() => {
+    async function getOrders() {
+      const response = await fetch('http://localhost:3030/products/order/s')
+      const data = await response.json()
+
+      setOrders(data)
+    }
+
+    getOrders()
+  }, []);
+
   return (
     <>
       <Nav navName='Admin Panel' navLinks={linkings} />
 
       <div style={{ margin: '1rem' }}>
         <h1>All orders</h1>
-        <DataTable />
+        <DataTable data={orders}/>
       </div>
     </>
   );
