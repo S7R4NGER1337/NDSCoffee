@@ -5,3 +5,9 @@ exports.makeAnOrder = async (userData) => {
 
     return order
 }
+
+exports.getOrders = async () => {
+    const order = await Order.find()
+
+    return order
+}

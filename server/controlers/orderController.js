@@ -8,4 +8,10 @@ router.post('/order/:id', async (req, res) => {
     res.end()
 })
 
+
+router.get('/order/:id', async (req, res) => {
+    const orders = await orderManager.getOrders()
+    res.json(orders)
+    res.end()
+})
 module.exports = router
