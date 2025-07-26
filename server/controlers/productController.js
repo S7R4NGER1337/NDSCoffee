@@ -63,4 +63,13 @@ router.put('/:id', async (req, res) => {
     res.json(updatedProduct)
     res.end()
 })
+
+router.post('/status/:id', async (req, res) => {
+    const productId = req.params.id
+    
+    console.log(productId);
+    
+    await productManager.changeProductStatus(productId)
+    res.end()
+})
 module.exports = router
