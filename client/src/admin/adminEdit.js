@@ -25,7 +25,17 @@ export default function AdminEdit() {
   }, [location]);
 
   async function editProduct() {
+    
+    const product = await fetch(`http://localhost:3030/products/edit/${location}`, {
+        method: 'POST',
+        body: JSON.stringify(produtData),
+        headers: {
+        "Content-type": "application/json",
+      }
+    })
+
     navigate('/admin')
+    return product
   }
   return <div>
     <form>

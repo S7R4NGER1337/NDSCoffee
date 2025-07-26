@@ -64,6 +64,15 @@ router.put('/:id', async (req, res) => {
     res.end()
 })
 
+router.post('/edit/:id', async (req, res) => {
+    const data = req.body
+    const id = req.params.id
+    const updatedProduct = await productManager.updateProduct(id, data)
+
+    res.json(updatedProduct)
+    res.end()
+})
+
 router.post('/status/:id', async (req, res) => {
     const productId = req.params.id
     
