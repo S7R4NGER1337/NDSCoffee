@@ -7,6 +7,7 @@ import "./App.css";
 import Home from "./home/Home.js";
 import Catalog from "./catalog/Catalog.js";
 import Order from "./order/Order.js";
+import AdminEdit from "./admin/adminEdit.js";
 
 export function setOrder(productId) {
   if (!productId) return;
@@ -23,7 +24,6 @@ export function setOrder(productId) {
   return cartInfo;
 }
 
-
 function App() {
   return (
     <div className="App">
@@ -32,6 +32,7 @@ function App() {
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/admin/create" element={<AdminCreate />} />
         <Route path="/admin/orders" element={<OrdersPage />} />
+        <Route path="/admin/edit/:id" element={<AdminEdit />} />
         <Route path="/product/:id" element={<ProductPage />} />
         <Route path="/catalog" element={<Catalog />} />
         <Route path="/order" element={<Order />} />
