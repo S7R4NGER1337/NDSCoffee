@@ -44,8 +44,6 @@ function App() {
     });
     const isAuthenticated = await res.json();
     
-    console.log(isAuthenticated);
-    
     setAuthenticated(isAuthenticated)
 
     return isAuthenticated ? true : false;

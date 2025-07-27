@@ -76,8 +76,6 @@ router.post('/edit/:id', async (req, res) => {
 router.post('/status/:id', async (req, res) => {
     const productId = req.params.id
     
-    console.log(productId);
-    
     await productManager.changeProductStatus(productId)
     res.end()
 })
