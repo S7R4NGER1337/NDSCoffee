@@ -9,6 +9,8 @@ import Catalog from "./catalog/Catalog.js";
 import Order from "./order/Order.js";
 import AdminEdit from "./admin/adminEdit.js";
 import AuthGuard from "./authGuard.js";
+import AdminLogin from "./admin/adminLogin.js";
+import { useState } from "react";
 
 export function setOrder(productId) {
   if (!productId) return;
@@ -26,18 +28,42 @@ export function setOrder(productId) {
 }
 
 function App() {
+
+  const [authenticated, setAuthenticated] = useState(false)
+
+  async function loginSubmit(userData) {
+    const res = await fetch("http://localhost:3030/login", {
+      method: "POST",
+      body: JSON.stringify({
+        name: userData.username,
+        password: userData.password,
+      }),
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+    const isAuthenticated = await res.json();
+    
+    console.log(isAuthenticated);
+    
+    setAuthenticated(isAuthenticated)
+
+    return isAuthenticated ? true : false;
+  }
+
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<Home />} />
 
-        <Route element={<AuthGuard/>}>
-        <Route path="/admin" element={<AdminPage />} />
-        <Route path="/admin/create" element={<AdminCreate />} />
-        <Route path="/admin/orders" element={<OrdersPage />} />
-        <Route path="/admin/edit/:id" element={<AdminEdit />} />
+        <Route element={<AuthGuard isAuthenticated={authenticated} />}>
+          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/admin/create" element={<AdminCreate />} />
+          <Route path="/admin/orders" element={<OrdersPage />} />
+          <Route path="/admin/edit/:id" element={<AdminEdit />} />
         </Route>
 
+        <Route path="/admin/login" element={<AdminLogin loginSubmit={loginSubmit}/>} />
         <Route path="/product/:id" element={<ProductPage />} />
         <Route path="/catalog" element={<Catalog />} />
         <Route path="/order" element={<Order />} />
