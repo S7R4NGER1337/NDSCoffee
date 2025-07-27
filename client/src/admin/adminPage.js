@@ -7,6 +7,10 @@ export default function AdminPage(){
     const [products, setProducts] = useState([])
     const linkings = [
     {
+      linkPath: '/',
+      linkName: 'Go back to the App'
+    },
+    {
       linkPath: '/admin/create',
       linkName: 'Create product'
     },

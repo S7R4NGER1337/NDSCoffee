@@ -6,6 +6,10 @@ import { useEffect, useState } from 'react';
 export default function OrdersPage() {
   const [orders, setOrders] = useState()
   const linkings = [
+        {
+      linkPath: '/',
+      linkName: 'Go back to the App'
+    },
     {
       linkPath: '/admin',
       linkName: 'Admin'

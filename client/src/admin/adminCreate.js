@@ -25,6 +25,10 @@ export default function AdminCreate() {
   const navigate = useNavigate();
   const linkings = [
     {
+      linkPath: '/',
+      linkName: 'Go back to the App'
+    },
+    {
       linkPath: "/admin",
       linkName: "Admin",
     },
