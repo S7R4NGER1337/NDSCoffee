@@ -8,6 +8,7 @@ import Home from "./home/Home.js";
 import Catalog from "./catalog/Catalog.js";
 import Order from "./order/Order.js";
 import AdminEdit from "./admin/adminEdit.js";
+import AuthGuard from "./authGuard.js";
 
 export function setOrder(productId) {
   if (!productId) return;
@@ -29,10 +30,14 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<Home />} />
+
+        <Route element={<AuthGuard/>}>
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/admin/create" element={<AdminCreate />} />
         <Route path="/admin/orders" element={<OrdersPage />} />
         <Route path="/admin/edit/:id" element={<AdminEdit />} />
+        </Route>
+
         <Route path="/product/:id" element={<ProductPage />} />
         <Route path="/catalog" element={<Catalog />} />
         <Route path="/order" element={<Order />} />
