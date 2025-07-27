@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 
 const productController = require('./controlers/productController')
 const orderController = require('./controlers/orderController')
+const adminController = require('./controlers/adminController')
 
 const app = express()
 app.use(cors())
@@ -17,5 +18,7 @@ mongoose.connect('mongodb://localhost:27017/EcommerseForPortfolio')
 
 app.use('/products',productController)
 app.use('/products', orderController)
+app.use(adminController)
+
 app.listen(3030, () => console.log('test'))
 
