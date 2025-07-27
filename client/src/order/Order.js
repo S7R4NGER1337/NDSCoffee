@@ -1,6 +1,7 @@
 import OrderCard from "./OrderCard";
 import { useState } from "react";
 import "./order.css";
+import { useNavigate } from "react-router-dom";
 
 export default function Order() {
   const [userData, setUserData] = useState({
@@ -8,6 +9,7 @@ export default function Order() {
     address: "",
     phone: "",
   });
+  const navigate = useNavigate()
   const cart = JSON.parse(localStorage.getItem("cart"));
 
   async function submitOrder() {
@@ -27,6 +29,8 @@ export default function Order() {
         "Content-type": "application/json",
       },
     });
+
+    navigate('/order')
   }
 
   return (
