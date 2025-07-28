@@ -14,6 +14,7 @@ export default function Order() {
 
   async function submitOrder() {
     const orderedProducts = JSON.parse(localStorage.getItem("cart"));
+    if(userData.name === '' || userData.address === '' || userData.phone === '' || orderedProducts === null) return
     const bodyToSubmit = {
       name: userData.name,
       address: userData.address,
@@ -30,7 +31,9 @@ export default function Order() {
       },
     });
 
-    navigate('/order')
+    localStorage.removeItem('cart')
+    alert('Order successfull')
+    navigate('/')
   }
 
   return (
@@ -74,10 +77,12 @@ export default function Order() {
         </form>
       </div>
       <div className="cart">
-        {cart.map((item) => (
+        {cart === null ? <h1>There is nothing in the cart</h1>:
+        cart.map((item) => (
           <OrderCard data={item} key={item.id} />
-        ))}
-      </div>
+        ))
+        }
+      </div>/
     </>
   );
 }
