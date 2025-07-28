@@ -1,6 +1,7 @@
 import OrderCard from "./OrderCard";
 import { useState } from "react";
 import "./order.css";
+import Nav from '../components/nav'
 import { useNavigate } from "react-router-dom";
 
 export default function Order() {
@@ -11,6 +12,17 @@ export default function Order() {
   });
   const navigate = useNavigate()
   const cart = JSON.parse(localStorage.getItem("cart"));
+
+  const linkings = [
+        {
+            linkPath: '/about',
+            linkName: 'About us'
+        },
+        {
+            linkPath: '/catalog',
+            linkName: 'Catalog'
+        }
+    ]
 
   async function submitOrder() {
     const orderedProducts = JSON.parse(localStorage.getItem("cart"));
@@ -38,6 +50,8 @@ export default function Order() {
 
   return (
     <>
+    <Nav navName="NDS" navLinks={linkings}/>
+    <div className="orderContainer">
       <div className="userData">
         <form className="orderForm">
           <label> Name </label>
@@ -58,7 +72,7 @@ export default function Order() {
             onChange={(e) =>
               setUserData({ ...userData, address: e.target.value })
             }
-          />
+            />
 
           <label> Phone </label>
           <input
@@ -69,7 +83,7 @@ export default function Order() {
             onChange={(e) =>
               setUserData({ ...userData, phone: e.target.value })
             }
-          />
+            />
 
           <button type="button" onClick={() => submitOrder()}>
             ORDER NOW
@@ -81,8 +95,9 @@ export default function Order() {
         cart.map((item) => (
           <OrderCard data={item} key={item.id} />
         ))
-        }
-      </div>/
-    </>
+      }
+      </div>
+    </div>
+      </>
   );
 }

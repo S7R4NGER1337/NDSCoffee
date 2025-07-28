@@ -3,3 +3,13 @@
     flex-direction: column;
     max-width: 23rem;
 }
+
+.orderContainer{
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    display: flex;
+    gap: 5rem;
+    justify-items: center;
+    align-items: center;
+}
