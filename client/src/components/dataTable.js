@@ -53,7 +53,7 @@ export default function DataTable({ data }) {
 
   
   return (
-    <div style={{ margin: "1em" }}>
+    <div style={{ margin: "1em", marginTop: '5rem' }}>
       {canRenderProducts() ? (
         <h1>There are no products</h1>
       ) : (
@@ -77,7 +77,7 @@ export default function DataTable({ data }) {
                 </TableRow>
               )}
             </TableHead>
-            {pathName !== "/admin/orders" ? (
+            {pathName !== "/admin/orders" ? 
               <TableBody>
                 {productData.map((product) => (
                   <TableRow
@@ -103,8 +103,9 @@ export default function DataTable({ data }) {
                   </TableRow>
                 ))}
               </TableBody>
-            ) : (
+             : 
               <TableBody>
+
                 {productData.map((product) => (
                   <TableRow
                     key={product.name}
@@ -114,7 +115,7 @@ export default function DataTable({ data }) {
                       component="th"
                       scope="row"
                       style={{ display: "flex", gap: "1em" }}>
-                      {(product["productId"][0].id)}
+                      {(product._id)}
                     </TableCell>
                     <TableCell align="right">
                       {product.name}
@@ -126,9 +127,9 @@ export default function DataTable({ data }) {
                       {product.phone}
                     </TableCell>
                   </TableRow>
-                ))}
+              ))}
               </TableBody>
-            )}
+            }
           </Table>
         </TableContainer>
       )}
