@@ -17,3 +17,13 @@
 .aboutUsSection{
     margin: 2em;
 }
+
+.aboutUsHeader{
+    font-size: 2.4rem;
+    justify-self: center;
+    margin-bottom: 5rem;
+}
+
+.aboutUsSection{
+    margin-top: 6rem;
+}
