@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import Nav from "../components/nav"
 import AboutUs from "./AboutUs"
 import FeaturedProducts from "./FeaturedProducts"
-import './home.css'
+import styles from './home.module.css'
 import { useRef } from 'react';
 
 
@@ -22,11 +22,12 @@ export default function Home() {
 
     return (
         <>
-            <Nav navName='NDS' navLinks={linkings} aboutRef={aboutRef}/>
-            <div className="banner">
-                <h1>NDS Coffee</h1>
+            <Nav navName='NDS' navLinks={linkings} aboutRef={aboutRef} color={'white'}/>
+            <div className={styles.banner}>
+                <h1 className={styles.bannerName}>NDS Coffee</h1>
+                <p className={styles.bannerText}>Carefully selected beans from the world's finest plantations.</p>
                 <Link to={'/catalog'} style={{textDecoration: 'none', color: 'inherit'}}>
-                    <button className="bannerBtn">Catalog</button>
+                    <button className={styles.bannerBtn}>Explore Catalog</button>
                 </Link>
             </div>
             <FeaturedProducts/>
