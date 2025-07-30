@@ -1,8 +1,9 @@
 import { useState } from "react";
 import Nav from "../components/nav";
-import "./adminCreate.css";
+import styles from "./adminCreate.module.css";
 import { useNavigate } from "react-router-dom";
 
+//TODO fix clssNames
 export default function AdminCreate() {
   const [formData, setFormData] = useState({
     name: {
@@ -144,12 +145,12 @@ export default function AdminCreate() {
   }
 
   return (
-    <>
+    <div  style={{'marginTop': '5rem'}}>
       <Nav navName="Admin Panel" navLinks={linkings} />
 
-      <div className="sectionCreate">
+      <div className={styles.sectionCreate}>
         <h1>Create Product</h1>
-        <form onSubmit={onSubmit} className="createForm">
+        <form onSubmit={onSubmit} className={styles.createForm}>
           <label>name</label>
           <input
             type="text"
@@ -188,13 +189,13 @@ export default function AdminCreate() {
 
           <button
             type="submit"
-            className="createBtn"
+            className={styles.createBtn}
             disabled={isButtonDisabled()}
           >
             Submit
           </button>
         </form>
       </div>
-    </>
+    </div>
   );
 }

@@ -8,7 +8,6 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { useState, useEffect } from "react";
 import {WhatButtonsToRender} from '../components/adminPageButtons'
-import "./dataTable.css";
 
 export default function DataTable({ data }) {
   const [productData, setProductData] = useState([]);

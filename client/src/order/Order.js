@@ -1,6 +1,6 @@
 import OrderCard from "./OrderCard";
 import { useState } from "react";
-import "./order.css";
+import styles from "./order.module.css";
 import Nav from '../components/nav'
 import { useNavigate } from "react-router-dom";
 
@@ -51,9 +51,9 @@ export default function Order() {
   return (
     <>
     <Nav navName="NDS" navLinks={linkings}/>
-    <div className="orderContainer">
-      <div className="userData">
-        <form className="orderForm">
+    <div className={styles.orderContainer}>
+      <div className={styles.userData}>
+        <form className={styles.orderForm}>
           <label> Name </label>
           <input
             required
@@ -90,7 +90,7 @@ export default function Order() {
           </button>
         </form>
       </div>
-      <div className="cart">
+      <div className={styles.cart}>
         {cart === null ? <h1>There is nothing in the cart</h1>:
         cart.map((item) => (
           <OrderCard data={item} key={item.id} />

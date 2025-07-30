@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import FeaturedProduct from "./FeaturedProduct";
-import "./featuredProducts.css";
+import styles from "./featuredProducts.module.css";
 import { useEffect, useState } from "react";
 
 export default function FeaturedProducts() {
@@ -21,8 +21,8 @@ export default function FeaturedProducts() {
 
   return (
     <div style={{ margin: "2em" }}>
-      <h1 className="featuredProductsHeading">Featured Products</h1>
-      <div className="featuredProducts">
+      <h1 className={styles.featuredProductsHeading}>Featured Products</h1>
+      <div className={styles.featuredProducts}>
         {products.length > 0 ? products.map((product) => (
           <Link
             to={`/product/${product._id}`}

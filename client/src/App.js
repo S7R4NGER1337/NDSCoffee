@@ -54,12 +54,12 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
 
-        <Route element={<AuthGuard isAuthenticated={authenticated} />}>
+        {/* <Route element={<AuthGuard isAuthenticated={authenticated} />}> */}
           <Route path="/admin" element={<AdminPage />} />
           <Route path="/admin/create" element={<AdminCreate />} />
           <Route path="/admin/orders" element={<OrdersPage />} />
           <Route path="/admin/edit/:id" element={<AdminEdit />} />
-        </Route>
+        {/* </Route> */}
 
         <Route path="/admin/login" element={<AdminLogin loginSubmit={loginSubmit}/>} />
         <Route path="/product/:id" element={<ProductPage />} />

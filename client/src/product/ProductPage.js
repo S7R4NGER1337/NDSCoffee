@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Nav from "../components/nav";
-import "./productPage.css";
+import styles from "./productPage.module.css";
 import { setOrder } from "../App";
 import { useNavigate } from "react-router";
 
@@ -41,17 +41,17 @@ export default function ProductPage() {
   return (
     <>
       <Nav navName="NDS" navLinks={linkings} />
-      <div className="productContainer">
+      <div className={styles.productContainer}>
         <img
           alt="productImage"
           src={productData.image}
-          className="productImage"
+          className={styles.productImage}
         />
-        <div className="productData">
-          <h1 className="productName">{productData.name}</h1>
-          <p className="productDescription">{productData.description}</p>
-          <p className="productPrice">{productData.price} лв</p>
-          <button className="productBuy" onClick={() => {
+        <div className={styles.productData}>
+          <h1 className={styles.productName}>{productData.name}</h1>
+          <p className={styles.productDescription}>{productData.description}</p>
+          <p className={styles.productPrice}>{productData.price} лв</p>
+          <button className={styles.productBuy} onClick={() => {
             setOrder(productId)
             navigate('/order')
             }}>Buy now</button>

@@ -1,10 +1,21 @@
 .navigation {
-  
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+
+  /* color: white; */
+  /* color: black; */
+
+  font-weight: 800;
   display: flex;
-  background-color: rgb(255, 255, 255);
-  height: 5em;
+  justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
+  padding: 0 2rem;
+
+  background-color: transparent;
+  height: 5em;
 }
 
 .navName {

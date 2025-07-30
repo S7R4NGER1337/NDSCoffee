@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "./catalogCard.css";
+import styles from "./catalogCard.module.css";
 
 export default function CatalogCard({ productData }) {
   return (
@@ -7,15 +7,15 @@ export default function CatalogCard({ productData }) {
       to={`/product/${productData._id}`}
       style={{ textDecoration: "none", color: "inherit" }}
     >
-      <div className="catalogCardContainer">
+      <div className={styles.catalogCardContainer}>
         <img
-          className="catalogCardImage"
+          className={styles.catalogCardImage}
           alt="productImg"
           src={productData.image}
         />
-        <h1 className="catalogCardname">{productData.name}</h1>
-        <p className="catalogCardPrice">{productData.price} лв</p>
-        <button className="catalogCardButton">More Info</button>
+        <h1 className={styles.catalogCardname}>{productData.name}</h1>
+        <p className={styles.catalogCardPrice}>{productData.price} лв</p>
+        <button className={styles.catalogCardButton}>More Info</button>
       </div>
     </Link>
   );

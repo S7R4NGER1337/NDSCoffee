@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import styles from './adminEdit.module.css'
 
 export default function AdminEdit() {
   const [produtData, setProductData] = useState({
@@ -37,8 +38,9 @@ export default function AdminEdit() {
     navigate('/admin')
     return product
   }
-  return <div>
-    <form>
+  return <div style={{margin: '1rem','marginTop': '5rem'}}>
+    <h1>Edit Page</h1>
+    <form className={styles.editForm}>
         <label>Name</label>
         <input type="text" value={produtData.name} onChange={(e) => setProductData({...produtData, name: e.target.value})}/>
 
@@ -51,7 +53,7 @@ export default function AdminEdit() {
         <label>Image</label>
         <input type="text" value={produtData.image} onChange={(e) => setProductData({...produtData, image: e.target.value})}/>
 
-        <button type="button" onClick={() => editProduct()}>Edit</button>
+        <button type="button" className={styles.editButton} onClick={() => editProduct()}>Edit</button>
     </form>
   </div>;
 }

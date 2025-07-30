@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./orderCard.css";
+import styles from "./orderCard.module.css";
 
 export default function OrderCard({ data }) {
   const [product, setProduct] = useState([]);
@@ -47,8 +47,8 @@ export default function OrderCard({ data }) {
   },[data.qty])
 
   return (
-    <div className="cardContainer">
-      <img alt="cardImage" src={product.image} className="cardImage" />
+    <div className={styles.cardContainer}>
+      <img alt="cardImage" src={product.image} className={styles.cardImage} />
       <div>
         <h1>{product.name}</h1>
         <p>{product.price * data.qty} лв</p>
