@@ -49,12 +49,12 @@ export default function ProductPage() {
         />
         <div className={styles.productData}>
           <h1 className={styles.productName}>{productData.name}</h1>
-          <p className={styles.productDescription}>{productData.description}</p>
           <p className={styles.productPrice}>{productData.price} лв</p>
+          <p className={styles.productDescription}>{productData.description}</p>
           <button className={styles.productBuy} onClick={() => {
             setOrder(productId)
             navigate('/order')
-            }}>Buy now</button>
+            }}>Add to cart</button>
         </div>
       </div>
     </>
