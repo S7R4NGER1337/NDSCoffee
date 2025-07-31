@@ -2,29 +2,41 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
     height: 100%;
     max-width: 22rem;
     width: 100%;
     border: 0.1rem solid gray;
+    border-radius: 1em;
     box-shadow: 0px 0px 12px gray;
 }
 
 .catalogCardImage {
-    width: 22rem;
+    width: 100%;
     height: 25rem;
     object-fit: contain;
 }
 
 .catalogCardButton {
-    background-color: green;
+    background-color: black;
     color: white;
-    border: 0px;
+    border: 0.2rem solid black;
     font-size: 2rem;
-    width: 100%;
+    width: 60%;
     padding: 0.2em 1em;
     margin-top: auto;
+    margin-bottom: 1rem;
+    border-radius: 0.5em;
 }
 
 .catalogCardButton:hover{
     cursor: pointer;
+    background-color: white;
+    color: black;
+    box-shadow: 0px 0px 1rem black;
+}
+
+.catalogCardPrice{
+    margin-top: 0.2rem;
+    margin-bottom: 1rem;
 }

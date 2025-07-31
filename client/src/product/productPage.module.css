@@ -47,6 +47,7 @@
     background-color: white;
     color: black;
     border: 0.2rem solid black;
+    box-shadow: 0px 0px 1rem black;
 }
 
 .productPrice{
