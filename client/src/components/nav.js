@@ -8,10 +8,9 @@ import styles from './nav.module.css'
 
 export default function Nav(navData) {
 
-  const navColor = navData.navName === 'Admin Panel' ? 'black':'white'
   
   return(
-    <div className={styles.navigation} style={{color: navColor}}>
+    <div className={styles.navigation} style={{color: navData.color}}>
       <h1 className={styles.navName}>{navData.navName}</h1>
       <div className={styles.navLinks}>
           {navData['navLinks'].map(link =>
