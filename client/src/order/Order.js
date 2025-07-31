@@ -15,8 +15,8 @@ export default function Order() {
 
   const linkings = [
         {
-            linkPath: '/about',
-            linkName: 'About us'
+            linkPath: '/',
+            linkName: 'Home'
         },
         {
             linkPath: '/catalog',
