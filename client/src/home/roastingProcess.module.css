@@ -1,0 +1,6 @@
+.processImage{
+    max-width: 8rem;
+    background-color: rgba(247, 231, 221, 1);
+    padding: 2em;
+    border-radius: 5em;
+}
