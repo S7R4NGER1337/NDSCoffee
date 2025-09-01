@@ -23,16 +23,26 @@ export default function FeaturedProducts() {
     <div className={styles.featuredProductsContainer}>
       <h1 className={styles.featuredProductsHeading}>Featured Coffee Beans</h1>
       <div className={styles.featuredProducts}>
-        {products.length > 0 ? products.map((product) => (
-          <Link
-            to={`/product/${product._id}`}
-            style={{ textDecoration: "none", color: "inherit" }}
-            key={product._id}
-            >
-            <FeaturedProduct productData={product}/>
-          </Link>
-        )): <h1>There are no active products</h1>}
+        {products.length > 0 ? (
+          products.map((product) => (
+            <Link
+              to={`/product/${product._id}`}
+              style={{ textDecoration: "none", color: "inherit" }}
+              key={product._id}
+              >
+              <FeaturedProduct productData={product} />
+            </Link>
+          ))
+        ) : (
+          <h1>There are no active products</h1>
+        )}
       </div>
+      <Link
+        to='/catalog'
+        style={{ textDecoration: "none", color: "inherit" }}
+      >
+        <button className={styles.viewAllBtn}>View All Coffee Beans</button>
+      </Link>
     </div>
   );
 }
