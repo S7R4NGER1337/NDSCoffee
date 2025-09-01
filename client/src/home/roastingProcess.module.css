@@ -1,6 +1,46 @@
-.processImage{
+.processImage {
     max-width: 8rem;
     background-color: rgba(247, 231, 221, 1);
     padding: 2em;
     border-radius: 5em;
+}
+
+.roastingProcessContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 3em;
+    border-radius: 1em;
+}
+.roastingProcessName {
+    font-size: 2.2rem;
+    color: rgba(44, 26, 10, 1);
+}
+
+.roastingProcessSteps{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.processStep{
+    display: flex;
+    gap: 0.5em;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    max-width: 22rem;
+}
+
+.processName{
+    font-size: 1.5rem;
+    color: rgba(44, 26, 10, 1);
+}
+
+.processDesc{
+    font-weight: 400;
+    font-size: 1.1rem;
+    text-align: center;
+    color: rgba(107, 78, 51, 1);
 }
