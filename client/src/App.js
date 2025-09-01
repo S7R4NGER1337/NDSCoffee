@@ -11,6 +11,7 @@ import AdminEdit from "./admin/adminEdit.js";
 import AuthGuard from "./authGuard.js";
 import AdminLogin from "./admin/adminLogin.js";
 import { useState } from "react";
+import Nav from "./components/nav.js";
 
 export function setOrder(productId) {
   if (!productId) return;
@@ -50,6 +51,8 @@ function App() {
   }
 
   return (
+    <>
+    <Nav />
     <div className="App">
       <Routes>
         <Route path="/" element={<Home />} />
@@ -67,6 +70,7 @@ function App() {
         <Route path="/order" element={<Order />} />
       </Routes>
     </div>
+    </>
   );
 }
 
