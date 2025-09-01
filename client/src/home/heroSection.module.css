@@ -1,45 +1,41 @@
+.heroSectionContainer {
+    max-width: 40rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    position: absolute;
+    top: 30%;
+    text-align: start;
+    color: white;
+    padding-left: 4rem;
+}
+
 .banner {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    font-size: 2rem;
-    color: white;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../../public/mainBanner.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
     width: 100%;
-    min-height: 100vh;
-    /* цял екран */
-    display: flex;
-    flex-direction: column;
-
-    height: 100vh;
-    cursor: default;
+    height: auto;
 }
 
-.bannerBtn {
-    font-size: 2rem;
-    padding: 0.3em 2em;
-    background-color: rgb(241, 159, 78);
-    border: none;
-    border-radius: 0.6em;
+.heroWrapper {
+    position: relative;
 }
 
-.bannerBtn:hover {
-    cursor: pointer;
+.heroName {
+    font-size: 4rem;
+    font-weight: 800;
+}
+
+.heroText {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: rgb(151, 146, 145);
+}
+
+.bannerBtn{
+    background-color: rgba(212, 98, 17, 1);
     color: white;
-}
-
-.bannerText {
-    font-size: 1.5rem;
-    margin-top: 0;
-    margin-bottom: 5rem;
-    color: rgb(179, 180, 180);
-}
-
-.bannerName {
-    margin-bottom: 0;
+    border: none;
+    font-size: 1.2rem;
+    font-weight: 500;
+    padding: 0.6em 1.5em;
+    border-radius: 0.3em;
 }
