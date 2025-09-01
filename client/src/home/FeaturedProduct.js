@@ -6,7 +6,7 @@ export default function FeaturedProduct({productData}) {
         <div className={styles.featuredProduct}>
             <img alt="productImage" src={productData.image} className={styles.featuredProductImg}/>
             <h1 className={styles.featuredProductName}>{productData.name}</h1>
-            <button className={styles.featuredProductBtn}>View Product</button>
+            <p className={styles.featuredProductPrice}>${productData.price}</p>
         </div>
     )
 }
