@@ -1,42 +1,47 @@
-.navigation {
-  position: absolute;
-  top: 0;
-  left: 0;
+.navigation{
+  position: fixed;
+  background-color: white;
+  z-index: 1;
   width: 100%;
-  z-index: 10;
-
-  /* color: white; */
-  /* color: black; */
-
-  font-weight: 800;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 2rem;
-
-  background-color: transparent;
-  height: 5em;
+  padding: 1em;
+  color: rgba(64, 48, 33, 1);
+  border-bottom: 0.2em solid rgba(249, 237, 231, 1);
 }
 
-.navName {
-  align-self: flex-start;
-  justify-self: left;
-  margin-bottom: 0.5em;
-}
-
-.navLinks {
+.navInfo{
   display: flex;
-  justify-content: center;
-  gap: 3rem;
-  font-size: 2rem;
-  margin: 0 auto;
   width: auto;
+  justify-content: center;
+  align-items: center;
 }
 
-.navLink{
-  margin: 0
+.navName{
+  font-size: 1.3rem;
 }
 
-.navLink:hover{
+.navIcon{
+  width: 2rem;
+}
+
+.navLinks{
+  font-weight: 500;
+  font-size: 1.1rem;
+  display: flex;
+  gap: 2em;
+}
+
+.navButtons{
+  display: flex;
+  gap: 1em;
+}
+
+.navButton{
+  width: 2rem;
+}
+
+.navButton:hover{
   cursor: pointer;
 }
