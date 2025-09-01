@@ -1,0 +1,37 @@
+.offerContainer{
+    height: 17rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    background-color: rgba(247, 231, 221, 1);
+    border-radius: 1em;
+}
+
+.offerName{
+    font-size: 2.2rem;
+    color: rgba(44, 26, 10, 1);
+}
+
+.offerText {
+    color: rgba(115, 87, 61, 1);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.offerButton{
+    font-size: 1.2rem;
+    padding: 0.6em 2em;
+    font-weight: 500;
+    background-color: rgba(255, 140, 58, 1);
+    border: none;
+    color: white;
+    border-radius: 0.3em;
+}
+
+.offerButton:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+}

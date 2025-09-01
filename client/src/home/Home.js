@@ -2,6 +2,7 @@ import AboutUs from "./AboutUs"
 import FeaturedProducts from "./FeaturedProducts"
 import { useRef } from 'react';
 import HeroSection from "./HeroSection";
+import Offer from "../components/Offer";
 
 
 export default function Home() {
@@ -10,6 +11,7 @@ export default function Home() {
     return (
         <>
            <HeroSection />
+           <Offer />
             <FeaturedProducts/>
             <div ref={aboutRef}>
                 <AboutUs />
