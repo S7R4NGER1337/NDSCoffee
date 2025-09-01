@@ -20,8 +20,8 @@ export default function FeaturedProducts() {
   }, []);
 
   return (
-    <div style={{ margin: "2em" }}>
-      <h1 className={styles.featuredProductsHeading}>Featured Products</h1>
+    <div className={styles.featuredProductsContainer}>
+      <h1 className={styles.featuredProductsHeading}>Featured Coffee Beans</h1>
       <div className={styles.featuredProducts}>
         {products.length > 0 ? products.map((product) => (
           <Link
