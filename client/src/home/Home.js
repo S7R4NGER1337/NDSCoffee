@@ -3,6 +3,7 @@ import FeaturedProducts from "./FeaturedProducts"
 import { useRef } from 'react';
 import HeroSection from "./HeroSection";
 import Offer from "../components/Offer";
+import RoastingProcess from "./RoastingProcess";
 
 
 export default function Home() {
@@ -16,6 +17,7 @@ export default function Home() {
             <div ref={aboutRef}>
                 <AboutUs />
             </div>
+            <RoastingProcess />
         </>
     )
 }
