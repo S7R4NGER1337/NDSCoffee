@@ -28,7 +28,7 @@ export default function FeaturedProducts() {
             to={`/product/${product._id}`}
             style={{ textDecoration: "none", color: "inherit" }}
             key={product._id}
-          >
+            >
             <FeaturedProduct productData={product}/>
           </Link>
         )): <h1>There are no active products</h1>}
