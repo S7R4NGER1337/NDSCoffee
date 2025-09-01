@@ -1,29 +1,28 @@
 .aboutUsImg{
-    max-width: 25rem;
+    max-width: 30rem;
+}
+
+.aboutUsSection{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.aboutUsHeader{
+    font-size: 2.2rem;
+    color: rgba(44, 26, 10, 1);
+}
+
+.aboutUsText{
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: rgba(107, 78, 51, 1);
+    line-height: 1.7rem;
 }
 
 .aboutUsInfo{
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5rem;
-}
-
-.aboutUsText{
-    font-size: 2rem;
-    max-width: 40rem;
-}
-
-.aboutUsSection{
-    margin: 2em;
-}
-
-.aboutUsHeader{
-    font-size: 2.4rem;
-    justify-self: center;
-    margin-bottom: 5rem;
-}
-
-.aboutUsSection{
-    margin-top: 6rem;
+    flex-direction: column;
+    gap: 1em;
+    max-width: 50rem;
 }
