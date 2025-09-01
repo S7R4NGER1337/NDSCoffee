@@ -12,6 +12,7 @@ import AuthGuard from "./authGuard.js";
 import AdminLogin from "./admin/adminLogin.js";
 import { useState } from "react";
 import Nav from "./components/nav.js";
+import Footer from "./components/Footer.js";
 
 export function setOrder(productId) {
   if (!productId) return;
@@ -70,6 +71,7 @@ function App() {
         <Route path="/order" element={<Order />} />
       </Routes>
     </div>
+    <Footer />
     </>
   );
 }
