@@ -1,0 +1,51 @@
+.footerContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2em;
+    padding: 1em;
+    padding-top: 2em;
+    background-color: rgba(44, 26, 10, 1);
+}
+
+.footerData{
+    display: flex;
+    justify-content: space-around;
+}
+
+.rights{
+    align-self: center;
+    color: rgb(128, 128, 128)
+}
+
+.line{
+    align-self: center;
+    height: 0.1em;
+    width: 90%;
+    background-color: rgb(128, 128, 128)
+}
+
+.footerName{
+    font-size: 1.4rem;
+    color: white;
+}
+
+.footerText{
+    color: rgb(128, 128, 128)
+}
+
+.footerInfo{
+    max-width: 16rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.social{
+    width: 2rem;
+}
+
+.footerSocials{
+    display: flex;
+    gap: 0.5em;
+}
