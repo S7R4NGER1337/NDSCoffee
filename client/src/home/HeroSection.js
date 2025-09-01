@@ -13,7 +13,7 @@ export default function HeroSection() {
         </p>
         <Link
           to={"/catalog"}
-          style={{ textDecoration: "none", color: "inherit" }}
+          style={{ textDecoration: "none", color: "inherit", width: 'max-content' }}
         >
           <button className={styles.bannerBtn}>Shop Coffee Beans</button>
         </Link>
