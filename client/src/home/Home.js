@@ -10,7 +10,7 @@ export default function Home() {
   const aboutRef = useRef(null)
 
     return (
-        <>
+        <div style={{display: "flex", flexDirection: 'column', gap: '4rem'}}>
            <HeroSection />
            <Offer />
             <FeaturedProducts/>
@@ -18,6 +18,6 @@ export default function Home() {
                 <AboutUs />
             </div>
             <RoastingProcess />
-        </>
+        </div>
     )
 }
