@@ -140,8 +140,12 @@ export default function AdminCreate() {
 
   return (
     <div className={styles.createContainer}>
-      <h1 className={styles.createHeading}>Create a New Product</h1>
-      <p className={styles.createText}>Fill in the details below to add a new coffee bean product.</p>
+      <div className={styles.createContainerData}>
+        <h1 className={styles.createHeading}>Create a New Product</h1>
+        <p className={styles.createText}>
+          Fill in the details below to add a new coffee bean product.
+        </p>
+      </div>
       <div className={styles.sectionCreate}>
         <form onSubmit={onSubmit} className={styles.createForm}>
           <label className={styles.inputLabel}>Product Name</label>
