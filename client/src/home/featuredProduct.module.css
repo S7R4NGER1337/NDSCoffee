@@ -20,5 +20,26 @@
 .featuredProductPrice{
     font-size: 1rem;
     color: rgba(107, 78, 51, 1)
+}
 
+.viewMore{
+    display: none;
+}
+.featuredProduct:hover{
+    .featuredProductImg{
+        filter: brightness(60%)
+    }
+    .viewMore{
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 30%;
+        transform: translate(-50% -50%);
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: white;
+    }
+    .imageWrap{
+        position: relative;
+    }
 }
