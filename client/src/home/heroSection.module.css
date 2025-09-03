@@ -41,3 +41,7 @@
     padding: 0.6em 1.5em;
     border-radius: 0.3em;
 }
+
+.bannerBtn:hover{
+    cursor: pointer;
+}
