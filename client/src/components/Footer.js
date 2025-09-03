@@ -17,7 +17,10 @@ export default function Footer() {
             </div>
             <div className={styles.footerInfo}>
                 <h1 className={styles.footerName}>Learn</h1>
-                <p className={styles.footerText}>Our Story</p>
+                <Link to='/about' style={{ textDecoration: "none", color: "inherit" }}>
+                    <p className={styles.footerText}>Our Story</p>
+                </Link>
+
             </div>
             <div className={styles.footerSocials}>
                 <img className={styles.social} src='/instagram-brands-solid-full.svg' alt='instagram' />
