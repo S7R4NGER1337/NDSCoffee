@@ -9,8 +9,20 @@ export default function AdminCreate() {
       value: "",
       isValid: true,
     },
-    price: {
+    origin: {
       value: "",
+      isValid: true,
+    },
+    roastLevel: {
+      value: "",
+      isValid: true,
+    },
+    qty: {
+      value: 0,
+      isValid: true,
+    },
+    price: {
+      value: 0,
       isValid: true,
     },
     description: {
@@ -24,6 +36,7 @@ export default function AdminCreate() {
   });
   const navigate = useNavigate();
 
+  //TODO FIX VALIDATE
   function validateFields() {
     const name = formData["name"].value;
     const price = Number(formData["price"].value);
@@ -126,13 +139,14 @@ export default function AdminCreate() {
   }
 
   return (
-    <div  style={{'marginTop': '5rem'}}>
-
+    <div className={styles.createContainer}>
+      <h1 className={styles.createHeading}>Create a New Product</h1>
+      <p className={styles.createText}>Fill in the details below to add a new coffee bean product.</p>
       <div className={styles.sectionCreate}>
-        <h1>Create Product</h1>
         <form onSubmit={onSubmit} className={styles.createForm}>
-          <label>name</label>
+          <label className={styles.inputLabel}>Product Name</label>
           <input
+            className={styles.inputData}
             type="text"
             name="name"
             required
@@ -140,17 +154,9 @@ export default function AdminCreate() {
             onChange={(e) => onChange(e)}
           />
 
-          <label>price in BGN</label>
+          <label className={styles.inputLabel}>Description</label>
           <input
-            type="text"
-            name="price"
-            required
-            value={formData["price"].value}
-            onChange={(e) => onChange(e)}
-          />
-
-          <label>description</label>
-          <input
+            className={styles.inputData}
             type="text"
             name="description"
             required
@@ -158,8 +164,55 @@ export default function AdminCreate() {
             onChange={(e) => onChange(e)}
           />
 
-          <label>image</label>
+          <label className={styles.inputLabel}>Origin</label>
           <input
+            className={styles.inputData}
+            type="text"
+            name="origin"
+            required
+            value={formData["origin"].value}
+            onChange={(e) => onChange(e)}
+          />
+
+          <label className={styles.inputLabel}>Roast Level</label>
+          <select
+            className={styles.inputData}
+            name="roastLevel"
+            value={formData["roastLevel"].value}
+            onChange={(e) => onChange(e)}
+          >
+            <option value="" disabled hidden>
+              Roasted Level
+            </option>
+            <option value="Light">Light</option>
+            <option value="Medium">Medium</option>
+            <option value="MediumDark">Medium-Dark</option>
+            <option value="Dark">Dark</option>
+          </select>
+
+          <label className={styles.inputLabel}>Stock Quantity</label>
+          <input
+            className={styles.inputData}
+            type="number"
+            name="qty"
+            required
+            value={formData["qty"].value}
+            onChange={(e) => onChange(e)}
+          />
+
+          <label className={styles.inputLabel}>Price ($)</label>
+          <input
+            className={styles.inputData}
+            type="number"
+            name="price"
+            required
+            value={formData["price"].value}
+            onChange={(e) => onChange(e)}
+          />
+
+          <label className={styles.inputLabel}>Product Image</label>
+          <input
+            className={styles.inputData}
             type="text"
             name="image"
             value={formData["image"].value}
@@ -167,12 +220,21 @@ export default function AdminCreate() {
             onChange={(e) => onChange(e)}
           />
 
+          <input
+            className={styles.inputData}
+            type="file"
+            alt="image"
+            name="image"
+            value={formData["image"].value}
+            required
+            onChange={(e) => onChange(e)}
+          />
           <button
             type="submit"
             className={styles.createBtn}
             disabled={isButtonDisabled()}
           >
-            Submit
+            Save Product
           </button>
         </form>
       </div>
