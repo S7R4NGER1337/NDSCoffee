@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Nav from "../components/nav";
 import styles from "./adminCreate.module.css";
 import { useNavigate } from "react-router-dom";
 
@@ -24,24 +23,6 @@ export default function AdminCreate() {
     },
   });
   const navigate = useNavigate();
-  const linkings = [
-    {
-      linkPath: '/',
-      linkName: 'Go back to the App'
-    },
-    {
-      linkPath: "/admin",
-      linkName: "Admin",
-    },
-    {
-      linkPath: "/admin/create",
-      linkName: "Create product",
-    },
-    {
-      linkPath: "/admin/orders",
-      linkName: "Orders",
-    },
-  ];
 
   function validateFields() {
     const name = formData["name"].value;
@@ -146,7 +127,6 @@ export default function AdminCreate() {
 
   return (
     <div  style={{'marginTop': '5rem'}}>
-      <Nav navName="Admin Panel" navLinks={linkings} />
 
       <div className={styles.sectionCreate}>
         <h1>Create Product</h1>
