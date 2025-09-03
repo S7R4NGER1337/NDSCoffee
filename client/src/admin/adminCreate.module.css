@@ -3,10 +3,12 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 0.1em solid gray;
-    max-width: 50rem;
+    border: 0.1em solid rgba(179, 179, 179, 0.63);
+    border-radius: 0.5em;
+    max-width: 42rem;
     width: 100%;
     margin: 0 auto;
+    padding: 2em
 }
 
 .createContainer{
@@ -27,39 +29,52 @@
 }
 .createHeading{
     font-size: 2rem;
+    color: rgba(44, 26, 10, 1);
 }
 
 .createText{
     font-size: 1rem;
-}
-
-.createProductForm{
-    padding: 2em;
-    border: 2px solid black;
-    border-radius: 2rem;
-    display: flex;
-    gap: 3rem;
-    flex-direction: column;
+    color: rgba(115, 87, 61, 1);
 }
 
 .inputData{
-    border: 2px solid gray;
+    border: 0.1em solid rgba(179, 179, 179, 0.63);
     padding: 0.8em;
     margin-bottom: 1em;
     font-size: 1rem;
+    border-radius: 0.5em;
 }
 
+.inputBigData{
+    height: 8rem;
+}
 .createForm{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
 }
 
+.inputContainer{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0.3em;
+}
+
+.inputContainerSmall{
+    width: 46%;
+}
 .createBtn{
-    padding: 0.8em;
-    font-size: 0.9rem;
+    padding: 1em;
+    font-size: 1rem;
     font-weight: bold;
-    border: 0.2rem solid gray;
+    border: none;
+    background-color: rgba(255, 140, 58, 1);
+    color: white;
     border-radius: 0.5em;
+    width: 100%;
 }
 
 .createBtn:hover{

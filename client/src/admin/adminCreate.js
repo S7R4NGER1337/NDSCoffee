@@ -148,91 +148,92 @@ export default function AdminCreate() {
       </div>
       <div className={styles.sectionCreate}>
         <form onSubmit={onSubmit} className={styles.createForm}>
-          <label className={styles.inputLabel}>Product Name</label>
-          <input
-            className={styles.inputData}
-            type="text"
-            name="name"
-            required
-            value={formData["name"].value}
-            onChange={(e) => onChange(e)}
-          />
+          <div className={styles.inputContainer}>
+            <label className={styles.inputLabel}>Product Name</label>
+            <input
+              className={styles.inputData}
+              type="text"
+              name="name"
+              required
+              value={formData["name"].value}
+              onChange={(e) => onChange(e)}
+            />
+          </div>
 
-          <label className={styles.inputLabel}>Description</label>
-          <input
-            className={styles.inputData}
-            type="text"
-            name="description"
-            required
-            value={formData["description"].value}
-            onChange={(e) => onChange(e)}
-          />
+          <div className={styles.inputContainer}>
+            <label className={styles.inputLabel}>Description</label>
+            <textarea
+              className={`${styles.inputData} ${styles.inputBigData}`}
+              type="text"
+              name="description"
+              required
+              value={formData["description"].value}
+              onChange={(e) => onChange(e)}
+            />
+          </div>
+          <div className={`${styles.inputContainer} ${styles.inputContainerSmall}`}>
+            <label className={styles.inputLabel}>Origin</label>
+            <input
+              className={styles.inputData}
+              type="text"
+              name="origin"
+              required
+              value={formData["origin"].value}
+              onChange={(e) => onChange(e)}
+            />
+          </div>
+          <div className={`${styles.inputContainer} ${styles.inputContainerSmall}`}>
+            <label className={styles.inputLabel}>Roast Level</label>
+            <select
+              className={styles.inputData}
+              name="roastLevel"
+              value={formData["roastLevel"].value}
+              onChange={(e) => onChange(e)}
+            >
+              <option value="" disabled hidden>
+                Roasted Level
+              </option>
+              <option value="Light">Light</option>
+              <option value="Medium">Medium</option>
+              <option value="MediumDark">Medium-Dark</option>
+              <option value="Dark">Dark</option>
+            </select>
+          </div>
+          <div className={`${styles.inputContainer} ${styles.inputContainerSmall}`}>
+            <label className={styles.inputLabel}>Stock Quantity</label>
+            <input
+              className={styles.inputData}
+              type="number"
+              name="qty"
+              required
+              value={formData["qty"].value}
+              onChange={(e) => onChange(e)}
+            />
+          </div>
+          <div className={`${styles.inputContainer} ${styles.inputContainerSmall}`}>
+            <label className={styles.inputLabel}>Price ($)</label>
+            <input
+              className={styles.inputData}
+              type="number"
+              name="price"
+              required
+              value={formData["price"].value}
+              onChange={(e) => onChange(e)}
+            />
+          </div>
 
-          <label className={styles.inputLabel}>Origin</label>
-          <input
-            className={styles.inputData}
-            type="text"
-            name="origin"
-            required
-            value={formData["origin"].value}
-            onChange={(e) => onChange(e)}
-          />
-
-          <label className={styles.inputLabel}>Roast Level</label>
-          <select
-            className={styles.inputData}
-            name="roastLevel"
-            value={formData["roastLevel"].value}
-            onChange={(e) => onChange(e)}
-          >
-            <option value="" disabled hidden>
-              Roasted Level
-            </option>
-            <option value="Light">Light</option>
-            <option value="Medium">Medium</option>
-            <option value="MediumDark">Medium-Dark</option>
-            <option value="Dark">Dark</option>
-          </select>
-
-          <label className={styles.inputLabel}>Stock Quantity</label>
-          <input
-            className={styles.inputData}
-            type="number"
-            name="qty"
-            required
-            value={formData["qty"].value}
-            onChange={(e) => onChange(e)}
-          />
-
-          <label className={styles.inputLabel}>Price ($)</label>
-          <input
-            className={styles.inputData}
-            type="number"
-            name="price"
-            required
-            value={formData["price"].value}
-            onChange={(e) => onChange(e)}
-          />
-
-          <label className={styles.inputLabel}>Product Image</label>
-          <input
-            className={styles.inputData}
-            type="text"
-            name="image"
-            value={formData["image"].value}
-            required
-            onChange={(e) => onChange(e)}
-          />
-
-          <input
-            className={styles.inputData}
-            type="file"
-            alt="image"
-            name="image"
-            value={formData["image"].value}
-            required
-            onChange={(e) => onChange(e)}
-          />
+          <div className={styles.inputContainer}>
+            <label className={styles.inputLabel}>Product Image</label>
+            <input
+              className={`${styles.inputData} ${styles.inputBigData}`}
+              type="file"
+              alt="image"
+              name="image"
+              value={formData["image"].value}
+              required
+              onChange={(e) => onChange(e)}
+            />
+          </div>
           <button
             type="submit"
             className={styles.createBtn}
