@@ -9,6 +9,7 @@ const ProductSchema = new mongoose.Schema({
     roastLevel: String,
     bought: Number,
     isActive: Boolean,
+    qty: Number,
 })
 
 const Product = mongoose.model('Product', ProductSchema)
