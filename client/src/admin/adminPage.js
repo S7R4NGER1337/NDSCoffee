@@ -36,8 +36,6 @@ export default function AdminPage(){
     
     
     return <>
-    <Nav navName='Admin Panel' navLinks={linkings}/>
-        
     <DataTable data={products}/>
     </>
 }

@@ -1,27 +1,8 @@
 import DataTable from "../components/dataTable";
-import Nav from "../components/nav";
 import { useEffect, useState } from "react";
 
 export default function OrdersPage() {
   const [orders, setOrders] = useState();
-  const linkings = [
-    {
-      linkPath: "/",
-      linkName: "Go back to the App",
-    },
-    {
-      linkPath: "/admin",
-      linkName: "Admin",
-    },
-    {
-      linkPath: "/admin/create",
-      linkName: "Create product",
-    },
-    {
-      linkPath: "/admin/orders",
-      linkName: "Orders",
-    },
-  ];
 
   useEffect(() => {
     async function getOrders() {
@@ -36,7 +17,6 @@ export default function OrdersPage() {
 
   return (
     <>
-      <Nav navName="Admin Panel" navLinks={linkings} />
 
       <div style={{ margin: "1rem", "marginTop": "5rem" }}>
         <h1>All orders</h1>
