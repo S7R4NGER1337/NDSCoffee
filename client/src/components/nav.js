@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import styles from "./nav.module.css";
+import { useLocation } from 'react-router-dom'
 
 export default function Nav() {
-  const links = [
+  const location = useLocation()
+
+  const userLinks = [
     {
       linkPath: "/",
       linkName: "Home",
@@ -17,6 +20,23 @@ export default function Nav() {
     },
   ];
 
+  const adminLinks = [
+    {
+      linkPath: '/',
+      linkName: 'Go back to the App'
+    },
+    {
+      linkPath: '/admin/create',
+      linkName: 'Create product'
+    },
+    {
+      linkPath: '/admin/orders',
+      linkName: 'Orders'
+    },
+  ]
+
+  const linksToRender = location.pathname.includes('admin') && !location.pathname.includes('login') ? adminLinks : userLinks
+  
   return (
     <div className={styles.navigation}>
       <div className={styles.navInfo}>
@@ -25,7 +45,7 @@ export default function Nav() {
       </div>
 
       <div className={styles.navLinks}>
-        {links.map((link) => (
+        {linksToRender.map((link) => (
           <Link
             to={link.linkPath}
             style={{ textDecoration: "none", color: "inherit" }}
