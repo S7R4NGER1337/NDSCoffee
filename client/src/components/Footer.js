@@ -7,7 +7,7 @@ export default function Footer() {
         <div className={styles.footerData}>
             <div className={styles.footerInfo}>
                 <h1 className={styles.footerName}>NDS</h1>
-                <p className={styles.footerText}>Premium coffee beans, sourced ethically and roasted with passion</p>
+                <p className={`${styles.footerText} ${styles.footerNoLink}`}>Premium coffee beans, sourced ethically and roasted with passion</p>
             </div>
             <div className={styles.footerInfo}>
                 <h1 className={styles.footerName}>Shop</h1>

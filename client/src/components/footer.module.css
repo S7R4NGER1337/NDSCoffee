@@ -58,3 +58,7 @@
 .footerText{
     cursor: pointer;
 }
+
+.footerNoLink{
+    cursor: default;
+}
