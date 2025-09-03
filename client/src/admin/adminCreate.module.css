@@ -3,6 +3,34 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border: 0.1em solid gray;
+    max-width: 50rem;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.createContainer{
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    width: auto;
+    gap: 3em;
+}
+
+.createContainerData{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    gap: 0.4em;
+}
+.createHeading{
+    font-size: 2rem;
+}
+
+.createText{
+    font-size: 1rem;
 }
 
 .createProductForm{
@@ -14,7 +42,7 @@
     flex-direction: column;
 }
 
-input{
+.inputData{
     border: 2px solid gray;
     padding: 0.8em;
     margin-bottom: 1em;
