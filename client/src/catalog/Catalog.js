@@ -59,7 +59,7 @@ export default function Catalog() {
             <option value="Indonesia">Indonesia</option>
             <option value="India">India</option>
             <option value="Honduras">Honduras</option>
-            <option value="Panama">Honduras</option>
+            <option value="Panama">Panama</option>
           </select>
         </div>
         <div className={styles.sort}>
