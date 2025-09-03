@@ -8,7 +8,7 @@ router.post('/login', async (req,res) => {
     let isAuthenticated = false
     const {name, password} = req.body
     
-    if(name === adminName || password === adminPassword) isAuthenticated = true
+    if(name === adminName && password === adminPassword) isAuthenticated = true
 
     res.json(isAuthenticated)
     res.end()
