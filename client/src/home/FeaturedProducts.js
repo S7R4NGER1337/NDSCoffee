@@ -30,7 +30,7 @@ export default function FeaturedProducts() {
               style={{ textDecoration: "none", color: "inherit" }}
               key={product._id}
               >
-              <FeaturedProduct productData={product} />
+              <FeaturedProduct productData={product} key={product._id}/>
             </Link>
           ))
         ) : (
