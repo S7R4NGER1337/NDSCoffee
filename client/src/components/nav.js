@@ -26,6 +26,10 @@ export default function Nav() {
       linkName: 'Go back to the App'
     },
     {
+      linkPath: '/admin',
+      linkName: 'Admin'
+    },
+    {
       linkPath: '/admin/create',
       linkName: 'Create product'
     },
