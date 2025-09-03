@@ -3,20 +3,30 @@ import styles from "./catalogCard.module.css";
 
 export default function CatalogCard({ productData }) {
   return (
-    <Link
-      to={`/product/${productData._id}`}
-      style={{ textDecoration: "none", color: "inherit" }}
-    >
-      <div className={styles.catalogCardContainer}>
-        <img
-          className={styles.catalogCardImage}
-          alt="productImg"
-          src={productData.image}
-        />
-        <h1 className={styles.catalogCardname}>{productData.name}</h1>
-        <p className={styles.catalogCardPrice}>{productData.price} лв</p>
-        <button className={styles.catalogCardButton}>More Info</button>
+    <div className={styles.catalogCardContainer}>
+      <Link
+        to={`/product/${productData._id}`}
+        style={{ textDecoration: "none", color: "inherit" }}
+      >
+        <div className={styles.imageWrap}>
+          <img
+            className={styles.catalogCardImage}
+            alt="productImg"
+            src={productData.image}
+          />
+          <span className={styles.fullDetails}>View Full Details</span>
+        </div>
+      </Link>
+      <div className={styles.catalogCardInfo}>
+        <h1 className={styles.catalogCardName}>{productData.name}</h1>
+        <p className={styles.catalogCardPrice}>${productData.price}</p>
       </div>
-    </Link>
+      <div className={styles.catalogCardButtons}>
+        <button className={`${styles.catalogCardButton} ${styles.addToCart}`}>
+          Add to Cart
+        </button>
+        <button className={styles.catalogCardButton}>Quick View</button>
+      </div>
+    </div>
   );
 }
