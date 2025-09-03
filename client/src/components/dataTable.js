@@ -43,19 +43,10 @@ export default function DataTable({ data }) {
       prev.map(item => item._id === productId ? { ...item, isActive: !item.isActive}: item)
     );
   }
-
-
-  const canRenderProducts = () => {
-    if (productData !== undefined && productData.length > 0) return false;
-    return true;
-  };
-
   
   return (
     <div style={{ margin: "1em", marginTop: '5rem' }}>
-      {canRenderProducts() ? (
-        <h1>There are no products</h1>
-      ) : (
+      {productData !== undefined && productData.length > 0 ? (
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
@@ -131,7 +122,10 @@ export default function DataTable({ data }) {
             }
           </Table>
         </TableContainer>
+      ) : (
+        <h1>There are no products</h1>
       )}
+
     </div>
   );
 }
