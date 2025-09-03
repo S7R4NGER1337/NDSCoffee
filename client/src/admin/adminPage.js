@@ -1,24 +1,9 @@
 import DataTable from "../components/dataTable";
-import Nav from "../components/nav";
 import { useEffect, useState } from "react";
 
 export default function AdminPage(){
 
     const [products, setProducts] = useState([])
-    const linkings = [
-    {
-      linkPath: '/',
-      linkName: 'Go back to the App'
-    },
-    {
-      linkPath: '/admin/create',
-      linkName: 'Create product'
-    },
-    {
-      linkPath: '/admin/orders',
-      linkName: 'Orders'
-    },
-  ]
 
     useEffect(() => {
       async function getData() {
