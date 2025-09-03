@@ -12,7 +12,7 @@ export default function Nav() {
       linkName: "Coffee Beans",
     },
     {
-      linkPath: "/",
+      linkPath: "/about",
       linkName: "About Us",
     },
   ];

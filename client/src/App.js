@@ -13,6 +13,7 @@ import AdminLogin from "./admin/adminLogin.js";
 import { useState } from "react";
 import Nav from "./components/nav.js";
 import Footer from "./components/Footer.js";
+import AboutRedirect from "./components/AboutRedirect.js";
 
 export function setOrder(productId) {
   if (!productId) return;
@@ -69,6 +70,7 @@ function App() {
         <Route path="/product/:id" element={<ProductPage />} />
         <Route path="/catalog" element={<Catalog />} />
         <Route path="/order" element={<Order />} />
+        <Route path="/about" element={<AboutRedirect />} />
       </Routes>
     </div>
     <Footer />
