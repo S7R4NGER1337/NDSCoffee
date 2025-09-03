@@ -1,8 +1,59 @@
+.catalogContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.catalogPageInfo{
+    display: flex;
+    flex-direction: column;
+    gap: 0.6em;
+}
+
 .catalogCards{
     display: flex;
     justify-content: center;
     gap: 5rem;
 }
+
 .catalogHeading{
-    margin-top: 5rem;
+    font-size: 2.3rem;
+    color: rgba(44, 26, 10, 1);
+}
+
+.catalogText{
+    font-size: 1rem;
+    color: rgba(115, 87, 61, 1);
+}
+
+.selectInput{
+    color: rgba(44, 26, 10, 1);
+    border: none;
+    border-radius: 0.5em;
+    border: 0.1em solid rgb(255, 215, 190);
+    background-color: rgba(247, 231, 221, 1);
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 0.6em 1.1em;
+}
+
+.sortLabel{
+    color: rgba(115, 87, 61, 1);
+    font-size: 1rem;
+}
+
+.filtersContainer{
+    display: flex;
+    justify-content: space-between;
+}
+
+.filters{
+    display: flex;
+    gap: 1em;
+}
+
+.sort{
+    align-items: center;
+    display: flex;
+    gap: 0.5em;
 }

@@ -7,6 +7,7 @@ export default function Catalog() {
   const [filters, setFilters] = useState({
     roastedLevel: "",
     origin: "",
+    selectFilter: ""
   });
 
   useEffect(() => {
@@ -19,15 +20,18 @@ export default function Catalog() {
   }, []);
 
   return (
-    <>
-      <h1 className={styles.catalogHeading}>All Coffee Beans</h1>
-      <p className={styles.catalogText}>
-        Explore our curated collection of the finest coffee beans from around
-        the world.
-      </p>
+    <div className={styles.catalogContainer}>
+      <div className={styles.catalogPageInfo}>
+        <h1 className={styles.catalogHeading}>All Coffee Beans</h1>
+        <p className={styles.catalogText}>
+          Explore our curated collection of the finest coffee beans from around
+          the world.
+        </p>
+      </div>
       <div className={styles.filtersContainer}>
         <div className={styles.filters}>
           <select
+            className={styles.selectInput}
             name="RoastLevel"
             value={filters.roastedLevel}
             onChange={(e) =>
@@ -43,6 +47,7 @@ export default function Catalog() {
             <option value="Dark">Dark</option>
           </select>
           <select
+            className={styles.selectInput}
             name="Origin"
             value={filters.origin}
             onChange={(e) => setFilters({ ...filters, origin: e.target.value })}
@@ -63,11 +68,13 @@ export default function Catalog() {
           </select>
         </div>
         <div className={styles.sort}>
+          <label className={styles.sortLabel}>Sort by:</label>
           <select
-            name="RoastLevel"
-            value={filters.roastedLevel}
+            className={styles.selectInput}
+            name="SelectFilter"
+            value={filters.selectFilter}
             onChange={(e) =>
-              setFilters({ ...filters, roastedLevel: e.target.value })
+              setFilters({ ...filters, selectFilter: e.target.value })
             }
           >
             <option value="Featured">Featured</option>
@@ -81,6 +88,6 @@ export default function Catalog() {
           <CatalogCard productData={product} key={product._id} />
         ))}
       </div>
-    </>
+    </div>
   );
 }
