@@ -4,16 +4,7 @@ import Nav from "../components/nav";
 import styles from "./productPage.module.css";
 import { setOrder } from "../App";
 import { useNavigate } from "react-router";
-
-async function getProductData(id) {
-  try {
-    const response = await fetch(`http://localhost:3030/products/${id}`);
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Error fetching products:", error);
-  }
-}
+import { getProductDataById } from "../api/products";
 
 export default function ProductPage() {
   const navigate = useNavigate()
@@ -33,7 +24,7 @@ export default function ProductPage() {
 
   useEffect(() => {
     async function setData() {
-      setProductData(await getProductData(productId));
+      setProductData(await getProductDataById(productId));
     }
     setData();
   }, [productId]);
