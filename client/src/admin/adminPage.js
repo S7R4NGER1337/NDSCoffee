@@ -1,5 +1,6 @@
-import DataTable from "../components/dataTable";
+// import DataTable from "../components/dataTable";
 import { useEffect, useState } from "react";
+import TestTable from './testTable'
 
 export default function AdminPage(){
 
@@ -9,8 +10,8 @@ export default function AdminPage(){
       async function getData() {
         try {
           const response = await fetch('http://localhost:3030/products');
-          const data = await response.json(); // Parse the JSON body
-          setProducts(data); // Now logs actual data
+          const data = await response.json();
+          setProducts(data);
         } catch (error) {
           console.error('Error fetching products:', error);
         }
@@ -21,6 +22,7 @@ export default function AdminPage(){
     
     
     return <>
-    <DataTable data={products}/>
+    {/* <DataTable data={products}/> */}
+    <TestTable data={products}/>
     </>
 }
