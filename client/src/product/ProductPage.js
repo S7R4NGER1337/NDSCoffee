@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import Nav from "../components/nav";
 import styles from "./productPage.module.css";
 import { setOrder } from "../App";
 import { useNavigate } from "react-router";
@@ -8,17 +7,6 @@ import { getProductDataById } from "../api/products";
 
 export default function ProductPage() {
   const navigate = useNavigate()
-  const linkings = [
-    {
-      linkPath: '/',
-      linkName: 'Home'
-    },
-    {
-      linkPath: "/catalog",
-      linkName: "Catalog",
-    },
-  ];
-
   const [productData, setProductData] = useState({});
   const productId = useLocation().pathname.split("/")[2];
 
@@ -31,7 +19,6 @@ export default function ProductPage() {
 
   return (
     <>
-      <Nav navName="NDS" navLinks={linkings} />
       <div className={styles.productContainer}>
         <img
           alt="productImage"
