@@ -3,9 +3,11 @@ import Switch from "@mui/material/Switch";
 import { styled } from "@mui/material/styles";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function TestTable({ data }) {
   const [productData, setProductData] = useState(data);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setProductData(data);
@@ -149,6 +151,7 @@ export default function TestTable({ data }) {
                   className={styles.actionIcon}
                   src="/pen-solid-full.svg"
                   alt="editIcon"
+                onClick={() => navigate(`/admin/edit/${product._id}`)}
                 />
                 <img
                   className={styles.actionIcon}
