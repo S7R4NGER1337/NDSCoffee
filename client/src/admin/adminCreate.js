@@ -39,41 +39,38 @@ export default function AdminCreate() {
   const location = useLocation();
 
   useEffect(() => {
-  if (location.pathname.includes("/edit")) {
-    async function getProductData() {
-      try {
-        const response = await fetch(
-          `http://localhost:3030/products/${location.pathname.split("/")[3]}`
-        );
-        const data = await response.json();
+    if (location.pathname.includes("/edit")) {
+      async function getProductData() {
+        try {
+          const response = await fetch(
+            `http://localhost:3030/products/${location.pathname.split("/")[3]}`
+          );
+          const data = await response.json();
 
-        // Set formData as you already do
-        const newData = {
-          name: { value: data.name, isValid: true },
-          origin: { value: data.origin, isValid: true },
-          roastLevel: { value: data.roastLevel, isValid: true },
-          qty: { value: data.qty, isValid: true },
-          price: { value: data.price, isValid: true },
-          description: { value: data.description, isValid: true },
-          image: { value: data.image, isValid: true },
-        };
-        setFormData(newData);
+          const newData = {
+            name: { value: data.name, isValid: true },
+            origin: { value: data.origin, isValid: true },
+            roastLevel: { value: data.roastLevel, isValid: true },
+            qty: { value: data.qty, isValid: true },
+            price: { value: data.price, isValid: true },
+            description: { value: data.description, isValid: true },
+            image: { value: data.image, isValid: true },
+          };
+          setFormData(newData);
 
-        // **Preload file input**
-        if (data.image && imageInputRef.current) {
-          const file = base64ToFile(data.image, "image.png");
-          const dataTransfer = new DataTransfer();
-          dataTransfer.items.add(file);
-          imageInputRef.current.files = dataTransfer.files;
+          if (data.image && imageInputRef.current) {
+            const file = base64ToFile(data.image, "image.png");
+            const dataTransfer = new DataTransfer();
+            dataTransfer.items.add(file);
+            imageInputRef.current.files = dataTransfer.files;
+          }
+        } catch (error) {
+          console.error("Error fetching products:", error);
         }
-      } catch (error) {
-        console.error("Error fetching products:", error);
       }
+      getProductData();
     }
-    getProductData();
-  }
-}, [location]);
-
+  }, [location]);
 
   function validateFields() {
     const name = formData["name"].value;
@@ -167,6 +164,20 @@ export default function AdminCreate() {
     const roastLevel = formData["roastLevel"].value;
     const qty = Number(formData["qty"].value);
 
+    if (location.pathname.includes("/edit")) {
+      await editProduct(
+        name,
+        origin,
+        roastLevel,
+        qty,
+        price,
+        description,
+        image
+      );
+      navigate('/admin')
+      return
+    }
+
     await createNewProducts(
       name,
       origin,
@@ -206,6 +217,34 @@ export default function AdminCreate() {
       },
     });
     return product;
+  }
+
+  async function editProduct(name,
+    origin,
+    roastLevel,
+    qty,
+    price,
+    description,
+    image) {
+
+    const product = await fetch(`http://localhost:3030/products/edit/${location.pathname.split("/")[3]}`, {
+        method: 'POST',
+        body: JSON.stringify({
+        name,
+        origin,
+        roastLevel,
+        qty,
+        price,
+        description,
+        image,
+      }),
+        headers: {
+        "Content-type": "application/json",
+      }
+    })
+
+    
+    return product
   }
 
   function convertToBase64(file) {
