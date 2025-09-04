@@ -11,12 +11,12 @@ export default function Catalog() {
   });
 
   useEffect(() => {
-    async function getProducts() {
-      const response = await fetch("http://localhost:3030/products/available");
-      const data = await response.json();
-      setProducts(data);
-    }
-    getProducts();
+      async function getProducts() {
+        const response = await fetch("http://localhost:3030/products/available");
+        const data = await response.json();
+        setProducts(data);
+      }
+      getProducts();
   }, []);
 
   return (
