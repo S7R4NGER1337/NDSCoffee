@@ -45,3 +45,9 @@
     font-weight: 500;
     font-size: 1.1rem;
 }
+
+.actionIcon{
+    cursor: pointer;
+    max-width: 1.7rem;
+    margin-right: 1em;
+}
