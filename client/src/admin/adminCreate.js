@@ -88,13 +88,24 @@ export default function AdminCreate() {
     }
   }
 
-  function onChange(e) {
+  async function onChange(e) {
     const field = e.target.name;
+    if (field === "image") {
+      const file = e.target.files[0];
+      const base64 = await convertToBase64(file);
+      const editedValue = (formData[field].value = base64);
+      const editedData = { ...formData, ...editedValue };
+
+      setFormData(editedData);
+      validateFields();
+      return;
+    }
+
     const value = e.target.value;
     const editedValue = (formData[field].value = value);
     const editedData = { ...formData, ...editedValue };
-    setFormData(editedData);
 
+    setFormData(editedData);
     validateFields();
   }
 
@@ -138,6 +149,19 @@ export default function AdminCreate() {
     return product;
   }
 
+  function convertToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  }
+
   return (
     <div className={styles.createContainer}>
       <div className={styles.createContainerData}>
@@ -171,7 +195,9 @@ export default function AdminCreate() {
               onChange={(e) => onChange(e)}
             />
           </div>
-          <div className={`${styles.inputContainer} ${styles.inputContainerSmall}`}>
+          <div
+            className={`${styles.inputContainer} ${styles.inputContainerSmall}`}
+          >
             <label className={styles.inputLabel}>Origin</label>
             <input
               className={styles.inputData}
@@ -182,7 +208,9 @@ export default function AdminCreate() {
               onChange={(e) => onChange(e)}
             />
           </div>
-          <div className={`${styles.inputContainer} ${styles.inputContainerSmall}`}>
+          <div
+            className={`${styles.inputContainer} ${styles.inputContainerSmall}`}
+          >
             <label className={styles.inputLabel}>Roast Level</label>
             <select
               className={styles.inputData}
@@ -199,7 +227,9 @@ export default function AdminCreate() {
               <option value="Dark">Dark</option>
             </select>
           </div>
-          <div className={`${styles.inputContainer} ${styles.inputContainerSmall}`}>
+          <div
+            className={`${styles.inputContainer} ${styles.inputContainerSmall}`}
+          >
             <label className={styles.inputLabel}>Stock Quantity</label>
             <input
               className={styles.inputData}
@@ -210,7 +240,9 @@ export default function AdminCreate() {
               onChange={(e) => onChange(e)}
             />
           </div>
-          <div className={`${styles.inputContainer} ${styles.inputContainerSmall}`}>
+          <div
+            className={`${styles.inputContainer} ${styles.inputContainerSmall}`}
+          >
             <label className={styles.inputLabel}>Price ($)</label>
             <input
               className={styles.inputData}
@@ -227,9 +259,9 @@ export default function AdminCreate() {
             <input
               className={`${styles.inputData} ${styles.inputBigData}`}
               type="file"
-              alt="image"
               name="image"
-              value={formData["image"].value}
+              accept=".jpg, .png, .jpeg"
+              fileName={formData["image"].value}
               required
               onChange={(e) => onChange(e)}
             />
