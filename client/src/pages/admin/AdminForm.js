@@ -192,6 +192,8 @@ export default function AdminForm() {
       price,
       description,
       image,
+      isActive: false,
+      bought: 0
     });
     navigate("/admin");
   }
