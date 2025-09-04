@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import styles from "./adminCreate.module.css";
 import { useNavigate, useLocation } from "react-router-dom";
+import { editProduct, createNewProducts } from "../api/products";
 
 //TODO fix clssNames
 export default function AdminCreate() {
@@ -164,87 +165,34 @@ export default function AdminCreate() {
     const roastLevel = formData["roastLevel"].value;
     const qty = Number(formData["qty"].value);
 
+    const productId = location.pathname.split("/")[3];
     if (location.pathname.includes("/edit")) {
       await editProduct(
-        name,
-        origin,
-        roastLevel,
-        qty,
-        price,
-        description,
-        image
+        {
+          name,
+          origin,
+          roastLevel,
+          qty,
+          price,
+          description,
+          image,
+        },
+        productId
       );
-      navigate('/admin')
-      return
+      navigate("/admin");
+      return;
     }
 
-    await createNewProducts(
+    await createNewProducts({
       name,
       origin,
       roastLevel,
       qty,
       price,
       description,
-      image
-    );
-    navigate("/admin");
-  }
-
-  async function createNewProducts(
-    name,
-    origin,
-    roastLevel,
-    qty,
-    price,
-    description,
-    image
-  ) {
-    const product = await fetch("http://localhost:3030/products/create", {
-      method: "POST",
-      body: JSON.stringify({
-        name,
-        origin,
-        roastLevel,
-        qty,
-        price,
-        description,
-        image,
-        bought: 0,
-        isActive: false,
-      }),
-      headers: {
-        "Content-type": "application/json",
-      },
+      image,
     });
-    return product;
-  }
-
-  async function editProduct(name,
-    origin,
-    roastLevel,
-    qty,
-    price,
-    description,
-    image) {
-
-    const product = await fetch(`http://localhost:3030/products/edit/${location.pathname.split("/")[3]}`, {
-        method: 'POST',
-        body: JSON.stringify({
-        name,
-        origin,
-        roastLevel,
-        qty,
-        price,
-        description,
-        image,
-      }),
-        headers: {
-        "Content-type": "application/json",
-      }
-    })
-
-    
-    return product
+    navigate("/admin");
   }
 
   function convertToBase64(file) {
@@ -273,9 +221,15 @@ export default function AdminCreate() {
   return (
     <div className={styles.createContainer}>
       <div className={styles.createContainerData}>
-        <h1 className={styles.createHeading}>{location.pathname.includes("/edit") ? 'Edit Your Product': "Create a New Product"}</h1>
+        <h1 className={styles.createHeading}>
+          {location.pathname.includes("/edit")
+            ? "Edit Your Product"
+            : "Create a New Product"}
+        </h1>
         <p className={styles.createText}>
-          {location.pathname.includes("/edit") ? "Fill in the details below to edit your coffee bean product.": " Fill in the details below to add a new coffee bean product."}
+          {location.pathname.includes("/edit")
+            ? "Fill in the details below to edit your coffee bean product."
+            : " Fill in the details below to add a new coffee bean product."}
         </p>
       </div>
       <div className={styles.sectionCreate}>
