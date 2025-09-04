@@ -110,8 +110,11 @@ export default function TestTable({ data }) {
       <div className={styles.tableData}>
         <h1 className={styles.tableDataName}>Products</h1>
         <div className={styles.tableDataActions}>
-          <button>Search</button>
-          <button>Add Product</button>
+          <div className={styles.tableDataSearchContainer}>
+            <img className={styles.tableDataSearchIcon} src="/magnifying-glass-solid-full.svg" alt="searchIcon" />
+            <input className={styles.tableDataSearchInput} type="text" name="search" placeholder="Search products..."/>
+          </div>
+          <button onClick={() => navigate('/admin/create')} className={styles.tableDataSearchButton}>+ Add Product</button>
         </div>
       </div>
       <table className={styles.table}>
