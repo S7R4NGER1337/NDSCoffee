@@ -1,11 +1,11 @@
 import { useEffect, useState, useRef } from "react";
-import styles from "./adminCreate.module.css";
+import styles from "./adminForm.module.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import { editProduct, createNewProducts } from "../api/products";
 import {convertToBase64, base64ToFile} from '../utils/imageHelper'
 
 //TODO fix clssNames
-export default function AdminCreate() {
+export default function AdminForm() {
   const imageInputRef = useRef();
   const [formData, setFormData] = useState({
     name: {
