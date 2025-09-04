@@ -86,6 +86,23 @@ export default function TestTable({ data }) {
     });
   }
 
+  async function deleteProduct(productId) {
+    setProductData((prev) =>
+      prev.filter((product) => product._id !== productId)
+    );
+    const deletedProct = await fetch(
+      `http://localhost:3030/products/${productId}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+      }
+    );
+
+    return deletedProct;
+  }
+
   return (
     <div className={styles.tableWrap}>
       <div className={styles.tableData}>
@@ -127,9 +144,18 @@ export default function TestTable({ data }) {
                 />
               </td>
               <td className={styles.tableBody}>{product.bought}</td>
-              <td className={styles.tableBody}>
-                <button>Edit</button>
-                <button>Delete</button>
+              <td className={`${styles.tableBody} ${styles.tableActions}`}>
+                <img
+                  className={styles.actionIcon}
+                  src="/pen-solid-full.svg"
+                  alt="editIcon"
+                />
+                <img
+                  className={styles.actionIcon}
+                  onClick={() => deleteProduct(product._id)}
+                  src="/trash-solid-full.svg"
+                  alt="deleteIcon"
+                />
               </td>
             </tr>
           ))}
