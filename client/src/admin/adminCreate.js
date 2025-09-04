@@ -18,11 +18,11 @@ export default function AdminCreate() {
       isValid: true,
     },
     qty: {
-      value: 0,
+      value: null,
       isValid: true,
     },
     price: {
-      value: 0,
+      value: null,
       isValid: true,
     },
     description: {
@@ -130,7 +130,6 @@ export default function AdminCreate() {
     const qty = formData["qty"].value;
 
     await createNewProducts(name, origin, roastLevel, qty, price, description, image);
-    //TODO redirect to admin
     navigate("/admin");
   }
 
@@ -181,6 +180,7 @@ export default function AdminCreate() {
               required
               value={formData["name"].value}
               onChange={(e) => onChange(e)}
+              placeholder="e.g. Ethiopia Yirgacheffe"
             />
           </div>
 
@@ -193,6 +193,7 @@ export default function AdminCreate() {
               required
               value={formData["description"].value}
               onChange={(e) => onChange(e)}
+              placeholder="A brief description of the coffee's flavor profile, origin and characteristics."
             />
           </div>
           <div
@@ -206,6 +207,8 @@ export default function AdminCreate() {
               required
               value={formData["origin"].value}
               onChange={(e) => onChange(e)}
+              placeholder="e.g. Ethiopia"
+
             />
           </div>
           <div
@@ -238,6 +241,7 @@ export default function AdminCreate() {
               required
               value={formData["qty"].value}
               onChange={(e) => onChange(e)}
+              placeholder="e.g. 100"
             />
           </div>
           <div
@@ -251,6 +255,7 @@ export default function AdminCreate() {
               required
               value={formData["price"].value}
               onChange={(e) => onChange(e)}
+              placeholder="e.g. 13.50"
             />
           </div>
 
