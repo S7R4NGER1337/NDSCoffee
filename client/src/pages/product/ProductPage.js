@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import styles from "./productPage.module.css";
-import { setOrder } from "../App";
+import { setOrder } from "../../App";
 import { useNavigate } from "react-router";
-import { getProductDataById } from "../api/products";
+import { getProductDataById } from "../../api/products";
 
 export default function ProductPage() {
   const navigate = useNavigate()

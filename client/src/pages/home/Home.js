@@ -2,7 +2,7 @@ import AboutUs from "./AboutUs";
 import FeaturedProducts from "./FeaturedProducts";
 import { useEffect, useRef } from "react";
 import HeroSection from "./HeroSection";
-import Offer from "../components/Offer";
+import Offer from "../../components/Offer";
 import RoastingProcess from "./RoastingProcess";
 import { useLocation } from "react-router-dom";
 

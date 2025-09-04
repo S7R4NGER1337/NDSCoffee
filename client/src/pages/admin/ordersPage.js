@@ -1,4 +1,4 @@
-import DataTable from "../components/dataTable";
+import DataTable from "../../components/dataTable";
 import { useEffect, useState } from "react";
 
 export default function OrdersPage() {

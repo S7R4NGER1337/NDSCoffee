@@ -1,19 +1,20 @@
 import { Route, Routes } from "react-router";
-import AdminPage from "./admin/adminPage.js";
-import OrdersPage from "./admin/ordersPage.js";
-import ProductPage from "./product/ProductPage.js";
-import "./App.css";
-import Home from "./home/Home.js";
-import Catalog from "./catalog/Catalog.js";
-import Order from "./order/Order.js";
-import AuthGuard from "./authGuard.js";
-import AdminLogin from "./admin/adminLogin.js";
 import { useState } from "react";
-import Nav from "./components/nav.js";
-import Footer from "./components/Footer.js";
-import AboutRedirect from "./components/AboutRedirect.js";
-import AdminForm from "./admin/AdminForm.js";
+import "./App.css";
+import AuthGuard from "./authGuard.js";
 import {  userAuthenticated } from './api/user.js'
+
+import Nav from "./components/nav.js";
+import AdminPage from './pages/admin/adminPage.js'
+import AdminForm from "./pages/admin/AdminForm.js";
+import AdminLogin from "./pages/admin/adminLogin.js";
+import Home from './pages/home/Home.js'
+import Catalog from "./pages/catalog/Catalog.js";
+import OrdersPage from './pages/admin/ordersPage.js'
+import Order from "./pages/order/Order.js";
+import ProductPage from './pages/product/ProductPage.js'
+import AboutRedirect from "./components/AboutRedirect.js";
+import Footer from "./components/Footer.js";
 
 export function setOrder(productId) {
   if (!productId) return;

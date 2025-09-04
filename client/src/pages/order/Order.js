@@ -1,7 +1,7 @@
 import OrderCard from "./OrderCard";
 import { useState } from "react";
 import styles from "./order.module.css";
-import Nav from '../components/nav'
+import Nav from '../../components/nav'
 import { useNavigate } from "react-router-dom";
 
 export default function Order() {
