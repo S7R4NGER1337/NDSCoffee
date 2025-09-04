@@ -8,9 +8,12 @@ import { useNavigate } from "react-router-dom";
 export default function TestTable({ data }) {
   const [productData, setProductData] = useState(data);
   const navigate = useNavigate();
+  const [searchData, setSearchData] = useState("");
+  const [filteredProducts, setFilteredProducts] = useState([]);
 
   useEffect(() => {
     setProductData(data);
+    setFilteredProducts(data);
   }, [data]);
 
   const IOSSwitch = styled((props) => (
@@ -105,16 +108,45 @@ export default function TestTable({ data }) {
     return deletedProct;
   }
 
+  function searchOnChange(e) {
+    const value = e.target.value;
+    setSearchData(value);
+
+    const filteredProdutcs = productData.filter(
+      (product) =>
+        product["name"].toLowerCase().includes(value.toLowerCase()) ||
+        product["origin"].toLowerCase().includes(value.toLowerCase()) ||
+        product["roastLevel"].toLowerCase().includes(value.toLowerCase())
+    );
+    setFilteredProducts(filteredProdutcs);
+  }
+
   return (
     <div className={styles.tableWrap}>
       <div className={styles.tableData}>
         <h1 className={styles.tableDataName}>Products</h1>
         <div className={styles.tableDataActions}>
           <div className={styles.tableDataSearchContainer}>
-            <img className={styles.tableDataSearchIcon} src="/magnifying-glass-solid-full.svg" alt="searchIcon" />
-            <input className={styles.tableDataSearchInput} type="text" name="search" placeholder="Search products..."/>
+            <img
+              className={styles.tableDataSearchIcon}
+              src="/magnifying-glass-solid-full.svg"
+              alt="searchIcon"
+            />
+            <input
+              onChange={(e) => searchOnChange(e)}
+              className={styles.tableDataSearchInput}
+              value={searchData}
+              type="text"
+              name="search"
+              placeholder="Search products..."
+            />
           </div>
-          <button onClick={() => navigate('/admin/create')} className={styles.tableDataSearchButton}>+ Add Product</button>
+          <button
+            onClick={() => navigate("/admin/create")}
+            className={styles.tableDataSearchButton}
+          >
+            + Add Product
+          </button>
         </div>
       </div>
       <table className={styles.table}>
@@ -131,7 +163,7 @@ export default function TestTable({ data }) {
           </tr>
         </thead>
         <tbody className={styles.tableBodysWrapper}>
-          {productData.map((product) => (
+          {filteredProducts.map((product) => (
             <tr className={styles.tableBodyWrap} key={product._id}>
               <td className={`${styles.tableBody} ${styles.tableBodyDarker}`}>
                 {product.name}
@@ -154,7 +186,7 @@ export default function TestTable({ data }) {
                   className={styles.actionIcon}
                   src="/pen-solid-full.svg"
                   alt="editIcon"
-                onClick={() => navigate(`/admin/edit/${product._id}`)}
+                  onClick={() => navigate(`/admin/edit/${product._id}`)}
                 />
                 <img
                   className={styles.actionIcon}
