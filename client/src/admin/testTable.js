@@ -86,16 +86,26 @@ export default function TestTable({ data }) {
         item._id === productId ? { ...item, isActive: !item.isActive } : item
       )
     );
+    setFilteredProducts((prev) =>
+      prev.map((item) =>
+        item._id === productId ? { ...item, isActive: !item.isActive } : item
+      )
+    );
+
     await fetch(`http://localhost:3030/products/status/${productId}`, {
       method: "POST",
     });
   }
 
   async function deleteProduct(productId) {
-    setProductData((prev) =>
-      prev.filter((product) => product._id !== productId)
-    );
-    const deletedProct = await fetch(
+      setProductData((prev) =>
+        prev.filter((product) => product._id !== productId)
+      );
+      setFilteredProducts((prev) =>
+        prev.filter((product) => product._id !== productId)
+      );
+      
+      const deletedProct = await fetch(
       `http://localhost:3030/products/${productId}`,
       {
         method: "POST",
