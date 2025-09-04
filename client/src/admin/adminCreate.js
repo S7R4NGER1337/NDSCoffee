@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import styles from "./adminCreate.module.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 //TODO fix clssNames
 export default function AdminCreate() {
+  const imageInputRef = useRef();
   const [formData, setFormData] = useState({
     name: {
       value: "",
@@ -18,11 +19,11 @@ export default function AdminCreate() {
       isValid: true,
     },
     qty: {
-      value: null,
+      value: "",
       isValid: true,
     },
     price: {
-      value: null,
+      value: "",
       isValid: true,
     },
     description: {
@@ -35,8 +36,45 @@ export default function AdminCreate() {
     },
   });
   const navigate = useNavigate();
+  const location = useLocation();
 
-  //TODO FIX VALIDATE
+  useEffect(() => {
+  if (location.pathname.includes("/edit")) {
+    async function getProductData() {
+      try {
+        const response = await fetch(
+          `http://localhost:3030/products/${location.pathname.split("/")[3]}`
+        );
+        const data = await response.json();
+
+        // Set formData as you already do
+        const newData = {
+          name: { value: data.name, isValid: true },
+          origin: { value: data.origin, isValid: true },
+          roastLevel: { value: data.roastLevel, isValid: true },
+          qty: { value: data.qty, isValid: true },
+          price: { value: data.price, isValid: true },
+          description: { value: data.description, isValid: true },
+          image: { value: data.image, isValid: true },
+        };
+        setFormData(newData);
+
+        // **Preload file input**
+        if (data.image && imageInputRef.current) {
+          const file = base64ToFile(data.image, "image.png");
+          const dataTransfer = new DataTransfer();
+          dataTransfer.items.add(file);
+          imageInputRef.current.files = dataTransfer.files;
+        }
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    }
+    getProductData();
+  }
+}, [location]);
+
+
   function validateFields() {
     const name = formData["name"].value;
     const price = Number(formData["price"].value);
@@ -127,17 +165,39 @@ export default function AdminCreate() {
     const image = formData["image"].value;
     const origin = formData["origin"].value;
     const roastLevel = formData["roastLevel"].value;
-    const qty = formData["qty"].value;
+    const qty = Number(formData["qty"].value);
 
-    await createNewProducts(name, origin, roastLevel, qty, price, description, image);
+    await createNewProducts(
+      name,
+      origin,
+      roastLevel,
+      qty,
+      price,
+      description,
+      image
+    );
     navigate("/admin");
   }
 
-  async function createNewProducts(name, origin, roastLevel, qty, price, description, image) {
+  async function createNewProducts(
+    name,
+    origin,
+    roastLevel,
+    qty,
+    price,
+    description,
+    image
+  ) {
     const product = await fetch("http://localhost:3030/products/create", {
       method: "POST",
       body: JSON.stringify({
-        name, origin, roastLevel, qty, price, description, image,
+        name,
+        origin,
+        roastLevel,
+        qty,
+        price,
+        description,
+        image,
         bought: 0,
         isActive: false,
       }),
@@ -160,6 +220,16 @@ export default function AdminCreate() {
       };
     });
   }
+
+  const base64ToFile = (base64, filename) => {
+    const arr = base64.split(",");
+    const mime = arr[0].match(/:(.*?);/)[1];
+    const bstr = atob(arr[1]);
+    let n = bstr.length;
+    const u8arr = new Uint8Array(n);
+    while (n--) u8arr[n] = bstr.charCodeAt(n);
+    return new File([u8arr], filename, { type: mime });
+  };
 
   return (
     <div className={styles.createContainer}>
@@ -208,7 +278,6 @@ export default function AdminCreate() {
               value={formData["origin"].value}
               onChange={(e) => onChange(e)}
               placeholder="e.g. Ethiopia"
-
             />
           </div>
           <div
@@ -268,6 +337,7 @@ export default function AdminCreate() {
               accept=".jpg, .png, .jpeg"
               fileName={formData["image"].value}
               required
+              ref={imageInputRef}
               onChange={(e) => onChange(e)}
             />
           </div>
