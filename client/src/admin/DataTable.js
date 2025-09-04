@@ -5,7 +5,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function TestTable({ data }) {
+export default function DataTable({ data }) {
   const [productData, setProductData] = useState(data);
   const navigate = useNavigate();
   const [searchData, setSearchData] = useState("");

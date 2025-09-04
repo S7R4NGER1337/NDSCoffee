@@ -1,6 +1,6 @@
 // import DataTable from "../components/dataTable";
 import { useEffect, useState } from "react";
-import TestTable from './testTable'
+import DataTable from './DataTable'
 
 export default function AdminPage(){
 
@@ -23,6 +23,6 @@ export default function AdminPage(){
     
     return <>
     {/* <DataTable data={products}/> */}
-    <TestTable data={products}/>
+    <DataTable data={products}/>
     </>
 }
