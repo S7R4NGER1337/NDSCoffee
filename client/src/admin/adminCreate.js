@@ -273,9 +273,9 @@ export default function AdminCreate() {
   return (
     <div className={styles.createContainer}>
       <div className={styles.createContainerData}>
-        <h1 className={styles.createHeading}>Create a New Product</h1>
+        <h1 className={styles.createHeading}>{location.pathname.includes("/edit") ? 'Edit Your Product': "Create a New Product"}</h1>
         <p className={styles.createText}>
-          Fill in the details below to add a new coffee bean product.
+          {location.pathname.includes("/edit") ? "Fill in the details below to edit your coffee bean product.": " Fill in the details below to add a new coffee bean product."}
         </p>
       </div>
       <div className={styles.sectionCreate}>
