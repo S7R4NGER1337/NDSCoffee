@@ -125,20 +125,20 @@ export default function AdminCreate() {
     const price = Number(formData["price"].value);
     const description = formData["description"].value;
     const image = formData["image"].value;
+    const origin = formData["origin"].value;
+    const roastLevel = formData["roastLevel"].value;
+    const qty = formData["qty"].value;
 
-    await createNewProducts(name, price, description, image);
+    await createNewProducts(name, origin, roastLevel, qty, price, description, image);
     //TODO redirect to admin
     navigate("/admin");
   }
 
-  async function createNewProducts(name, price, description, image) {
+  async function createNewProducts(name, origin, roastLevel, qty, price, description, image) {
     const product = await fetch("http://localhost:3030/products/create", {
       method: "POST",
       body: JSON.stringify({
-        name,
-        price,
-        description,
-        image,
+        name, origin, roastLevel, qty, price, description, image,
         bought: 0,
         isActive: false,
       }),
