@@ -1,0 +1,47 @@
+.tableHeader, .tableBody{
+    padding: 1em;
+    text-align: start;
+}
+.tableBody{
+    text-align: start;
+}
+.table{
+    width: 100%;
+    margin: 1em;
+    border: 0.1em solid rgba(179, 179, 179, 0.63);
+    border-bottom: none;
+    border-radius: 0.5em;
+}
+.tableWrap{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.tableData{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tableBody, .tableHeader{
+    border-bottom: 0.1em solid rgba(179, 179, 179, 0.63);
+}
+
+.tableBody{
+    color: rgba(115, 87, 61, 1);
+    font-size: 1rem;
+}
+
+.tableHeader{
+    color: rgba(44, 26, 10, 1);
+}
+
+.tableBodyDarker{
+    color: rgba(44, 26, 10, 1);
+    font-weight: 500;
+    font-size: 1.1rem;
+}
