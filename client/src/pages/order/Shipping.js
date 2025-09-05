@@ -1,4 +1,4 @@
-import OrderCard from "./ProductCard";
+// import OrderCard from "./ProductCard";
 import { useState } from "react";
 import styles from "./shipping.module.css";
 import { useNavigate } from "react-router-dom";
@@ -13,36 +13,36 @@ export default function Order() {
     paymentType: "",
   });
   const navigate = useNavigate();
-  const cart = JSON.parse(localStorage.getItem("cart"));
+  // const cart = JSON.parse(localStorage.getItem("cart"));
 
-  async function submitOrder() {
-    const orderedProducts = JSON.parse(localStorage.getItem("cart"));
-    if (
-      userData.name === "" ||
-      userData.address === "" ||
-      userData.phone === "" ||
-      orderedProducts === null
-    )
-      return;
-    const bodyToSubmit = {
-      name: userData.name,
-      address: userData.address,
-      phone: userData.phone,
-      productId: orderedProducts,
-    };
+  // async function submitOrder() {
+  //   const orderedProducts = JSON.parse(localStorage.getItem("cart"));
+  //   if (
+  //     userData.name === "" ||
+  //     userData.address === "" ||
+  //     userData.phone === "" ||
+  //     orderedProducts === null
+  //   )
+  //     return;
+  //   const bodyToSubmit = {
+  //     name: userData.name,
+  //     address: userData.address,
+  //     phone: userData.phone,
+  //     productId: orderedProducts,
+  //   };
 
-    await fetch(`http://localhost:3030/products/order/s`, {
-      method: "POST",
-      body: JSON.stringify(bodyToSubmit),
-      headers: {
-        "Content-type": "application/json",
-      },
-    });
+  //   await fetch(`http://localhost:3030/products/order/s`, {
+  //     method: "POST",
+  //     body: JSON.stringify(bodyToSubmit),
+  //     headers: {
+  //       "Content-type": "application/json",
+  //     },
+  //   });
 
-    localStorage.removeItem("cart");
-    alert("Order successfull");
-    navigate("/");
-  }
+  //   localStorage.removeItem("cart");
+  //   alert("Order successfull");
+  //   navigate("/");
+  // }
 
   return (
     <>
@@ -138,9 +138,21 @@ export default function Order() {
                 <option value="card">Credit/Debit Card</option>
               </select>
             </div>
-            <button type="button" onClick={() => submitOrder()}>
-              ORDER NOW
-            </button>
+            <div className={styles.inputButtons}>
+              <button
+                className={styles.inputButton}
+                type="button"
+                onClick={() => navigate("/cart")}
+              >
+                Back to Cart
+              </button>
+              <button
+                className={`${styles.inputButton} ${styles.inputContinue}`}
+                type="button"
+              >
+                Continue to Payment
+              </button>
+            </div>
           </form>
         </div>
         {/* <div className={styles.cart}>

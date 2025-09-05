@@ -1,15 +1,62 @@
 .orderForm{
     display: flex;
     flex-direction: column;
-    max-width: 23rem;
+    gap: 1.5em;
+    width: 100%;
 }
 
 .orderContainer{
-    position: absolute;
-    top: 25%;
-    left: 25%;
     display: flex;
-    gap: 5rem;
-    justify-items: center;
+    justify-content: center;
     align-items: center;
+}
+
+.userData{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    border: 0.1em solid rgba(179, 179, 179, 0.63);
+    border-radius: 0.5em;
+    max-width: 42rem;
+    gap: 1em;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2em;
+}
+
+.orderFormGroup{
+    display: flex;
+    flex-direction: column;
+    gap: 0.3em;
+    width: 100%;
+}
+
+.orderFormInput{
+    width: 100%;
+    padding: 0.8em;
+    font-size: 1.1rem;
+    border: 0.1em solid rgba(179, 179, 179, 0.63);
+    border-radius: 0.5em;
+}
+
+.inputButton{
+    cursor: pointer;
+    padding: 1em 2em;
+    font-size: 1rem;
+    background-color: white;
+    font-weight: 600;
+    color: rgba(255, 140, 58, 1);
+    border-radius: 0.5em;
+    border: 0.15em solid rgba(255, 140, 58, 1);
+}
+
+.inputContinue{
+    background-color: rgba(255, 140, 58, 1);
+    color: white;
+}
+
+.inputButtons{
+    display: flex;
+    justify-content: space-between;
 }
