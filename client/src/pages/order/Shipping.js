@@ -44,6 +44,15 @@ export default function Order() {
   //   navigate("/");
   // }
 
+  function continueOnClick() {
+    if(userData.paymentType === 'card'){
+      navigate('/payment', {state: userData})
+    } else if(userData.paymentType === 'cash'){
+      navigate('/review', {state: userData})
+    }
+    return
+  }
+
   return (
     <>
       <div className={styles.orderContainer}>
@@ -149,6 +158,7 @@ export default function Order() {
               <button
                 className={`${styles.inputButton} ${styles.inputContinue}`}
                 type="button"
+                onClick={() => continueOnClick()}
               >
                 Continue to Payment
               </button>
