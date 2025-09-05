@@ -1,7 +1,6 @@
 import styles from "./reviewProduct.module.css";
 import { getProductDataById } from "../../api/products";
 import { useEffect, useState } from "react";
-import { ProductImage } from "../../utils/imageHelper";
 import { Link } from "react-router-dom";
 
 export default function ReviewProduct({ data }) {
@@ -18,7 +17,7 @@ export default function ReviewProduct({ data }) {
   return (
     <Link to={`/product/${data.id}`} style={{textDecoration: 'none', color: 'inherit'}}>
       <div className={styles.productContainer}>
-        <img src={products.image} alt="productImage" />
+        <img src={products.image} alt="productImage" className={styles.productImage}/>
         <h1 className={styles.productName}>
           {products.name} x{data.qty}
         </h1>
