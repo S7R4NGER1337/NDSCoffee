@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import styles from "./review.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import OrderCard from "./ProductCard";
+import ReviewProduct from "./ReviewProduct";
 
 
 export default function Review() {
@@ -52,7 +53,8 @@ export default function Review() {
             {cart === null ? (
             <h1>There is nothing in the cart</h1>
           ) : (
-            cart.map((item) => <OrderCard data={item} key={item.id} />)
+            // cart.map((item) => <OrderCard data={item} key={item.id}/>)
+            cart.map((item) => <ReviewProduct data={item} key={item.id}/>)
           )}
         </div>
       </div>
