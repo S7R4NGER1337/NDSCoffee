@@ -1,14 +1,9 @@
 .orderForm{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
     gap: 1.5em;
-    width: 100%;
-}
-
-.orderContainer{
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .userData{
@@ -20,7 +15,6 @@
     border-radius: 0.5em;
     max-width: 42rem;
     gap: 1em;
-    width: 100%;
     margin: 0 auto;
     padding: 2em;
 }
@@ -33,7 +27,6 @@
 }
 
 .orderFormInput{
-    width: 100%;
     padding: 0.8em;
     font-size: 1.1rem;
     border: 0.1em solid rgba(179, 179, 179, 0.63);
@@ -58,5 +51,10 @@
 
 .inputButtons{
     display: flex;
+    width: 100%;
     justify-content: space-between;
+}
+
+.orderFormSmall{
+    width: 47%;
 }

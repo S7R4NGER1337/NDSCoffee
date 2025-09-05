@@ -73,7 +73,6 @@ export default function Order() {
                 }
               />
             </div>
-
             <div className={styles.orderFormGroup}>
               <label> Street Addres </label>
               <input
@@ -116,7 +115,7 @@ export default function Order() {
                 }
               />
             </div>
-            <div className={styles.orderFormGroup}>
+            <div className={`${styles.orderFormGroup} ${styles.orderFormSmall}`}>
               <label> Postal Code </label>
               <input
                 placeholder="Enter your postal code"
@@ -130,7 +129,7 @@ export default function Order() {
                 }
               />
             </div>
-            <div className={styles.orderFormGroup}>
+            <div className={`${styles.orderFormGroup} ${styles.orderFormSmall}`}>
               <label> Payment Type </label>
               <select
                 className={styles.orderFormInput}
