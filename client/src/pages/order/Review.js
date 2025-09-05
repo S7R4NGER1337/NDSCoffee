@@ -1,8 +1,7 @@
 import { useEffect } from "react";
 import styles from "./review.module.css";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import ReviewProduct from "./ReviewProduct";
-
 
 export default function Review() {
   const { state } = useLocation();
@@ -13,18 +12,20 @@ export default function Review() {
     if (state === null || cart === null) navigate("/");
   }, [state, cart, navigate]);
 
-
   return (
     <div className={styles.reviewcontainer}>
       <h1>Review Your Order</h1>
       <div className={styles.cartContainer}>
-        <h1>Items</h1>
+        <h1 className={styles.cartContainerName}>Items</h1>
         <div className={styles.itemsContainer}>
-            {cart === null ? (
+          {cart === null ? (
             <h1>There is nothing in the cart</h1>
           ) : (
-            cart.map((item) => <ReviewProduct data={item} key={item.id}/>)
+            cart.map((item) => <ReviewProduct data={item} key={item.id} />)
           )}
+          <Link to="/cart" style={{textDecoration: 'none', color: 'rgba(255, 140, 58, 1)', alignSelf: 'end'}}>
+            <p>Edit Your Items</p>
+          </Link>
         </div>
       </div>
     </div>

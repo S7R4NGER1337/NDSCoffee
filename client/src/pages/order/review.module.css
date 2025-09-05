@@ -1,0 +1,24 @@
+.reviewcontainer{
+    max-width: 50rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+    gap: 4em;
+}
+
+.cartContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.itemsContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+}
+
+.cartContainerName{
+    font-size: 1.4rem;
+}
