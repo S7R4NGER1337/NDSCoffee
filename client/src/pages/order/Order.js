@@ -1,7 +1,6 @@
 import OrderCard from "./OrderCard";
 import { useState } from "react";
 import styles from "./order.module.css";
-import Nav from '../../components/nav'
 import { useNavigate } from "react-router-dom";
 
 export default function Order() {
@@ -13,16 +12,6 @@ export default function Order() {
   const navigate = useNavigate()
   const cart = JSON.parse(localStorage.getItem("cart"));
 
-  const linkings = [
-        {
-            linkPath: '/',
-            linkName: 'Home'
-        },
-        {
-            linkPath: '/catalog',
-            linkName: 'Catalog'
-        }
-    ]
 
   async function submitOrder() {
     const orderedProducts = JSON.parse(localStorage.getItem("cart"));
@@ -50,7 +39,6 @@ export default function Order() {
 
   return (
     <>
-    <Nav navName="NDS" navLinks={linkings}/>
     <div className={styles.orderContainer}>
       <div className={styles.userData}>
         <form className={styles.orderForm}>
