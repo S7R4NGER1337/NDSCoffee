@@ -1,6 +1,6 @@
-import OrderCard from "./OrderCard";
+import OrderCard from "./ProductCard";
 import { useState } from "react";
-import styles from "./order.module.css";
+import styles from "./shipping.module.css";
 import { useNavigate } from "react-router-dom";
 
 export default function Order() {

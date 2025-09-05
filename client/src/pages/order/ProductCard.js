@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import styles from "./orderCard.module.css";
+import styles from "./productCard.module.css";
 
 export default function OrderCard({ data }) {
   const [product, setProduct] = useState([]);

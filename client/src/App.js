@@ -11,7 +11,7 @@ import AdminLogin from "./pages/admin/adminLogin.js";
 import Home from './pages/home/Home.js'
 import Catalog from "./pages/catalog/Catalog.js";
 import OrdersPage from './pages/admin/ordersPage.js'
-import Order from "./pages/order/Order.js";
+import Order from "./pages/order/Shipping.js";
 import ProductPage from './pages/product/ProductPage.js'
 import AboutRedirect from "./components/AboutRedirect.js";
 import Footer from "./components/Footer.js";
