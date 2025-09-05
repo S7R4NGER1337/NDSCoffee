@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useState } from "react";
 
 export function convertToBase64(file) {
   return new Promise((resolve, reject) => {
@@ -23,30 +23,29 @@ export const base64ToFile = (base64, filename) => {
   return new File([u8arr], filename, { type: mime });
 };
 
-function stripBase64Prefix(base64) {
-  return base64.replace(/^data:image\/\w+;base64,/, "");
-}
-
 export function ProductImage({ base64Data }) {
-  const imageUrl = useMemo(() => {
-    if (!base64Data) return "";
+  const [imageUrl, setImageUrl] = useState(null);
 
-    const cleanBase64 = stripBase64Prefix(base64Data);
+  useEffect(() => {
+    if (!base64Data) return;
 
-    try {
-      const byteCharacters = atob(cleanBase64);
-      const byteNumbers = new Array(byteCharacters.length)
-        .fill(0)
-        .map((_, i) => byteCharacters.charCodeAt(i));
-      const byteArray = new Uint8Array(byteNumbers);
+    const cleanBase64 = base64Data.startsWith("data:") ? base64Data : `data:image/png;base64,${base64Data}`;
 
-      const blob = new Blob([byteArray], { type: "image/png" });
-      return URL.createObjectURL(blob);
-    } catch (err) {
-      console.error("Failed to decode Base64:", err);
-      return "";
-    }
+    fetch(cleanBase64)
+      .then(res => res.blob())
+      .then(blob => {
+        const url = URL.createObjectURL(blob);
+        setImageUrl(url);
+      })
+      .catch(err => console.error(err));
+
+    return () => {
+      if (imageUrl) URL.revokeObjectURL(imageUrl);
+    };
   }, [base64Data]);
 
-  return <img src={imageUrl} alt="product" style={{maxWidth: '5rem'}}/>;
+  if (!imageUrl) return null;
+
+  return <img src={imageUrl} alt="product" style={{ maxWidth: "5rem" }} loading="lazy" />;
 }
+
