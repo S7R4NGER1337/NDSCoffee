@@ -1,0 +1,9 @@
+.productContainer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.productName{
+    font-size: 1.2rem;
+}
