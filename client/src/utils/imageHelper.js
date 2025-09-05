@@ -48,5 +48,5 @@ export function ProductImage({ base64Data }) {
     }
   }, [base64Data]);
 
-  return <img src={imageUrl} alt="product" />;
+  return <img src={imageUrl} alt="product" style={{maxWidth: '5rem'}}/>;
 }
