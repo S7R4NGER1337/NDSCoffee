@@ -8,8 +8,8 @@ export default function Shipping() {
     fullName: "",
     streetAddres: "",
     city: "",
-    postalCode: "",
-    phone: "",
+    postalCode: 0,
+    phone: 0,
     paymentType: "",
   });
   const navigate = useNavigate();

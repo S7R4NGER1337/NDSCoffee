@@ -22,3 +22,18 @@
 .cartContainerName{
     font-size: 1.4rem;
 }
+
+.clientContainer{
+    display: flex;
+    justify-content: space-between;
+}
+
+.clientDataName{
+    font-size: 1.4rem;
+}
+
+.clientDataContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
