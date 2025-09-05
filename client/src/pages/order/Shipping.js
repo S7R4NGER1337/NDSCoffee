@@ -3,7 +3,7 @@ import { useState } from "react";
 import styles from "./shipping.module.css";
 import { useNavigate } from "react-router-dom";
 
-export default function Order() {
+export default function Shipping() {
   const [userData, setUserData] = useState({
     fullName: "",
     streetAddres: "",
