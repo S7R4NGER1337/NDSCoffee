@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import styles from "./catalogCard.module.css";
 
 export default function CatalogCard({ productData }) {
+  
   return (
     <div className={styles.catalogCardContainer}>
       <Link

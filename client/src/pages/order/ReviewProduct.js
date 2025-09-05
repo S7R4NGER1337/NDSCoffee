@@ -18,7 +18,7 @@ export default function ReviewProduct({ data }) {
   return (
     <Link to={`/product/${data.id}`} style={{textDecoration: 'none', color: 'inherit'}}>
       <div className={styles.productContainer}>
-        <ProductImage base64Data={products.image} />
+        <img src={products.image} alt="productImage" />
         <h1 className={styles.productName}>
           {products.name} x{data.qty}
         </h1>

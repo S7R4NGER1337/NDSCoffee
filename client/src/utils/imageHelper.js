@@ -22,30 +22,3 @@ export const base64ToFile = (base64, filename) => {
   while (n--) u8arr[n] = bstr.charCodeAt(n);
   return new File([u8arr], filename, { type: mime });
 };
-
-export function ProductImage({ base64Data }) {
-  const [imageUrl, setImageUrl] = useState(null);
-
-  useEffect(() => {
-    if (!base64Data) return;
-
-    const cleanBase64 = base64Data.startsWith("data:") ? base64Data : `data:image/png;base64,${base64Data}`;
-
-    fetch(cleanBase64)
-      .then(res => res.blob())
-      .then(blob => {
-        const url = URL.createObjectURL(blob);
-        setImageUrl(url);
-      })
-      .catch(err => console.error(err));
-
-    return () => {
-      if (imageUrl) URL.revokeObjectURL(imageUrl);
-    };
-  }, [base64Data]);
-
-  if (!imageUrl) return null;
-
-  return <img src={imageUrl} alt="product" style={{ maxWidth: "5rem" }} loading="lazy" />;
-}
-
