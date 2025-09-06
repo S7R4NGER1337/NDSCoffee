@@ -5,6 +5,12 @@ exports.getAllProducts = async () => {
   return products;
 };
 
+exports.getProductsPrice = async (id) => {
+  const product = await Product.findById(id).select("price")
+  
+  return product
+}
+
 exports.createProduct = async (productData) => {
   try {
     await Product.create(productData);
