@@ -1,7 +1,7 @@
 // import OrderCard from "./ProductCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./shipping.module.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function Shipping() {
   const [userData, setUserData] = useState({
@@ -13,6 +13,8 @@ export default function Shipping() {
     paymentType: "",
   });
   const navigate = useNavigate();
+  const { state } = useLocation();
+
   // const cart = JSON.parse(localStorage.getItem("cart"));
 
   // async function submitOrder() {
@@ -44,6 +46,13 @@ export default function Shipping() {
   //   navigate("/");
   // }
 
+  useEffect(() => {
+    if(state !== null){
+      setUserData(state)
+    }
+
+  }, [state])
+  
   function continueOnClick() {
     if(userData.paymentType === 'card'){
       navigate('/payment', {state: userData})
