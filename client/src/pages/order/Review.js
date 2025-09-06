@@ -21,6 +21,20 @@ export default function Review() {
 
   }, [state, cart, navigate]);
 
+  async function placeOrder() {    
+    await fetch(`http://localhost:3030/products/order/s`, {
+      method: "POST",
+      body: JSON.stringify({...state, cart, status: 'pending'}),
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+
+    localStorage.removeItem("cart");
+    alert("Order successfull");
+    navigate("/");
+  }
+
   return (
     <div className={styles.reviewcontainer}>
       <h1>Review Your Order</h1>
@@ -81,7 +95,7 @@ export default function Review() {
           <p className={styles.orderSummaryTotalPrice}>$ {sumOfProducts}</p>
         </div>
       </div>
-      <button className={styles.placeOrder}>Place Order</button>
+      <button className={styles.placeOrder} onClick={() => placeOrder()}>Place Order</button>
     </div>
   );
 }
