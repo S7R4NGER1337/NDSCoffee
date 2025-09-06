@@ -17,6 +17,18 @@ router.post('/create', (req, res) => {
     res.end()
 })
 
+router.post('/price', async (req, res) => {
+    const { ids } = req.body
+
+    const prices = await Promise.all(
+      ids.map((id) => productManager.getProductsPrice(id))
+    );
+
+    const sumOfPrices = prices.reduce((sum, price) => sum + price, 0);
+    
+    res.send({sum: sumOfPrices})
+})
+
 router.get('/available', async (req, res) => {
     const products = await productManager.getAvailable()
     

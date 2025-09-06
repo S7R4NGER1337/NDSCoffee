@@ -6,9 +6,9 @@ exports.getAllProducts = async () => {
 };
 
 exports.getProductsPrice = async (id) => {
-  const product = await Product.findById(id).select("price")
+  const product = await Product.findById(id).select("price").lean()
   
-  return product
+  return product.price
 }
 
 exports.createProduct = async (productData) => {
