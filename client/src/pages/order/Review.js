@@ -8,23 +8,22 @@ export default function Review() {
   const { state } = useLocation();
   const navigate = useNavigate();
   const cart = JSON.parse(localStorage.getItem("cart"));
-  const [sumOfProducts, setSumOfProducts] = useState(0)
+  const [sumOfProducts, setSumOfProducts] = useState(0);
 
   useEffect(() => {
     if (state === null || cart === null) navigate("/");
 
     async function fetchProductPrices() {
-      const price = await getProductPrices(cart)
+      const price = await getProductPrices(cart);
       setSumOfProducts(price.sum);
     }
-    fetchProductPrices()
-
+    fetchProductPrices();
   }, [state, cart, navigate]);
 
-  async function placeOrder() {    
+  async function placeOrder() {
     await fetch(`http://localhost:3030/products/order/s`, {
       method: "POST",
-      body: JSON.stringify({...state, cart, status: 'pending'}),
+      body: JSON.stringify({ ...state, cart, status: "pending" }),
       headers: {
         "Content-type": "application/json",
       },
@@ -72,9 +71,22 @@ export default function Review() {
         </div>
         <div className={styles.clientDataContainer}>
           <h1 className={styles.clientDataName}>Payment Method</h1>
-          <p>
-            {state.paymentType === "cash" ? "Cash on Delivery" : "Paid by card"}
-          </p>
+          <div className={styles.paymentData}>
+            <p>
+              {state.paymentType === "cash"
+                ? "Cash on Delivery"
+                : "Paid by card"}
+            </p>
+            <img
+              className={styles.paymentIcon}
+              src={
+                state.paymentType === "cash"
+                  ? "truck-solid-full.svg"
+                  : "credit-card-solid-full.svg"
+              }
+              alt="paymentIcon"
+            />
+          </div>
         </div>
       </div>
       <div className={styles.line}></div>
@@ -95,7 +107,9 @@ export default function Review() {
           <p className={styles.orderSummaryTotalPrice}>$ {sumOfProducts}</p>
         </div>
       </div>
-      <button className={styles.placeOrder} onClick={() => placeOrder()}>Place Order</button>
+      <button className={styles.placeOrder} onClick={() => placeOrder()}>
+        Place Order
+      </button>
     </div>
   );
 }
