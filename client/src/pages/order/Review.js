@@ -79,6 +79,7 @@ export default function Review() {
           <p className={styles.orderSummaryTotalPrice}>$ {sumOfProducts}</p>
         </div>
       </div>
+      <button className={styles.placeOrder}>Place Order</button>
     </div>
   );
 }
