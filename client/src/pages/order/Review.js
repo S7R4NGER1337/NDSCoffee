@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styles from "./review.module.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import ReviewProduct from "./ReviewProduct";
@@ -8,10 +8,17 @@ export default function Review() {
   const { state } = useLocation();
   const navigate = useNavigate();
   const cart = JSON.parse(localStorage.getItem("cart"));
+  const [sumOfProducts, setSumOfProducts] = useState(0)
 
   useEffect(() => {
     if (state === null || cart === null) navigate("/");
-    getProductPrices(cart)
+
+    async function fetchProductPrices() {
+      const price = await getProductPrices(cart)
+      setSumOfProducts(price.sum);
+    }
+    fetchProductPrices()
+
   }, [state, cart, navigate]);
 
   return (
@@ -60,7 +67,7 @@ export default function Review() {
         <div className={styles.orderSummaryItems}>
           <div className={styles.orderSummaryItem}>
             <p className={styles.orderSummaryItemName}>Subtotal</p>
-            <p className={styles.orderSummaryItemPrice}>$ 12</p>
+            <p className={styles.orderSummaryItemPrice}>$ {sumOfProducts}</p>
           </div>
           <div className={styles.orderSummaryItem}>
             <p className={styles.orderSummaryItemName}>Shipping</p>
@@ -69,7 +76,7 @@ export default function Review() {
         </div>
         <div className={styles.orderSummaryTotal}>
           <h1 className={styles.orderSummaryTotalName}>Total</h1>
-          <p className={styles.orderSummaryTotalPrice}>$ 12</p>
+          <p className={styles.orderSummaryTotalPrice}>$ {sumOfProducts}</p>
         </div>
       </div>
     </div>
