@@ -45,6 +45,22 @@
 .orderSummaryName{
     font-size: 1.4rem;
 }
+.clientInfo{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.clientContainer{
+    flex-direction: column;
+    gap: 1em;
+}
+
+.editShoppingData{
+    cursor: pointer;
+    align-self: end;
+    color: rgba(255, 140, 58, 1);
+}
 
 .orderSummaryContainer{
     display: flex;

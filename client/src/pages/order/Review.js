@@ -37,7 +37,7 @@ export default function Review() {
 
   return (
     <>
-      <Progress page={3}/>
+      <Progress page={3} />
       <div className={styles.reviewcontainer}>
         <h1>Review Your Order</h1>
         <div className={styles.cartContainer}>
@@ -62,35 +62,38 @@ export default function Review() {
         </div>
         <div className={styles.line}></div>
         <div className={styles.clientContainer}>
-          <div className={styles.clientDataContainer}>
-            <h1 className={styles.clientDataName}>Shipping Data</h1>
-            <div className={styles.clientData}>
-              <p>{state.fullName}</p>
-              <p>{state.phone}</p>
-              <p>{state.city}</p>
-              <p>{state.postalCode}</p>
-              <p>{state.streetAddres}</p>
+          <div className={styles.clientInfo}>
+            <div className={styles.clientDataContainer}>
+              <h1 className={styles.clientDataName}>Shipping Data</h1>
+              <div className={styles.clientData}>
+                <p>{state.fullName}</p>
+                <p>{state.phone}</p>
+                <p>{state.city}</p>
+                <p>{state.postalCode}</p>
+                <p>{state.streetAddres}</p>
+              </div>
+            </div>
+            <div className={styles.clientDataContainer}>
+              <h1 className={styles.clientDataName}>Payment Method</h1>
+              <div className={styles.paymentData}>
+                <p>
+                  {state.paymentType === "cash"
+                    ? "Cash on Delivery"
+                    : "Paid by card"}
+                </p>
+                <img
+                  className={styles.paymentIcon}
+                  src={
+                    state.paymentType === "cash"
+                      ? "truck-solid-full.svg"
+                      : "credit-card-solid-full.svg"
+                  }
+                  alt="paymentIcon"
+                />
+              </div>
             </div>
           </div>
-          <div className={styles.clientDataContainer}>
-            <h1 className={styles.clientDataName}>Payment Method</h1>
-            <div className={styles.paymentData}>
-              <p>
-                {state.paymentType === "cash"
-                  ? "Cash on Delivery"
-                  : "Paid by card"}
-              </p>
-              <img
-                className={styles.paymentIcon}
-                src={
-                  state.paymentType === "cash"
-                    ? "truck-solid-full.svg"
-                    : "credit-card-solid-full.svg"
-                }
-                alt="paymentIcon"
-              />
-            </div>
-          </div>
+          <p onClick={() => navigate('/order', {state: state})} className={styles.editShoppingData}>Edit Shipping Data</p>
         </div>
         <div className={styles.line}></div>
         <div className={styles.orderSummaryContainer}>
