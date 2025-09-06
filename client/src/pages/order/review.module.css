@@ -4,7 +4,7 @@
     flex-direction: column;
     justify-content: center;
     margin: 0 auto;
-    gap: 4em;
+    gap: 2em;
 }
 
 .cartContainer{
@@ -95,3 +95,9 @@
     padding: 3.5em;
     border-radius: 1em;
 }
+
+.line{
+    height: 0.1em;
+    background-color: rgba(179, 179, 179, 0.63);
+}
+

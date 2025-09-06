@@ -44,6 +44,7 @@ export default function Review() {
           </Link>
         </div>
       </div>
+      <div className={styles.line}></div>
       <div className={styles.clientContainer}>
         <div className={styles.clientDataContainer}>
           <h1 className={styles.clientDataName}>Shipping Data</h1>
@@ -62,6 +63,7 @@ export default function Review() {
           </p>
         </div>
       </div>
+      <div className={styles.line}></div>
       <div className={styles.orderSummaryContainer}>
         <h1 className={styles.orderSummaryName}>Order Summary</h1>
         <div className={styles.orderSummaryItems}>
