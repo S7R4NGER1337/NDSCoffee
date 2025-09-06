@@ -1,5 +1,5 @@
 .reviewcontainer{
-    max-width: 50rem;
+    max-width: 55rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -88,4 +88,10 @@
     color: white;
     background-color: rgba(255, 140, 58, 1);
     border: none;
+}
+
+.reviewcontainer{
+    border: 0.1em solid rgba(179, 179, 179, 0.63);
+    padding: 3.5em;
+    border-radius: 1em;
 }
