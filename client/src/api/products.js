@@ -33,3 +33,25 @@ export async function getProductDataById(id) {
     console.error("Error fetching products:", error);
   }
 }
+
+export async function getProductPrices(id) {
+  let idArr = []
+  id.map((id) => {
+    for (let index = 0; index < id.qty; index++) {
+      idArr.push(id.id)
+    }
+    return id
+  })
+
+  const response = await fetch(`http://localhost:3030/products/price`, {
+    method: "POST",
+    body: JSON.stringify({ids: idArr}),
+    headers: {
+      "Content-type": "application/json",
+    },
+  })
+  
+  const price = await response.json()
+  
+  return price
+}

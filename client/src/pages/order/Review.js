@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import styles from "./review.module.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import ReviewProduct from "./ReviewProduct";
+import { getProductPrices } from "../../api/products";
 
 export default function Review() {
   const { state } = useLocation();
@@ -10,6 +11,7 @@ export default function Review() {
 
   useEffect(() => {
     if (state === null || cart === null) navigate("/");
+    getProductPrices(cart)
   }, [state, cart, navigate]);
 
   return (
