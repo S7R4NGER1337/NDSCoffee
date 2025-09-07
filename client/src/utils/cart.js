@@ -26,3 +26,23 @@ export async function productFetch(setCartProducts, cart) {
     console.error(err);
   }
 }
+
+export function methodsQty(productId, operation, setQty) {
+  const cartInfo = JSON.parse(localStorage.getItem("cart")) || [];
+  const index = cartInfo.findIndex((item) => item.id === productId);
+
+  if (operation === "sub") {
+    setQty((prev) => prev - 1);
+    cartInfo[index].qty -= 1;
+  }
+  if (operation === "sum") {
+    setQty((prev) => prev + 1);
+    cartInfo[index].qty += 1;
+  }
+  if (cartInfo[index].qty <= 0 || operation === "del") {
+    cartInfo.splice(cartInfo.indexOf(cartInfo[index]), 1);
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cartInfo));
+  return cartInfo;
+}
