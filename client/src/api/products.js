@@ -55,3 +55,26 @@ export async function getProductPrices(id) {
   
   return price
 }
+
+
+export async function getCartProducts(id) {
+  let idArr = []
+  id.map((id) => {
+    for (let index = 0; index < id.qty; index++) {
+      idArr.push(id.id)
+    }
+    return id
+  })
+
+  const response = await fetch(`http://localhost:3030/products/cartProduct`, {
+    method: "POST",
+    body: JSON.stringify({ids: idArr}),
+    headers: {
+      "Content-type": "application/json",
+    },
+  })
+  
+  const product = await response.json()
+  
+  return product
+}
