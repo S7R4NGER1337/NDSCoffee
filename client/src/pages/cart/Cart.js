@@ -22,7 +22,7 @@ export default function Cart() {
             <CartProduct
               productData={product}
               qty={cart.qty}
-              key={product.id}
+              key={product._id}
             />
           ))}
         </div>
