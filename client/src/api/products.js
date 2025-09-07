@@ -20,7 +20,7 @@ export async function createNewProducts(productData) {
       "Content-type": "application/json",
     },
   });
-  
+
   return product;
 }
 
@@ -35,46 +35,45 @@ export async function getProductDataById(id) {
 }
 
 export async function getProductPrices(id) {
-  let idArr = []
+  let idArr = [];
   id.map((id) => {
     for (let index = 0; index < id.qty; index++) {
-      idArr.push(id.id)
+      idArr.push(id.id);
     }
-    return id
-  })
+    return id;
+  });
 
   const response = await fetch(`http://localhost:3030/products/price`, {
     method: "POST",
-    body: JSON.stringify({ids: idArr}),
+    body: JSON.stringify({ ids: idArr }),
     headers: {
       "Content-type": "application/json",
     },
-  })
-  
-  const price = await response.json()
-  
-  return price
+  });
+
+  const price = await response.json();
+
+  return price;
 }
 
-
 export async function getCartProducts(id) {
-  let idArr = []
+  let idArr = [];
   id.map((id) => {
     for (let index = 0; index < id.qty; index++) {
-      idArr.push(id.id)
+      idArr.push(id.id);
     }
-    return id
-  })
+    return id;
+  });
 
   const response = await fetch(`http://localhost:3030/products/cartProduct`, {
     method: "POST",
-    body: JSON.stringify({ids: idArr}),
+    body: JSON.stringify({ ids: idArr }),
     headers: {
       "Content-type": "application/json",
     },
-  })
-  
-  const product = await response.json()
-  
-  return product
+  });
+
+  const product = await response.json();
+
+  return product;
 }
