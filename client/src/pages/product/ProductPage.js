@@ -36,7 +36,7 @@ export default function ProductPage() {
     }
     
     setOrder(productId, qty);
-    navigate("/order");
+    navigate("/cart");
   }
 
   return (
