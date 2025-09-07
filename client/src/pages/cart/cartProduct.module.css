@@ -1,0 +1,67 @@
+.productImage{
+    max-width: 5rem;
+    height: auto;
+}
+
+.productDataContainer{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.productContainer{
+    display: flex;
+    width: 100%;
+    gap: 1em;
+}
+
+.productInfoName{
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+.productInfoPrice{
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.qtyAction{
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0.5em 0.6em;
+    border-radius: 5em 5em;
+    background-color: rgba(128, 128, 128, 0.171);
+    border: 0.1em solid rgba(128, 128, 128, 0.219);
+}
+
+.trashIcon{
+    max-width: 2rem;
+}
+
+.productInfoContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.productDataContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.productActions{
+    display: flex;
+    gap: 1em;
+}
+
+.qtyEdit{
+    align-items: center;
+    display: flex;
+    gap: 0.4em;
+}
+
+.productActions{
+    display: flex;
+    align-items: center;
+
+}

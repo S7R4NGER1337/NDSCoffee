@@ -8,30 +8,29 @@ export default function Cart() {
   const [cartProducts, setCartProducts] = useState([]);
 
   useEffect(() => {
-  async function productFetch() {
-    if (cart.length === 0) {
-      setCartProducts([]);
-      return;
+    async function productFetch() {
+      if (cart.length === 0) {
+        setCartProducts([]);
+        return;
+      }
+      try {
+        const products = await Promise.all(
+          cart.map((product) => getProductDataById(product.id))
+        );
+
+        const productsWithQty = products.map((product, index) => ({
+          ...product,
+          qty: cart[index].qty,
+        }));
+
+        setCartProducts(productsWithQty);
+      } catch (err) {
+        console.error(err);
+      }
     }
-    try {
-      const products = await Promise.all(
-        cart.map(product => getProductDataById(product.id))
-      );
 
-      const productsWithQty = products.map((product, index) => ({
-        ...product,
-        qty: cart[index].qty,
-      }));
-
-      setCartProducts(productsWithQty);
-    } catch (err) {
-      console.error(err);
-    }
-  }
-
-  productFetch();
-}, [cart]);
-
+    productFetch();
+  }, [cart]);
 
   return (
     <div className={styles.cartContainer}>
