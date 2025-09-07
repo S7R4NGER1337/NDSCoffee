@@ -1,5 +1,4 @@
 import styles from "./cart.module.css";
-import { getProductDataById } from "../../api/products";
 import { subtotalFetch, productFetch } from '../../utils/cart'
 import { useEffect, useState } from "react";
 import CartProduct from "./CartProduct";
