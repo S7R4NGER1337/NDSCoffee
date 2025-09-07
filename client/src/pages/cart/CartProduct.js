@@ -23,7 +23,7 @@ export default function CartProduct({ productData }) {
             className={styles.trashIcon}
             src="/trash-solid-full-gray.svg"
             alt="trashIcon"
-          />{" "}
+          />
         </div>
       </div>
     </div>

@@ -1,0 +1,11 @@
+.cartInfoContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.cartContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 3em;
+}
