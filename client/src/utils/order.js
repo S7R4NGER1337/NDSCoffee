@@ -1,4 +1,4 @@
-export function setOrder(productId) {
+export function setOrder(productId, qty) {
   if (!productId) return;
   const cartInfo = JSON.parse(localStorage.getItem("cart")) || [];
   const index = cartInfo.findIndex((item) => item.id === productId);
@@ -6,7 +6,7 @@ export function setOrder(productId) {
   if (index > -1) {
     cartInfo[index].qty += 1;
   } else {
-    cartInfo.push({ id: productId, qty: 1 });
+    cartInfo.push({ id: productId, qty });
   }
 
   localStorage.setItem("cart", JSON.stringify(cartInfo));

@@ -30,6 +30,15 @@ export default function ProductPage() {
     setQtyStatus(true);
   }
 
+  function addToCart() {
+    if(!qtyStatus){
+      return
+    }
+    
+    setOrder(productId, qty);
+    navigate("/order");
+  }
+
   return (
     <>
       <div className={styles.productContainer}>
@@ -69,13 +78,7 @@ export default function ProductPage() {
                   onChange={(e) => valueOnChange(e)}
                 />
               </div>
-              <button
-                className={styles.productBuy}
-                onClick={() => {
-                  setOrder(productId);
-                  navigate("/order");
-                }}
-              >
+              <button className={styles.productBuy} onClick={() => addToCart()}>
                 Add to cart
               </button>
             </div>
