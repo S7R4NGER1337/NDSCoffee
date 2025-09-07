@@ -1,11 +1,12 @@
 import styles from "./cart.module.css";
-import { getProductDataById } from "../../api/products";
+import { getProductDataById, getProductPrices } from "../../api/products";
 import { useEffect, useState } from "react";
 import CartProduct from "./CartProduct";
 
 export default function Cart() {
   const cart = JSON.parse(localStorage.getItem("cart"));
   const [cartProducts, setCartProducts] = useState([]);
+  const [total, setTotal] = useState(0)
 
   useEffect(() => {
     async function productFetch() {
@@ -28,7 +29,13 @@ export default function Cart() {
         console.error(err);
       }
     }
+    async function subtotalFetch() {
+      const price = await getProductPrices(cart)
+    
+      setTotal(price.sum)
+    }
 
+    subtotalFetch()
     productFetch();
   }, [cart]);
 
@@ -50,7 +57,7 @@ export default function Cart() {
           <div className={styles.orderDetails}>
             <div className={styles.orderInfo}>
               <p className={styles.orderInfoName}>Subtotal</p>
-              <p className={styles.orderInfoPrice}>$40</p>
+              <p className={styles.orderInfoPrice}>${total}</p>
             </div>
             <div className={styles.orderInfo}>
               <p className={styles.orderInfoName}>Shipping</p>
@@ -60,7 +67,7 @@ export default function Cart() {
           <div className={styles.line}></div>
           <div className={styles.orderTotal}>
             <h1 className={styles.orderTotalName}>Total</h1>
-            <p className={styles.orderTotalPrice}>$45</p>
+            <p className={styles.orderTotalPrice}>${total + 5}</p>
           </div>
           <div className={styles.line}></div>
           <button className={styles.orderButton}>Proceed to Checkout</button>
