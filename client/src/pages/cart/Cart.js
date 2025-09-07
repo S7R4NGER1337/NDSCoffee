@@ -45,7 +45,26 @@ export default function Cart() {
             />
           ))}
         </div>
-        <div className={styles.orderSummary}></div>
+        <div className={styles.orderSummary}>
+          <h1 className={styles.orderSummaryName}>Order Summary</h1>
+          <div className={styles.orderDetails}>
+            <div className={styles.orderInfo}>
+              <p className={styles.orderInfoName}>Subtotal</p>
+              <p className={styles.orderInfoPrice}>$40</p>
+            </div>
+            <div className={styles.orderInfo}>
+              <p className={styles.orderInfoName}>Shipping</p>
+              <p className={styles.orderInfoPrice}>$5</p>
+            </div>
+          </div>
+          <div className={styles.line}></div>
+          <div className={styles.orderTotal}>
+            <h1 className={styles.orderTotalName}>Total</h1>
+            <p className={styles.orderTotalPrice}>$45</p>
+          </div>
+          <div className={styles.line}></div>
+          <button className={styles.orderButton}>Proceed to Checkout</button>
+        </div>
       </div>
       <div className={styles.alsoLike}></div>
     </div>

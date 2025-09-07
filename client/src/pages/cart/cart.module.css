@@ -2,10 +2,70 @@
     display: flex;
     flex-direction: column;
     gap: 1em;
+    width: 70%;
 }
 
 .cartContainer{
     display: flex;
     flex-direction: column;
     gap: 3em;
+}
+
+.cartDataContainer{
+    display: flex;
+    justify-content: space-around;
+}
+
+.orderSummary{
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    padding: 1em;
+    gap: 2em;
+    border: 0.1em solid rgba(179, 179, 179, 0.63);
+    border-radius: 0.4em;
+    max-height: fit-content
+}
+
+.orderInfo{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: rgba(115, 87, 61, 1);
+}
+
+.orderDetails{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.orderTotal{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+}
+
+.orderTotalPrice{
+    font-size: 1.2rem;
+}
+
+.line{
+    height: 0.1em;
+    background-color: rgba(179, 179, 179, 0.63);
+}
+
+.orderSummaryName{
+    font-size: 1.5rem;
+}
+.orderButton{
+    font-size: 1.2rem;
+    padding: 0.5em;
+    color: white;
+    font-weight: 600;
+    background-color: rgba(255, 140, 58, 1);
+    border: none;
+    border-radius: 0.4rem;
+    cursor: pointer;
 }
