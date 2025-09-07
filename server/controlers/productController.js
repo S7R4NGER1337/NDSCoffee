@@ -29,6 +29,16 @@ router.post('/price', async (req, res) => {
     res.send({sum: sumOfPrices})
 })
 
+router.post('/cartProduct', async (req, res) => {
+    const { ids } = req.body
+
+    const product = await Promise.all(
+      ids.map((id) => productManager.getCartProductById(id))
+    );
+
+    res.send(product)
+})
+
 router.get('/available', async (req, res) => {
     const products = await productManager.getAvailable()
     

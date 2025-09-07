@@ -11,6 +11,12 @@ exports.getProductsPrice = async (id) => {
   return product.price
 }
 
+exports.getCartProductById = async (id) => {
+  const product = await Product.findById(id)
+  
+  return product
+}
+
 exports.createProduct = async (productData) => {
   try {
     await Product.create(productData);
