@@ -4,13 +4,10 @@
 }
 
 .productContainer{
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     display: flex;
     justify-content: center;
-    margin-top: 10vh;
+    max-width: 75rem;
+    margin: 10vh auto;
     gap: 10vw;
 }
 
@@ -22,34 +19,73 @@
 }
 
 .productName{
-    font-size: 3.5rem;
+    font-size: 2.5rem;
     margin-bottom: 1rem;
+    color: rgba(44, 26, 10, 1);
 }
 
 .productDescription{
-    font-size: 2rem;
+    font-size: 1.3rem;
+    line-height: 1.5rem;
     max-width: 50rem;
-    color: rgb(59, 59, 59);
+    color: rgba(115, 87, 61, 1);
 }
 
-.productBuy{
-    margin-top: 3rem;
-    font-size: 2rem;
-    padding: 0.3em 1em;
-    background-color: black;
-    color: white;
-    border: none;
-    border: 0.2rem solid black;
-}
-
-.productBuy:hover{
-    cursor: pointer;
-    background-color: white;
-    color: black;
-    border: 0.2rem solid black;
-    box-shadow: 0px 0px 1rem black;
+.productPriceName{
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: rgba(44, 26, 10, 1);
 }
 
 .productPrice{
-    margin-bottom: 2rem;
+    font-size: 2rem;
+    font-weight: 700;
+    color: rgba(255, 140, 58, 1);
+}
+
+.productpriceContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.productInfo{
+    display: flex;
+    flex-direction: column;
+    gap: 3em;
+}
+
+.qty{
+    font-size: 1.2rem;
+    padding: 0.4em;
+    max-width: 6rem;
+}
+
+.qtyContainer{
+    display: flex;
+    gap: 0.5em;
+    flex-direction: column;
+}
+.qtyName{
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: rgba(44, 26, 10, 1);
+}
+
+.buttonsContainer{
+    display: flex;
+    align-items: end;
+    gap: 1.5em;
+}
+
+.productBuy{
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 0.5em;
+    width: 100%;
+    border: none;
+    color: white;
+    border-radius: 0.3em;
+    background-color: rgba(255, 140, 58, 1);
+    font-weight: 500;
 }
