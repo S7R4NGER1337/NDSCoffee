@@ -1,5 +1,6 @@
 import styles from "./cart.module.css";
-import { getProductDataById, getProductPrices } from "../../api/products";
+import { getProductDataById } from "../../api/products";
+import { subtotalFetch, productFetch } from '../../utils/cart'
 import { useEffect, useState } from "react";
 import CartProduct from "./CartProduct";
 
@@ -9,34 +10,8 @@ export default function Cart() {
   const [total, setTotal] = useState(0)
 
   useEffect(() => {
-    async function productFetch() {
-      if (cart.length === 0) {
-        setCartProducts([]);
-        return;
-      }
-      try {
-        const products = await Promise.all(
-          cart.map((product) => getProductDataById(product.id))
-        );
-
-        const productsWithQty = products.map((product, index) => ({
-          ...product,
-          qty: cart[index].qty,
-        }));
-
-        setCartProducts(productsWithQty);
-      } catch (err) {
-        console.error(err);
-      }
-    }
-    async function subtotalFetch() {
-      const price = await getProductPrices(cart)
-    
-      setTotal(price.sum)
-    }
-
-    subtotalFetch()
-    productFetch();
+    subtotalFetch(setTotal, cart)
+    productFetch(setCartProducts, cart);
   }, [cart]);
 
   return (
