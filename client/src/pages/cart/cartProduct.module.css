@@ -12,7 +12,7 @@
 
 .productContainer {
     display: flex;
-    width: 60%;
+    width: 100%;
     gap: 1em;
     border: 0.1em solid rgba(179, 179, 179, 0.63);
     border-radius: 0.4em;
@@ -75,5 +75,4 @@
 .productActions {
     display: flex;
     align-items: center;
-
 }
