@@ -16,6 +16,7 @@ import Review from './pages/order/Review.js'
 import ProductPage from './pages/product/ProductPage.js'
 import AboutRedirect from "./components/AboutRedirect.js";
 import Footer from "./components/Footer.js";
+import Cart from "./pages/cart/Cart.js";
 
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
         <Route path="/admin/login" element={<AdminLogin loginSubmit={loginSubmit}/>} />
         <Route path="/product/:id" element={<ProductPage />} />
         <Route path="/catalog" element={<Catalog />} />
+        <Route path="/cart" element={<Cart />} />
         <Route path="/order" element={<Shipping />} />
         <Route path="/about" element={<AboutRedirect />} />
         <Route path="/review" element={<Review />} />
