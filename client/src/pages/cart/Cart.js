@@ -1,16 +1,22 @@
 import styles from "./cart.module.css";
-import { subtotalFetch, productFetch } from '../../utils/cart'
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import CartProduct from "./CartProduct";
+// import { getProductPrices, getProductDataById } from "../../api/products";
+import { subtotalFetch, productFetch, emptyCart } from "../../utils/cart";
 
 export default function Cart() {
-  const cart = JSON.parse(localStorage.getItem("cart"));
   const [cartProducts, setCartProducts] = useState([]);
-  const [total, setTotal] = useState(0)
+  const [total, setTotal] = useState(0);
+  const navigate = useNavigate();
+  const [cart, setCart] = useState(() => {
+    return JSON.parse(localStorage.getItem("cart")) || [];
+  });
 
   useEffect(() => {
-    subtotalFetch(setTotal, cart)
+    emptyCart(navigate, cart);
     productFetch(setCartProducts, cart);
+    subtotalFetch(setTotal, cart);
   }, [cart]);
 
   return (
@@ -23,6 +29,7 @@ export default function Cart() {
               productData={product}
               qty={cart.qty}
               key={product._id}
+              setCart={setCart}
             />
           ))}
         </div>

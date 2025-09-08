@@ -2,7 +2,7 @@ import styles from "./cartProduct.module.css";
 import { useEffect, useState } from "react";
 import { methodsQty } from "../../utils/cart";
 
-export default function CartProduct({ productData }) {
+export default function CartProduct({ productData, setCart }) {
   const [qty, setQty] = useState(0);
   const [price, setPrice] = useState(0);
 
@@ -26,21 +26,21 @@ export default function CartProduct({ productData }) {
         <div className={styles.productActions}>
           <div className={styles.qtyEdit}>
             <p
-              onClick={() => methodsQty(productData._id, "sub", setQty)}
+              onClick={() => methodsQty(productData._id, "sub", setQty, setCart)}
               className={styles.qtyAction}
             >
               -
             </p>
             <p className={styles.qtyValue}>{qty}</p>
             <p
-              onClick={() => methodsQty(productData._id, "sum", setQty)}
+              onClick={() => methodsQty(productData._id, "sum", setQty, setCart)}
               className={styles.qtyAction}
             >
               +
             </p>
           </div>
           <img
-            onClick={() => methodsQty(productData._id, "del", setQty)}
+            onClick={() => methodsQty(productData._id, "del", setQty, setCart)}
             className={styles.trashIcon}
             src="/trash-solid-full-gray.svg"
             alt="trashIcon"
