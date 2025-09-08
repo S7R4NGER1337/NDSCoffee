@@ -110,7 +110,7 @@ export default function Review() {
           </div>
           <div className={styles.orderSummaryTotal}>
             <h1 className={styles.orderSummaryTotalName}>Total</h1>
-            <p className={styles.orderSummaryTotalPrice}>$ {sumOfProducts}</p>
+            <p className={styles.orderSummaryTotalPrice}>$ {sumOfProducts + 5}</p>
           </div>
         </div>
         <button className={styles.placeOrder} onClick={() => placeOrder()}>
