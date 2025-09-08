@@ -1,0 +1,101 @@
+.tableHeader,
+.tableBody {
+    padding: 1em;
+    text-align: start;
+}
+
+.tableBody {
+    text-align: start;
+}
+
+.table {
+    width: 100%;
+    margin: 1em;
+    border: 0.1em solid rgba(179, 179, 179, 0.63);
+    border-bottom: none;
+    border-radius: 0.5em;
+}
+
+.tableWrap {
+    display: flex;
+    gap: 2em;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.tableData {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tableBody,
+.tableHeader {
+    border-bottom: 0.1em solid rgba(179, 179, 179, 0.63);
+}
+
+.tableBody {
+    color: rgba(115, 87, 61, 1);
+    font-size: 1rem;
+}
+
+.tableHeader {
+    color: rgba(44, 26, 10, 1);
+}
+
+.tableBodyDarker {
+    color: rgba(44, 26, 10, 1);
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+.actionIcon {
+    cursor: pointer;
+    max-width: 1.7rem;
+    margin-right: 1em;
+}
+
+.tableDataSearchContainer {
+    display: flex;
+}
+
+.tableDataSearchInput {
+    padding: 0.2em;
+    border: 0.1em solid gray;
+    border-top-right-radius: 0.4em;
+    border-bottom-right-radius: 0.4em;
+    border-left: none;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.tableDataSearchIcon {
+    max-width: 2.3rem;
+    padding: 0.3em;
+    border: 0.1em solid gray;
+    border-right: none;
+    border-top-left-radius: 0.4em;
+    border-bottom-left-radius: 0.4em;
+}
+
+.tableDataSearchInput:focus {
+    outline: none;
+}
+
+.tableDataSearchButton {
+    cursor: pointer;
+    background-color: rgba(255, 140, 58, 1);
+    border: none;
+    border-radius: 0.4em;
+    padding: 0.5em 1em;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.tableDataActions {
+    display: flex;
+    gap: 2em;
+}

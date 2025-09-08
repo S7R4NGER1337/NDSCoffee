@@ -1,26 +1,87 @@
-import DataTable from "../../components/dataTable";
+import { useNavigate } from "react-router-dom";
+import styles from "./ordersPage.module.css";
 import { useEffect, useState } from "react";
+import OrderCard from "./OrderCard";
 
 export default function OrdersPage() {
   const [orders, setOrders] = useState();
+  const [searchData, setSearchData] = useState("");
+  const [filtered, setFiltered] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function getOrders() {
       const response = await fetch("http://localhost:3030/products/order/s");
       const data = await response.json();
 
+      setFiltered(data);
       setOrders(data);
     }
-
+    
     getOrders();
   }, []);
 
+  
+  function searchOnChange(e) {
+    const value = e.target.value;
+    setSearchData(value);
+
+    const filteredProdutcs = orders.filter(
+      (product) =>
+        product["name"].toLowerCase().includes(value.toLowerCase()) ||
+        product["origin"].toLowerCase().includes(value.toLowerCase()) ||
+        product["roastLevel"].toLowerCase().includes(value.toLowerCase())
+    );
+    setFiltered(filteredProdutcs);
+  }
+
   return (
     <>
-
-      <div style={{ margin: "1rem", "marginTop": "5rem" }}>
-        <h1>All orders</h1>
-          <DataTable data={orders} />
+      <div className={styles.tableWrap}>
+        <div className={styles.tableData}>
+          <div className={styles.pageData}>
+            <h1 className={styles.tableDataName}>Order Management</h1>
+            <p>Efficiently monitor and manage all customer orders.</p>
+          </div>
+          <div className={styles.tableDataActions}>
+            <div className={styles.tableDataSearchContainer}>
+              <img
+                className={styles.tableDataSearchIcon}
+                src="/magnifying-glass-solid-full.svg"
+                alt="searchIcon"
+              />
+              <input
+                onChange={(e) => searchOnChange(e)}
+                className={styles.tableDataSearchInput}
+                value={searchData}
+                type="text"
+                name="search"
+                placeholder="Search products..."
+              />
+            </div>
+            <button
+              onClick={() => navigate("/admin/create")}
+              className={styles.tableDataSearchButton}
+            >
+              + Add Product
+            </button>
+          </div>
+        </div>
+        <table className={styles.table}>
+          <thead>
+            <tr className={styles.tableHeadersWrapper}>
+              <th className={styles.tableHeader}>ORDER ID</th>
+              <th className={styles.tableHeader}>CUSTOMER</th>
+              <th className={styles.tableHeader}>DATE</th>
+              <th className={styles.tableHeader}>AMOUNT</th>
+              <th className={styles.tableHeader}>STATUS</th>
+              <th className={styles.tableHeader}>ACTIONS</th>
+            </tr>
+          </thead>
+          <tbody className={styles.tableBodysWrapper}>
+            {filtered.map((product) => <OrderCard product={product} key={product._id}/>)}
+          </tbody>
+        </table>
       </div>
     </>
   );
