@@ -24,7 +24,7 @@ export default function Review() {
   async function placeOrder() {
     await fetch(`http://localhost:3030/products/order/s`, {
       method: "POST",
-      body: JSON.stringify({ ...state, cart, status: "pending" }),
+      body: JSON.stringify({ ...state, cart, status: "Pending" }),
       headers: {
         "Content-type": "application/json",
       },
