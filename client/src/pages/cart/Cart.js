@@ -16,7 +16,7 @@ export default function Cart() {
     emptyCart(navigate, cart);
     productFetch(setCartProducts, cart);
     subtotalFetch(setTotal, cart);
-  }, [cart]);
+  }, [cart, navigate]);
 
   return (
     <div className={styles.cartContainer}>
