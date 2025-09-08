@@ -1,24 +1,78 @@
-import { useEffect, useState } from 'react';
-import styles from './orderCard.module.css'
-import { subtotalFetch } from '../../utils/cart'
+import { useEffect, useState } from "react";
+import styles from "./orderCard.module.css";
+import { subtotalFetch } from "../../utils/cart";
 
+export default function OrderCard({ product }) {
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [productData, setProductData] = useState(product);
 
-export default function OrderCard({product}) {
-    const [ totalPrice, setTotalPrice ] = useState(0)
+  useEffect(() => {
+    subtotalFetch(setTotalPrice, product.cart);
+  }, [product]);
 
-    useEffect(() => {
-        subtotalFetch(setTotalPrice, product.cart)
-    }, [product])
+  const Status = () => {
+    let statusColor = {
+      backgroundColor: "",
+      color: "rgba(133, 77, 14, 1)",
+    };
+
+    if (productData.status === "pending") {
+      statusColor.backgroundColor = "rgba(254, 252, 232, 1)";
+      statusColor.color = "rgba(133, 77, 14, 1)";
+    }
+    if (productData.status === "delivered") {
+      statusColor.backgroundColor = "rgba(220, 252, 231, 1)";
+      statusColor.color = "rgba(22, 101, 52, 1)";
+    }
+    if (productData.status === "processing") {
+      statusColor.backgroundColor = "rgba(237, 233, 254, 1)";
+      statusColor.color = "rgba(91, 33, 182, 1)";
+    }
+    if (productData.status === "canceled") {
+      statusColor.backgroundColor = "rgba(254, 226, 226, 1)";
+      statusColor.color = "rgba(153, 27, 27, 1)";
+    }
+    if (productData.status === "shipped") {
+      statusColor.backgroundColor = "rgba(224, 242, 254, 1)";
+      statusColor.color = "rgba(12, 74, 110, 1)";
+    }
+
+    return (
+      <p onClick={() => changeStatus()} className={styles.status} style={statusColor}>
+        {productData.status}
+      </p>
+    );
+  };
+
+  function changeStatus() {
+    let newStatus = ''
+    if(productData.status === 'Pending'){
+        newStatus = 'Processing'
+    }
+    if(productData.status === 'Processing'){
+        newStatus = 'Shipped'
+    }
+    if(productData.status === 'Phipped'){
+        newStatus = 'Delivered'
+    }
+    if(productData.status === 'Delivered'){
+        newStatus = 'Delivered'
+    }
+
+    setProductData({...productData, status: newStatus})
+  }
 
   return (
-    <tr className={styles.tableBodyWrap} key={product._id}>
+    <tr className={styles.tableBodyWrap} key={productData._id}>
       <td className={`${styles.tableBody} ${styles.tableBodyDarker}`}>
-        {product._id}
+        {productData._id}
       </td>
-      <td className={styles.tableBody}>{product.fullName}</td>
+      <td className={styles.tableBody}>{productData.fullName}</td>
       <td className={styles.tableBody}>15.11.24</td>
-      <td className={styles.tableBody}>{totalPrice}</td>
-      <td className={styles.tableBody}>{product.status}</td>
+      <td className={styles.tableBody}>${totalPrice}</td>
+      <td className={styles.tableBody}>
+        <Status />
+      </td>
       <td className={`${styles.tableBody} ${styles.tableActions}`}>
         <p>Details</p>
       </td>
