@@ -1,0 +1,21 @@
+.tableBody,
+.tableHeader {
+    border-bottom: 0.1em solid rgba(179, 179, 179, 0.63);
+}
+.tableBody {
+    text-align: start;
+}
+.tableBody {
+    color: rgba(115, 87, 61, 1);
+    font-size: 1rem;
+}
+.tableHeader,
+.tableBody {
+    padding: 1em;
+    text-align: start;
+}
+.tableBodyDarker {
+    color: rgba(44, 26, 10, 1);
+    font-weight: 500;
+    font-size: 1.1rem;
+}
