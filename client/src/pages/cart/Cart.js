@@ -2,16 +2,15 @@ import styles from "./cart.module.css";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CartProduct from "./CartProduct";
-// import { getProductPrices, getProductDataById } from "../../api/products";
 import { subtotalFetch, productFetch, emptyCart } from "../../utils/cart";
 
 export default function Cart() {
   const [cartProducts, setCartProducts] = useState([]);
   const [total, setTotal] = useState(0);
-  const navigate = useNavigate();
   const [cart, setCart] = useState(() => {
     return JSON.parse(localStorage.getItem("cart")) || [];
   });
+  const navigate = useNavigate();
 
   useEffect(() => {
     emptyCart(navigate, cart);
@@ -51,7 +50,7 @@ export default function Cart() {
             <p className={styles.orderTotalPrice}>${total + 5}</p>
           </div>
           <div className={styles.line}></div>
-          <button className={styles.orderButton}>Proceed to Checkout</button>
+          <button onClick={() => navigate('/order')} className={styles.orderButton}>Proceed to Checkout</button>
         </div>
       </div>
       <div className={styles.alsoLike}></div>
