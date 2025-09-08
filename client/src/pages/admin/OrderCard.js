@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./orderCard.module.css";
 import { subtotalFetch } from "../../utils/cart";
+import { changeOrderStatus } from '../../api/orders'
 
 export default function OrderCard({ product }) {
   const [totalPrice, setTotalPrice] = useState(0);
@@ -16,23 +17,23 @@ export default function OrderCard({ product }) {
       color: "rgba(133, 77, 14, 1)",
     };
 
-    if (productData.status === "pending") {
+    if (productData.status === "Pending") {
       statusColor.backgroundColor = "rgba(254, 252, 232, 1)";
       statusColor.color = "rgba(133, 77, 14, 1)";
     }
-    if (productData.status === "delivered") {
+    if (productData.status === "Delivered") {
       statusColor.backgroundColor = "rgba(220, 252, 231, 1)";
       statusColor.color = "rgba(22, 101, 52, 1)";
     }
-    if (productData.status === "processing") {
+    if (productData.status === "Processing") {
       statusColor.backgroundColor = "rgba(237, 233, 254, 1)";
       statusColor.color = "rgba(91, 33, 182, 1)";
     }
-    if (productData.status === "canceled") {
+    if (productData.status === "Canceled") {
       statusColor.backgroundColor = "rgba(254, 226, 226, 1)";
       statusColor.color = "rgba(153, 27, 27, 1)";
     }
-    if (productData.status === "shipped") {
+    if (productData.status === "Shipped") {
       statusColor.backgroundColor = "rgba(224, 242, 254, 1)";
       statusColor.color = "rgba(12, 74, 110, 1)";
     }
@@ -52,13 +53,14 @@ export default function OrderCard({ product }) {
     if(productData.status === 'Processing'){
         newStatus = 'Shipped'
     }
-    if(productData.status === 'Phipped'){
+    if(productData.status === 'Shipped'){
         newStatus = 'Delivered'
     }
     if(productData.status === 'Delivered'){
         newStatus = 'Delivered'
     }
 
+    changeOrderStatus(productData._id, newStatus)
     setProductData({...productData, status: newStatus})
   }
 
