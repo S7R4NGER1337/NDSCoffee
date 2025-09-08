@@ -27,7 +27,7 @@ export async function productFetch(setCartProducts, cart) {
   }
 }
 
-export function methodsQty(productId, operation, setQty) {
+export function methodsQty(productId, operation, setQty, setCart) {
   const cartInfo = JSON.parse(localStorage.getItem("cart")) || [];
   const index = cartInfo.findIndex((item) => item.id === productId);
 
@@ -44,5 +44,15 @@ export function methodsQty(productId, operation, setQty) {
   }
 
   localStorage.setItem("cart", JSON.stringify(cartInfo));
+
+  setCart(cartInfo);
+
   return cartInfo;
+}
+
+export function emptyCart(navigate, cart) {
+  if (cart.length === 0) {
+    navigate("/");
+    return;
+  }
 }
