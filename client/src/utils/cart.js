@@ -4,6 +4,7 @@ export async function subtotalFetch(setTotal, cart) {
   const price = await getProductPrices(cart);
 
   setTotal(price.sum);
+  return price
 }
 
 export async function productFetch(setCartProducts, cart) {
