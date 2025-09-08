@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./orderCard.module.css";
 import { subtotalFetch } from "../../utils/cart";
-import { changeOrderStatus } from '../../api/orders'
+import { changeOrderStatus } from "../../api/orders";
 
 export default function OrderCard({ product }) {
   const [totalPrice, setTotalPrice] = useState(0);
@@ -39,29 +39,33 @@ export default function OrderCard({ product }) {
     }
 
     return (
-      <p onClick={() => changeStatus()} className={styles.status} style={statusColor}>
+      <p
+        onClick={() => changeStatus()}
+        className={styles.status}
+        style={statusColor}
+      >
         {productData.status}
       </p>
     );
   };
 
   function changeStatus() {
-    let newStatus = ''
-    if(productData.status === 'Pending'){
-        newStatus = 'Processing'
+    let newStatus = "";
+    if (productData.status === "Pending") {
+      newStatus = "Processing";
     }
-    if(productData.status === 'Processing'){
-        newStatus = 'Shipped'
+    if (productData.status === "Processing") {
+      newStatus = "Shipped";
     }
-    if(productData.status === 'Shipped'){
-        newStatus = 'Delivered'
+    if (productData.status === "Shipped") {
+      newStatus = "Delivered";
     }
-    if(productData.status === 'Delivered'){
-        newStatus = 'Delivered'
+    if (productData.status === "Delivered") {
+      newStatus = "Delivered";
     }
 
-    changeOrderStatus(productData._id, newStatus)
-    setProductData({...productData, status: newStatus})
+    changeOrderStatus(productData._id, newStatus);
+    setProductData({ ...productData, status: newStatus });
   }
 
   return (
@@ -76,7 +80,16 @@ export default function OrderCard({ product }) {
         <Status />
       </td>
       <td className={`${styles.tableBody} ${styles.tableActions}`}>
-        <p>Details</p>
+        <p
+          style={{
+            color: "rgba(255, 140, 58, 1)",
+            fontSize: "1.1rem",
+            fontWeight: "600",
+            cursor: "pointer",
+          }}
+        >
+          Details
+        </p>
       </td>
     </tr>
   );
