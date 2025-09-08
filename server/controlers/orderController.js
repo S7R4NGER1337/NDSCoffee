@@ -14,4 +14,14 @@ router.get('/order/:id', async (req, res) => {
     res.json(orders)
     res.end()
 })
+
+router.post('/changeStatus/:id', async (req, res) => {
+    const { status } = req.body
+    const id = req.params.id
+    const product = await orderManager.changeProductDeliveryStatus(id, status)
+
+    res.send(product)
+})
+
+
 module.exports = router
