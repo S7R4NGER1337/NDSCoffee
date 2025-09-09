@@ -57,7 +57,7 @@ exports.updateProduct = async (id, data) => {
 };
 
 exports.getAvailable = async () => {
-  const availableProducts = await Product.find({ isActive: true }).select('name price _id image');
+  const availableProducts = await Product.find({ isActive: true }).select('name price _id image description roastLevel');
 
   return availableProducts;
 };
