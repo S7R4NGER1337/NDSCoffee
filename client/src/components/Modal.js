@@ -7,8 +7,6 @@ export default function Modal({ open, onClose, children }) {
   const panelRef = useRef(null);
 
   useEffect(() => {
-    if (!open) return;
-
     const handleDocumentClick = (e) => {
       if (panelRef.current && !panelRef.current.contains(e.target)) {
         onClose();
@@ -19,10 +17,16 @@ export default function Modal({ open, onClose, children }) {
       if (e.key === "Escape") onClose();
     };
 
-    document.addEventListener("mousedown", handleDocumentClick);
-    document.addEventListener("keydown", handleKeyDown);
+    if (open) {
+      document.body.classList.add("dimmed");
+      document.addEventListener("mousedown", handleDocumentClick);
+      document.addEventListener("keydown", handleKeyDown);
+    } else {
+      document.body.classList.remove("dimmed");
+    }
 
     return () => {
+      document.body.classList.remove("dimmed");
       document.removeEventListener("mousedown", handleDocumentClick);
       document.removeEventListener("keydown", handleKeyDown);
     };
@@ -42,7 +46,7 @@ export default function Modal({ open, onClose, children }) {
         ref={panelRef}
         role="dialog"
         aria-modal="true"
-        className="relative z-10 w-full max-w-lg rounded-2xl bg-white p-6 shadow-2xl"
+        className={styles.modalStyle}
         onMouseDown={(e) => e.stopPropagation()}
       >
         {children}
