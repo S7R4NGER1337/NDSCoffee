@@ -1,5 +1,7 @@
 import { useEffect, useRef } from "react";
 import styles from './modal.module.css'
+import ReactDom from 'react-dom'
+
 
 export default function Modal({ open, onClose, children }) {
   const panelRef = useRef(null);
@@ -28,7 +30,7 @@ export default function Modal({ open, onClose, children }) {
 
   if (!open) return null;
 
-  return (
+  return ReactDom.createPortal(
     <div className={styles.modalWrap}>
       <div
         className="absolute inset-0 bg-black/40"
@@ -45,6 +47,7 @@ export default function Modal({ open, onClose, children }) {
       >
         {children}
       </div>
-    </div>
+    </div>,
+    document.getElementById('portal')
   );
 }
