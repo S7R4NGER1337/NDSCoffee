@@ -48,6 +48,7 @@ export default function CatalogCard({ productData }) {
       </div>
       <Modal open={open} onClose={closeModal}>
         <div className={styles.quickViewContainer}>
+            <p className={styles.closeBtn} onClick={() => closeModal()}>X</p>
             <img className={styles.quickViewImage} src={productData.image} alt="productImage" />
             <div className={styles.quickViewData}>
               <h1 className={styles.quickViewName}>{productData.name}</h1>
