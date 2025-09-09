@@ -47,15 +47,21 @@ export default function CatalogCard({ productData }) {
         </div>
       </div>
       <Modal open={open} onClose={closeModal}>
-        <h2 className="text-xl font-semibold">Модален прозорец</h2>
-        <p className="mt-2">
-          Кликни извън модала или натисни Escape за да го затвориш.
-        </p>
-
-        <div className="mt-4 flex justify-end">
-          <button onClick={closeModal} className="rounded-md border px-3 py-1">
-            Затвори
-          </button>
+        <div className={styles.quickViewContainer}>
+            <img className={styles.quickViewImage} src={productData.image} alt="productImage" />
+            <div className={styles.quickViewData}>
+              <h1 className={styles.quickViewName}>{productData.name}</h1>
+              <p className={styles.quickViewPrice}>${productData.price}</p>
+              <p className={styles.quickViewDesc}>{productData.description}</p>
+              <div className={styles.quickViewRoastContainer}>
+                <p className={styles.quickViewRoastName}>Roast Level: </p>
+                <p className={styles.quickViewRoastLevel}>{productData.roastLevel}</p>
+              </div>
+              <button className={styles.quickViewAddToCart}>Add to Cart</button>
+              <Link to={`/product/${productData._id}`} className={styles.quickViewFull}>
+                <p>View Full Details</p>
+              </Link>
+            </div>
         </div>
       </Modal>
     </>

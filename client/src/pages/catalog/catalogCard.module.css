@@ -88,3 +88,67 @@
 .imageWrap:hover .fullDetails {
   display: block;
 }
+
+.quickViewImage{
+  width: 17rem;
+}
+
+.quickViewContainer{
+  display: flex;
+  background-color: white;
+}
+
+.quickViewData{
+  display: flex;
+  flex-direction: column;
+  padding: 2em;
+  justify-content: space-between;
+}
+
+.quickViewPrice{
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: rgba(255, 140, 58, 1)
+}
+
+.quickViewName{
+  font-size: 1.7rem;
+}
+
+.quickViewDesc{
+  font-size: 1.1rem;
+  max-width: 30rem;
+  line-height: 1.3rem;
+}
+
+.quickViewRoastLevel{
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: rgba(255, 140, 58, 1)
+}
+.quickViewRoastContainer{
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+.quickViewRoastName{
+  font-size: 1.1rem;
+}
+
+.quickViewAddToCart{
+  cursor: pointer;
+  padding: 0.6em;
+  color: white;
+  background-color: rgba(255, 140, 58, 1);
+  font-size: 1.2rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.4em;
+}
+
+.quickViewFull{
+  align-self: end;
+  color: gray;
+  text-decoration: underline;
+  cursor: pointer;
+}
