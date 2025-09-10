@@ -51,29 +51,6 @@ export default function OrdersPage() {
             <h1 className={styles.tableDataName}>Order Management</h1>
             <p>Efficiently monitor and manage all customer orders.</p>
           </div>
-          <div className={styles.tableDataActions}>
-            <div className={styles.tableDataSearchContainer}>
-              <img
-                className={styles.tableDataSearchIcon}
-                src="/magnifying-glass-solid-full.svg"
-                alt="searchIcon"
-              />
-              <input
-                onChange={(e) => searchOnChange(e)}
-                className={styles.tableDataSearchInput}
-                value={searchData}
-                type="text"
-                name="search"
-                placeholder="Search products..."
-              />
-            </div>
-            <button
-              onClick={() => navigate("/admin/create")}
-              className={styles.tableDataSearchButton}
-            >
-              + Add Product
-            </button>
-          </div>
         </div>
         <table className={styles.table}>
           <thead>
