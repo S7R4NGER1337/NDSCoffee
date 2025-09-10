@@ -1,13 +1,10 @@
-import { useNavigate } from "react-router-dom";
 import styles from "./ordersPage.module.css";
 import { useEffect, useState } from "react";
 import OrderCard from "./OrderCard";
 import { deleteOrder } from '../../api/orders'
 
 export default function OrdersPage() {
-  const [orders, setOrders] = useState();
   const [filtered, setFiltered] = useState([]);
-  const navigate = useNavigate();
 
   useEffect(() => {
     async function getOrders() {
@@ -15,7 +12,6 @@ export default function OrdersPage() {
       const data = await response.json();
 
       setFiltered(data);
-      setOrders(data);
     }
     
     getOrders();
