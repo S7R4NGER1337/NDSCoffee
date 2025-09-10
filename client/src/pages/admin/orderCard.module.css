@@ -1,21 +1,14 @@
 .tableBody,
 .tableHeader {
     border-bottom: 0.1em solid rgba(179, 179, 179, 0.63);
-}
-
-.tableBody {
+        padding: 1em;
     text-align: start;
 }
 
 .tableBody {
-    color: rgba(115, 87, 61, 1);
+    text-align: start;
+        color: rgba(115, 87, 61, 1);
     font-size: 1rem;
-}
-
-.tableHeader,
-.tableBody {
-    padding: 1em;
-    text-align: start;
 }
 
 .tableBodyDarker {
@@ -31,4 +24,41 @@
     width: fit-content;
     border-radius: 1em;
     cursor: pointer;
+}
+
+.detailsImage{
+    width: 10rem;
+}
+
+.detailsContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    padding: 2em;
+    justify-content: center;
+    align-items: center;
+    max-width: 40rem;
+    flex-wrap: wrap;
+}
+
+.detailsImageContainer{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2em;
+}
+
+.detailsClientDataContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2em;
+}
+
+.detailsClientData,.detailsClientDataText, .detailsClientDataName{
+    width: fit-content;
+}
+
+.detailsClientData{
+    display: flex;
+    gap: 0.5em;
 }
