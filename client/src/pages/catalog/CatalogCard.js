@@ -3,6 +3,7 @@ import styles from "./catalogCard.module.css";
 import { useState, useRef } from "react";
 import Modal from "../../components/Modal";
 import { setOrder } from "../../utils/order";
+import {showPopUp} from "../../components/PopUp";
 
 export default function CatalogCard({ productData }) {
   const [open, setOpen] = useState(false);
@@ -16,6 +17,7 @@ export default function CatalogCard({ productData }) {
 
   function addToCart() {
     setOrder(productData._id, 1);
+    showPopUp("Product successfully added to the cart.")
     closeModal()
   }
 

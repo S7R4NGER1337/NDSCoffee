@@ -4,6 +4,7 @@ import styles from "./productPage.module.css";
 import { setOrder } from "../../utils/order";
 import { useNavigate } from "react-router";
 import { getProductDataById } from "../../api/products";
+import { showPopUp } from "../../components/PopUp";
 
 export default function ProductPage() {
   const navigate = useNavigate();
@@ -36,6 +37,7 @@ export default function ProductPage() {
     }
     
     setOrder(productId, qty);
+    showPopUp("Product successfully added to the cart.")
     navigate("/cart");
   }
 

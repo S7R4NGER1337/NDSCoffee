@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import ReviewProduct from "./ReviewProduct";
 import { getProductPrices } from "../../api/products";
 import Progress from "./Progress";
+import { showPopUp } from "../../components/PopUp";
 
 export default function Review() {
   const { state } = useLocation();
@@ -31,7 +32,7 @@ export default function Review() {
     });
 
     localStorage.removeItem("cart");
-    alert("Order successfull");
+    showPopUp("Order successfull");
     navigate("/");
   }
 
