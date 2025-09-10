@@ -4,7 +4,7 @@ import styles from "./popUp.module.css";
 
 function PopUp({ text, onClose }) {
   useEffect(() => {
-    const timer = setTimeout(onClose, 2500);
+    const timer = setTimeout(onClose, 3000);
 
     return () => clearTimeout(timer);
   }, [onClose]);
@@ -20,7 +20,6 @@ function PopUp({ text, onClose }) {
 
 export function showPopUp(text) {
   const portal = document.getElementById("portal");
-  
   const container = document.createElement("div");
   portal.appendChild(container);
 
