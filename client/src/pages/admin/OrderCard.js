@@ -6,7 +6,7 @@ import { productFetch } from "../../utils/cart";
 import Modal from "../../components/Modal";
 import { Link } from "react-router-dom";
 
-export default function OrderCard({ product }) {
+export default function OrderCard({ product, deleteProduct }) {
   const [totalPrice, setTotalPrice] = useState(0);
   const [productData, setProductData] = useState(product);
   const [open, setOpen] = useState(false);
@@ -147,6 +147,7 @@ export default function OrderCard({ product }) {
               </div>
             </div>
           </div>
+          <p className={styles.deleteOrder} onClick={() => deleteProduct(productData._id)}>Delete Order</p>
         </Modal>
       )}
     </>

@@ -62,3 +62,10 @@
     display: flex;
     gap: 0.5em;
 }
+
+.deleteOrder{
+    cursor: pointer;
+    justify-self: end;
+    padding: 0.5em;
+    color: red;
+}
