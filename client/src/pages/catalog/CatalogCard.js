@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import styles from "./catalogCard.module.css";
 import { useState, useRef } from "react";
 import Modal from "../../components/Modal";
+import { setOrder } from "../../utils/order";
 
 export default function CatalogCard({ productData }) {
   const [open, setOpen] = useState(false);
@@ -12,6 +13,11 @@ export default function CatalogCard({ productData }) {
     setOpen(false);
     triggerRef.current?.focus();
   };
+
+  function addToCart() {
+    setOrder(productData._id, 1);
+    closeModal()
+  }
 
   return (
     <>
@@ -34,7 +40,7 @@ export default function CatalogCard({ productData }) {
           <p className={styles.catalogCardPrice}>${productData.price}</p>
         </div>
         <div className={styles.catalogCardButtons}>
-          <button className={`${styles.catalogCardButton} ${styles.addToCart}`}>
+          <button onClick={() => addToCart()} className={`${styles.catalogCardButton} ${styles.addToCart}`}>
             Add to Cart
           </button>
           <button
@@ -48,21 +54,32 @@ export default function CatalogCard({ productData }) {
       </div>
       <Modal open={open} onClose={closeModal}>
         <div className={styles.quickViewContainer}>
-            <p className={styles.closeBtn} onClick={() => closeModal()}>X</p>
-            <img className={styles.quickViewImage} src={productData.image} alt="productImage" />
-            <div className={styles.quickViewData}>
-              <h1 className={styles.quickViewName}>{productData.name}</h1>
-              <p className={styles.quickViewPrice}>${productData.price}</p>
-              <p className={styles.quickViewDesc}>{productData.description}</p>
-              <div className={styles.quickViewRoastContainer}>
-                <p className={styles.quickViewRoastName}>Roast Level: </p>
-                <p className={styles.quickViewRoastLevel}>{productData.roastLevel}</p>
-              </div>
-              <button className={styles.quickViewAddToCart}>Add to Cart</button>
-              <Link to={`/product/${productData._id}`} className={styles.quickViewFull}>
-                <p>View Full Details</p>
-              </Link>
+          <p className={styles.closeBtn} onClick={() => closeModal()}>
+            X
+          </p>
+          <img
+            className={styles.quickViewImage}
+            src={productData.image}
+            alt="productImage"
+          />
+          <div className={styles.quickViewData}>
+            <h1 className={styles.quickViewName}>{productData.name}</h1>
+            <p className={styles.quickViewPrice}>${productData.price}</p>
+            <p className={styles.quickViewDesc}>{productData.description}</p>
+            <div className={styles.quickViewRoastContainer}>
+              <p className={styles.quickViewRoastName}>Roast Level: </p>
+              <p className={styles.quickViewRoastLevel}>
+                {productData.roastLevel}
+              </p>
             </div>
+            <button className={styles.quickViewAddToCart} onClick={() => addToCart()}>Add to Cart</button>
+            <Link
+              to={`/product/${productData._id}`}
+              className={styles.quickViewFull}
+            >
+              <p>View Full Details</p>
+            </Link>
+          </div>
         </div>
       </Modal>
     </>
