@@ -6,7 +6,6 @@ import { deleteOrder } from '../../api/orders'
 
 export default function OrdersPage() {
   const [orders, setOrders] = useState();
-  const [searchData, setSearchData] = useState("");
   const [filtered, setFiltered] = useState([]);
   const navigate = useNavigate();
 
@@ -21,20 +20,6 @@ export default function OrdersPage() {
     
     getOrders();
   }, []);
-
-  
-  function searchOnChange(e) {
-    const value = e.target.value;
-    setSearchData(value);
-
-    const filteredProdutcs = orders.filter(
-      (product) =>
-        product["name"].toLowerCase().includes(value.toLowerCase()) ||
-        product["origin"].toLowerCase().includes(value.toLowerCase()) ||
-        product["roastLevel"].toLowerCase().includes(value.toLowerCase())
-    );
-    setFiltered(filteredProdutcs);
-  }
 
   function deleteProduct(id) {
     const filteredOrders = filtered.filter(order => order._id !== id)

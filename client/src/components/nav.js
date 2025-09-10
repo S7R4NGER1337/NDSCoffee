@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import styles from "./nav.module.css";
-import { useLocation } from 'react-router-dom'
+import { useLocation } from "react-router-dom";
 
 export default function Nav() {
-  const location = useLocation()
+  const location = useLocation();
 
   const userLinks = [
     {
@@ -22,25 +22,28 @@ export default function Nav() {
 
   const adminLinks = [
     {
-      linkPath: '/',
-      linkName: 'Go back to the App'
+      linkPath: "/",
+      linkName: "Go back to the App",
     },
     {
-      linkPath: '/admin',
-      linkName: 'Admin'
+      linkPath: "/admin",
+      linkName: "Admin",
     },
     {
-      linkPath: '/admin/create',
-      linkName: 'Create product'
+      linkPath: "/admin/create",
+      linkName: "Create product",
     },
     {
-      linkPath: '/admin/orders',
-      linkName: 'Orders'
+      linkPath: "/admin/orders",
+      linkName: "Orders",
     },
-  ]
+  ];
 
-  const linksToRender = location.pathname.includes('admin') && !location.pathname.includes('login') ? adminLinks : userLinks
-  
+  const linksToRender =
+    location.pathname.includes("admin") && !location.pathname.includes("login")
+      ? adminLinks
+      : userLinks;
+
   return (
     <div className={styles.navigation}>
       <div className={styles.navInfo}>
@@ -61,16 +64,13 @@ export default function Nav() {
       </div>
 
       <div className={styles.navButtons}>
-        <img
-          src="/magnifying-glass-solid-full.svg"
-          alt="cart"
-          className={styles.navButton}
-        />
-        <img
-          src="/cart-shopping-regular-full.svg"
-          alt="cart"
-          className={styles.navButton}
-        />
+        <Link to={"/cart"} style={{textDecoration: 'none', color: 'inherit'}}>
+          <img
+            src="/cart-shopping-regular-full.svg"
+            alt="cart"
+            className={styles.navButton}
+          />
+        </Link>
       </div>
     </div>
   );
