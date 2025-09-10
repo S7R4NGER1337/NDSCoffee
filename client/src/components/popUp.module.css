@@ -1,0 +1,20 @@
+.popUpWrap {
+    position: fixed;
+    top: 10%;
+    right: 1%;
+    z-index: 1000;
+    display: flex;
+}
+
+.popUpStyle {
+    background-color: #ffffff;
+    padding: 1.5em;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-size: 1.1rem;
+    color: rgba(255, 140, 58, 1);
+    font-size: 1.3rem;
+    font-weight: 600;
+}
