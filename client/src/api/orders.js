@@ -11,3 +11,8 @@ export async function changeOrderStatus(id, status){
 
     return changedProduct
 }
+
+export async function deleteOrder(id) {
+   await fetch(`http://localhost:3030/products/deleteOrder/${id}`)
+   return
+}

@@ -23,5 +23,8 @@ router.post('/changeStatus/:id', async (req, res) => {
     res.send(product)
 })
 
-
+router.get('/deleteOrder/:id', async (req, res) => {
+    const id = req.params.id
+    await orderManager.deleteProduct(id)
+})
 module.exports = router

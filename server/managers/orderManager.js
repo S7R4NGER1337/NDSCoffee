@@ -20,3 +20,8 @@ exports.changeProductDeliveryStatus = async (id, status) => {
 
   return product;
 };
+
+
+exports.deleteProduct = async (id) => {
+  await Order.findByIdAndDelete(id)
+}
