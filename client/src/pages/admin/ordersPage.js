@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "./ordersPage.module.css";
 import { useEffect, useState } from "react";
 import OrderCard from "./OrderCard";
+import { deleteOrder } from '../../api/orders'
 
 export default function OrdersPage() {
   const [orders, setOrders] = useState();
@@ -33,6 +34,13 @@ export default function OrdersPage() {
         product["roastLevel"].toLowerCase().includes(value.toLowerCase())
     );
     setFiltered(filteredProdutcs);
+  }
+
+  function deleteProduct(id) {
+    const filteredOrders = filtered.filter(order => order._id !== id)
+    setFiltered(filteredOrders);
+    
+    deleteOrder(id)
   }
 
   return (
@@ -79,7 +87,7 @@ export default function OrdersPage() {
             </tr>
           </thead>
           <tbody className={styles.tableBodysWrapper}>
-            {filtered.map((product) => <OrderCard product={product} key={product._id}/>)}
+            {filtered.map((product) => <OrderCard product={product} key={product._id} deleteProduct={deleteProduct}/>)}
           </tbody>
         </table>
       </div>
