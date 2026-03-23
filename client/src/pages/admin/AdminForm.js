@@ -1,215 +1,121 @@
-import { useEffect, useState, useRef } from "react";
-import styles from "./adminForm.module.css";
-import { useNavigate, useLocation } from "react-router-dom";
-import { editProduct, createNewProducts } from "../../api/products";
-import {convertToBase64, base64ToFile} from '../../utils/imageHelper'
+import { useEffect, useState, useRef } from 'react'
+import styles from './adminForm.module.css'
+import { useNavigate, useParams, useLocation } from 'react-router-dom'
+import { editProduct, createNewProducts, getProductDataById } from '../../api/products'
+import { convertToBase64, base64ToFile } from '../../utils/imageHelper'
 
-//TODO fix clssNames
+const INITIAL_FIELD = { value: '', isValid: true }
+
 export default function AdminForm() {
-  const imageInputRef = useRef();
+  const imageInputRef = useRef()
   const [formData, setFormData] = useState({
-    name: {
-      value: "",
-      isValid: true,
-    },
-    origin: {
-      value: "",
-      isValid: true,
-    },
-    roastLevel: {
-      value: "",
-      isValid: true,
-    },
-    qty: {
-      value: "",
-      isValid: true,
-    },
-    price: {
-      value: "",
-      isValid: true,
-    },
-    description: {
-      value: "",
-      isValid: true,
-    },
-    image: {
-      value: "",
-      isValid: true,
-    },
-  });
-  const navigate = useNavigate();
-  const location = useLocation();
+    name: { ...INITIAL_FIELD },
+    origin: { ...INITIAL_FIELD },
+    roastLevel: { ...INITIAL_FIELD },
+    qty: { ...INITIAL_FIELD },
+    price: { ...INITIAL_FIELD },
+    description: { ...INITIAL_FIELD },
+    image: { ...INITIAL_FIELD },
+  })
+  const navigate = useNavigate()
+  const { id: productId } = useParams()
+  const location = useLocation()
+  const isEditing = location.pathname.includes('/edit')
 
   useEffect(() => {
-    if (location.pathname.includes("/edit")) {
-      async function getProductData() {
-        try {
-          const response = await fetch(
-            `http://localhost:3030/products/${location.pathname.split("/")[3]}`
-          );
-          const data = await response.json();
+    if (!isEditing || !productId) return
 
-          const newData = {
-            name: { value: data.name, isValid: true },
-            origin: { value: data.origin, isValid: true },
-            roastLevel: { value: data.roastLevel, isValid: true },
-            qty: { value: data.qty, isValid: true },
-            price: { value: data.price, isValid: true },
-            description: { value: data.description, isValid: true },
-            image: { value: data.image, isValid: true },
-          };
-          setFormData(newData);
+    async function loadProduct() {
+      try {
+        const data = await getProductDataById(productId)
+        if (!data) return
 
-          if (data.image && imageInputRef.current) {
-            const file = base64ToFile(data.image, "image.png");
-            const dataTransfer = new DataTransfer();
-            dataTransfer.items.add(file);
-            imageInputRef.current.files = dataTransfer.files;
-          }
-        } catch (error) {
-          console.error("Error fetching products:", error);
+        setFormData({
+          name: { value: data.name || '', isValid: true },
+          origin: { value: data.origin || '', isValid: true },
+          roastLevel: { value: data.roastLevel || '', isValid: true },
+          qty: { value: data.qty ?? '', isValid: true },
+          price: { value: data.price ?? '', isValid: true },
+          description: { value: data.description || '', isValid: true },
+          image: { value: data.image || '', isValid: true },
+        })
+
+        if (data.image && imageInputRef.current) {
+          const file = base64ToFile(data.image, 'image.png')
+          const dataTransfer = new DataTransfer()
+          dataTransfer.items.add(file)
+          imageInputRef.current.files = dataTransfer.files
         }
+      } catch (error) {
+        console.error('Error loading product:', error)
       }
-      getProductData();
     }
-  }, [location]);
+    loadProduct()
+  }, [isEditing, productId])
 
-  function validateFields() {
-    const name = formData["name"].value;
-    const price = Number(formData["price"].value);
-    const description = formData["description"].value;
-    const image = formData["image"].value;
-
-    if (typeof name === "number" || name === "") {
-      const editedData = { ...formData, ...(formData["name"].isValid = false) };
-      setFormData(editedData);
-    } else {
-      const editedData = { ...formData, ...(formData["name"].isValid = true) };
-      setFormData(editedData);
-    }
-
-    if (isNaN(price) || price <= 0) {
-      const editedData = {
-        ...formData,
-        ...(formData["price"].isValid = false),
-      };
-      setFormData(editedData);
-    } else {
-      const editedData = { ...formData, ...(formData["price"].isValid = true) };
-      setFormData(editedData);
-    }
-
-    if (typeof description === "number" || description === "") {
-      const editedData = {
-        ...formData,
-        ...(formData["description"].isValid = false),
-      };
-      setFormData(editedData);
-    } else {
-      const editedData = {
-        ...formData,
-        ...(formData["description"].isValid = true),
-      };
-      setFormData(editedData);
-    }
-
-    if (typeof image === "number" || image === "") {
-      const editedData = {
-        ...formData,
-        ...(formData["image"].isValid = false),
-      };
-      setFormData(editedData);
-    } else {
-      const editedData = { ...formData, ...(formData["image"].isValid = true) };
-      setFormData(editedData);
-    }
+  function validate(data) {
+    const updated = { ...data }
+    updated.name = { ...updated.name, isValid: typeof updated.name.value === 'string' && updated.name.value.trim() !== '' }
+    updated.price = { ...updated.price, isValid: !isNaN(Number(updated.price.value)) && Number(updated.price.value) > 0 }
+    updated.description = { ...updated.description, isValid: typeof updated.description.value === 'string' && updated.description.value.trim() !== '' }
+    updated.image = { ...updated.image, isValid: updated.image.value !== '' }
+    return updated
   }
 
   async function onChange(e) {
-    const field = e.target.name;
-    if (field === "image") {
-      const file = e.target.files[0];
-      const base64 = await convertToBase64(file);
-      const editedValue = (formData[field].value = base64);
-      const editedData = { ...formData, ...editedValue };
+    const field = e.target.name
+    let value
 
-      setFormData(editedData);
-      validateFields();
-      return;
+    if (field === 'image') {
+      const file = e.target.files[0]
+      if (!file) return
+      value = await convertToBase64(file)
+    } else {
+      value = e.target.value
     }
 
-    const value = e.target.value;
-    const editedValue = (formData[field].value = value);
-    const editedData = { ...formData, ...editedValue };
-
-    setFormData(editedData);
-    validateFields();
+    const updated = { ...formData, [field]: { value, isValid: true } }
+    setFormData(validate(updated))
   }
 
   function isButtonDisabled() {
-    let isValid = false;
-    for (const key in formData) {
-      if (!formData[key].isValid) {
-        isValid = true;
-      }
-    }
-    return isValid;
+    return Object.values(formData).some((field) => !field.isValid)
   }
 
   async function onSubmit(e) {
-    e.preventDefault();
-    const name = formData["name"].value;
-    const price = Number(formData["price"].value);
-    const description = formData["description"].value;
-    const image = formData["image"].value;
-    const origin = formData["origin"].value;
-    const roastLevel = formData["roastLevel"].value;
-    const qty = Number(formData["qty"].value);
+    e.preventDefault()
+    const validated = validate(formData)
+    setFormData(validated)
+    if (Object.values(validated).some((f) => !f.isValid)) return
 
-    const productId = location.pathname.split("/")[3];
-    if (location.pathname.includes("/edit")) {
-      await editProduct(
-        {
-          name,
-          origin,
-          roastLevel,
-          qty,
-          price,
-          description,
-          image,
-        },
-        productId
-      );
-      navigate("/admin");
-      return;
+    const payload = {
+      name: formData.name.value,
+      origin: formData.origin.value,
+      roastLevel: formData.roastLevel.value,
+      qty: Number(formData.qty.value),
+      price: Number(formData.price.value),
+      description: formData.description.value,
+      image: formData.image.value,
     }
 
-    await createNewProducts({
-      name,
-      origin,
-      roastLevel,
-      qty,
-      price,
-      description,
-      image,
-      isActive: false,
-      bought: 0
-    });
-    navigate("/admin");
+    if (isEditing) {
+      await editProduct(payload, productId)
+    } else {
+      await createNewProducts({ ...payload, isActive: false, bought: 0 })
+    }
+    navigate('/admin')
   }
 
   return (
     <div className={styles.createContainer}>
       <div className={styles.createContainerData}>
         <h1 className={styles.createHeading}>
-          {location.pathname.includes("/edit")
-            ? "Edit Your Product"
-            : "Create a New Product"}
+          {isEditing ? 'Edit Your Product' : 'Create a New Product'}
         </h1>
         <p className={styles.createText}>
-          {location.pathname.includes("/edit")
-            ? "Fill in the details below to edit your coffee bean product."
-            : " Fill in the details below to add a new coffee bean product."}
+          {isEditing
+            ? 'Fill in the details below to edit your coffee bean product.'
+            : 'Fill in the details below to add a new coffee bean product.'}
         </p>
       </div>
       <div className={styles.sectionCreate}>
@@ -221,84 +127,83 @@ export default function AdminForm() {
               type="text"
               name="name"
               required
-              value={formData["name"].value}
-              onChange={(e) => onChange(e)}
+              value={formData.name.value}
+              onChange={onChange}
               placeholder="e.g. Ethiopia Yirgacheffe"
             />
+            {!formData.name.isValid && <p className={styles.errorText}>Name is required.</p>}
           </div>
 
           <div className={styles.inputContainer}>
             <label className={styles.inputLabel}>Description</label>
             <textarea
               className={`${styles.inputData} ${styles.inputBigData}`}
-              type="text"
               name="description"
               required
-              value={formData["description"].value}
-              onChange={(e) => onChange(e)}
+              value={formData.description.value}
+              onChange={onChange}
               placeholder="A brief description of the coffee's flavor profile, origin and characteristics."
             />
+            {!formData.description.isValid && <p className={styles.errorText}>Description is required.</p>}
           </div>
-          <div
-            className={`${styles.inputContainer} ${styles.inputContainerSmall}`}
-          >
+
+          <div className={`${styles.inputContainer} ${styles.inputContainerSmall}`}>
             <label className={styles.inputLabel}>Origin</label>
             <input
               className={styles.inputData}
               type="text"
               name="origin"
               required
-              value={formData["origin"].value}
-              onChange={(e) => onChange(e)}
+              value={formData.origin.value}
+              onChange={onChange}
               placeholder="e.g. Ethiopia"
             />
           </div>
-          <div
-            className={`${styles.inputContainer} ${styles.inputContainerSmall}`}
-          >
+
+          <div className={`${styles.inputContainer} ${styles.inputContainerSmall}`}>
             <label className={styles.inputLabel}>Roast Level</label>
             <select
               className={styles.inputData}
               name="roastLevel"
-              value={formData["roastLevel"].value}
-              onChange={(e) => onChange(e)}
+              value={formData.roastLevel.value}
+              onChange={onChange}
             >
-              <option value="" disabled hidden>
-                Roasted Level
-              </option>
+              <option value="" disabled hidden>Roast Level</option>
               <option value="Light">Light</option>
               <option value="Medium">Medium</option>
               <option value="MediumDark">Medium-Dark</option>
               <option value="Dark">Dark</option>
             </select>
           </div>
-          <div
-            className={`${styles.inputContainer} ${styles.inputContainerSmall}`}
-          >
+
+          <div className={`${styles.inputContainer} ${styles.inputContainerSmall}`}>
             <label className={styles.inputLabel}>Stock Quantity</label>
             <input
               className={styles.inputData}
               type="number"
               name="qty"
               required
-              value={formData["qty"].value}
-              onChange={(e) => onChange(e)}
+              min="0"
+              value={formData.qty.value}
+              onChange={onChange}
               placeholder="e.g. 100"
             />
           </div>
-          <div
-            className={`${styles.inputContainer} ${styles.inputContainerSmall}`}
-          >
+
+          <div className={`${styles.inputContainer} ${styles.inputContainerSmall}`}>
             <label className={styles.inputLabel}>Price ($)</label>
             <input
               className={styles.inputData}
               type="number"
               name="price"
               required
-              value={formData["price"].value}
-              onChange={(e) => onChange(e)}
+              min="0"
+              step="0.01"
+              value={formData.price.value}
+              onChange={onChange}
               placeholder="e.g. 13.50"
             />
+            {!formData.price.isValid && <p className={styles.errorText}>Enter a valid price greater than 0.</p>}
           </div>
 
           <div className={styles.inputContainer}>
@@ -307,13 +212,14 @@ export default function AdminForm() {
               className={`${styles.inputData} ${styles.inputBigData}`}
               type="file"
               name="image"
-              accept=".jpg, .png, .jpeg"
-              fileName={formData["image"].value}
-              required
+              accept=".jpg,.png,.jpeg,.webp"
+              required={!isEditing}
               ref={imageInputRef}
-              onChange={(e) => onChange(e)}
+              onChange={onChange}
             />
+            {!formData.image.isValid && <p className={styles.errorText}>Image is required.</p>}
           </div>
+
           <button
             type="submit"
             className={styles.createBtn}
@@ -324,5 +230,5 @@ export default function AdminForm() {
         </form>
       </div>
     </div>
-  );
+  )
 }

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./productCard.module.css";
+import { API_URL } from "../../api/config";
 
 export default function OrderCard({ data }) {
   const [product, setProduct] = useState([]);
@@ -34,7 +35,7 @@ export default function OrderCard({ data }) {
     async function getProduct() {
       try {
         const response = await fetch(
-          `http://localhost:3030/products/${data.id}`
+          `${API_URL}/products/${data.id}`
         );
         const product = await response.json();
 

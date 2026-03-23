@@ -1,79 +1,76 @@
-const apiUrl = "http://localhost:3030/products";
+import { API_URL, getAdminHeaders } from './config'
+
+const productsUrl = `${API_URL}/products`
 
 export async function editProduct(productData, productId) {
-  const product = await fetch(`${apiUrl}/edit/${productId}`, {
-    method: "POST",
+  const response = await fetch(`${productsUrl}/edit/${productId}`, {
+    method: 'POST',
     body: JSON.stringify(productData),
-    headers: {
-      "Content-type": "application/json",
-    },
-  });
-
-  return product;
+    headers: getAdminHeaders(),
+  })
+  return response
 }
 
 export async function createNewProducts(productData) {
-  const product = await fetch(`${apiUrl}/create`, {
-    method: "POST",
+  const response = await fetch(`${productsUrl}/create`, {
+    method: 'POST',
     body: JSON.stringify(productData),
-    headers: {
-      "Content-type": "application/json",
-    },
-  });
-
-  return product;
+    headers: getAdminHeaders(),
+  })
+  return response
 }
 
 export async function getProductDataById(id) {
   try {
-    const response = await fetch(`http://localhost:3030/products/${id}`);
-    const data = await response.json();
-    return data;
+    const response = await fetch(`${productsUrl}/${id}`)
+    if (!response.ok) return null
+    return response.json()
   } catch (error) {
-    console.error("Error fetching products:", error);
+    console.error('Error fetching product:', error)
+    return null
   }
 }
 
-export async function getProductPrices(id) {
-  let idArr = [];
-  id.map((id) => {
-    for (let index = 0; index < id.qty; index++) {
-      idArr.push(id.id);
-    }
-    return id;
-  });
+export async function getProductPrices(cart) {
+  const idArr = cart.flatMap(({ id, qty }) => Array(qty).fill(id))
 
-  const response = await fetch(`http://localhost:3030/products/price`, {
-    method: "POST",
+  const response = await fetch(`${productsUrl}/price`, {
+    method: 'POST',
     body: JSON.stringify({ ids: idArr }),
-    headers: {
-      "Content-type": "application/json",
-    },
-  });
-
-  const price = await response.json();
-
-  return price;
+    headers: { 'Content-type': 'application/json' },
+  })
+  return response.json()
 }
 
-export async function getCartProducts(id) {
-  let idArr = [];
-  id.map((id) => {
-    for (let index = 0; index < id.qty; index++) {
-      idArr.push(id.id);
-    }
-    return id;
-  });
+export async function getCartProducts(cart) {
+  const idArr = cart.flatMap(({ id, qty }) => Array(qty).fill(id))
 
-  const response = await fetch(`http://localhost:3030/products/cartProduct`, {
-    method: "POST",
+  const response = await fetch(`${productsUrl}/cartProduct`, {
+    method: 'POST',
     body: JSON.stringify({ ids: idArr }),
-    headers: {
-      "Content-type": "application/json",
-    },
-  });
+    headers: { 'Content-type': 'application/json' },
+  })
+  return response.json()
+}
 
-  const product = await response.json();
+export async function getAllProducts() {
+  const response = await fetch(productsUrl, {
+    headers: getAdminHeaders(),
+  })
+  if (!response.ok) return []
+  return response.json()
+}
 
-  return product;
+export async function deleteProduct(productId) {
+  return fetch(`${productsUrl}/${productId}`, {
+    method: 'DELETE',
+    headers: getAdminHeaders(),
+  })
+}
+
+export async function changeProductStatus(productId) {
+  return fetch(`${productsUrl}/status/${productId}`, {
+    method: 'POST',
+    headers: getAdminHeaders(),
+  })
 }

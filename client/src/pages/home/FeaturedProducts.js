@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import FeaturedProduct from "./FeaturedProduct";
 import styles from "./featuredProducts.module.css";
 import { useEffect, useState } from "react";
+import { API_URL } from "../../api/config";
 
 export default function FeaturedProducts() {
   const [products, setProducts] = useState([]);
@@ -9,7 +10,7 @@ export default function FeaturedProducts() {
   useEffect(() => {
     async function getProducts() {
       try {
-        const response = await fetch("http://localhost:3030/products/featured");
+        const response = await fetch(`${API_URL}/products/featured`);
         const data = await response.json();
         setProducts(data);
       } catch (error) {

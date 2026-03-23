@@ -8,6 +8,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { useState, useEffect } from "react";
 import {WhatButtonsToRender} from '../components/adminPageButtons'
+import { deleteProduct as deleteProductApi, changeProductStatus } from '../api/products'
 
 export default function DataTable({ data }) {
   const [productData, setProductData] = useState([]);
@@ -19,27 +20,13 @@ export default function DataTable({ data }) {
   }, [data]);
 
   async function deleteProduct(productId) {
-    const deletedProct = await fetch(
-      `http://localhost:3030/products/${productId}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-      }
-    );
-    setProductData((prev) =>
-      prev.filter((product) => product._id !== productId)
-    );
-
-    return deletedProct;
+    await deleteProductApi(productId)
+    setProductData((prev) => prev.filter((product) => product._id !== productId));
   }
 
   async function changeStatus(productId) {
-     await fetch(`http://localhost:3030/products/status/${productId}`, {
-        method: 'POST',
-    })
-    setProductData(prev => 
+    await changeProductStatus(productId)
+    setProductData(prev =>
       prev.map(item => item._id === productId ? { ...item, isActive: !item.isActive}: item)
     );
   }

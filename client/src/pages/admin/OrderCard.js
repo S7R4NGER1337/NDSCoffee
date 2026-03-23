@@ -86,7 +86,7 @@ export default function OrderCard({ product, deleteProduct }) {
           {productData._id}
         </td>
         <td className={styles.tableBody}>{productData.fullName}</td>
-        <td className={styles.tableBody}>15.11.24</td>
+        <td className={styles.tableBody}>{new Date(productData.createdAt || Date.now()).toLocaleDateString('bg-BG')}</td>
         <td className={styles.tableBody}>${totalPrice}</td>
         <td className={styles.tableBody}>
           <Status />
@@ -110,7 +110,7 @@ export default function OrderCard({ product, deleteProduct }) {
           <div className={styles.detailsContainer}>
             <div className={styles.detailsImageContainer}>
               {cartProducts.map((product, index) => (
-                <Link to={`/product/${product._id}`} style={{textDecoration: 'none', color: 'inherit'}}>
+                <Link key={product._id} to={`/product/${product._id}`} style={{textDecoration: 'none', color: 'inherit'}}>
                   <img
                     className={styles.detailsImage}
                     src={product.image}
@@ -135,7 +135,7 @@ export default function OrderCard({ product, deleteProduct }) {
               </div>
               <div className={styles.detailsClientData}>
                 <p className={styles.detailsClientDataName}>Adress: </p>
-                <p className={styles.detailsClientDataText}>{productData.streetAddres}</p>
+                <p className={styles.detailsClientDataText}>{productData.streetAddress}</p>
               </div>
               <div className={styles.detailsClientData}>
                 <p className={styles.detailsClientDataName}>Postal Code: </p>

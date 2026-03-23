@@ -1,61 +1,65 @@
-import { Route, Routes } from "react-router";
-import { useState } from "react";
-import "./App.css";
-import AuthGuard from "./authGuard.js";
-import {  userAuthenticated } from './api/user.js'
+import { Route, Routes } from 'react-router'
+import { useState } from 'react'
+import './App.css'
+import AuthGuard from './authGuard.js'
+import { userAuthenticated } from './api/user.js'
 
-import Nav from "./components/nav.js";
+import Nav from './components/nav.js'
 import AdminPage from './pages/admin/adminPage.js'
-import AdminForm from "./pages/admin/AdminForm.js";
-import AdminLogin from "./pages/admin/adminLogin.js";
+import AdminForm from './pages/admin/AdminForm.js'
+import AdminLogin from './pages/admin/adminLogin.js'
 import Home from './pages/home/Home.js'
-import Catalog from "./pages/catalog/Catalog.js";
+import Catalog from './pages/catalog/Catalog.js'
 import OrdersPage from './pages/admin/ordersPage.js'
-import Shipping from "./pages/order/Shipping.js";
+import Shipping from './pages/order/Shipping.js'
 import Review from './pages/order/Review.js'
 import ProductPage from './pages/product/ProductPage.js'
-import AboutRedirect from "./components/AboutRedirect.js";
-import Footer from "./components/Footer.js";
-import Cart from "./pages/cart/Cart.js";
-
+import AboutRedirect from './components/AboutRedirect.js'
+import Footer from './components/Footer.js'
+import Cart from './pages/cart/Cart.js'
 
 function App() {
-
-  const [authenticated, setAuthenticated] = useState(false)
+  const [authenticated, setAuthenticated] = useState(
+    () => !!sessionStorage.getItem('adminToken')
+  )
 
   async function loginSubmit(userData) {
-    const isAuthenticated = await userAuthenticated(userData)
-    setAuthenticated(isAuthenticated)
-    
-    return isAuthenticated ? true : false;
+    const token = await userAuthenticated(userData)
+    if (token) {
+      sessionStorage.setItem('adminToken', token)
+      setAuthenticated(true)
+      return true
+    }
+    setAuthenticated(false)
+    return false
   }
 
   return (
     <>
-    <Nav />
-    <div className="App">
-      <Routes>
-        <Route path="/" element={<Home />} />
+      <Nav />
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<Home />} />
 
-        <Route element={<AuthGuard isAuthenticated={authenticated} />}>
-          <Route path="/admin" element={<AdminPage />} />
-          <Route path="/admin/create" element={<AdminForm />} />
-          <Route path="/admin/orders" element={<OrdersPage />} />
-          <Route path="/admin/edit/:id" element={<AdminForm />} />
-        </Route>
+          <Route element={<AuthGuard isAuthenticated={authenticated} />}>
+            <Route path="/admin" element={<AdminPage />} />
+            <Route path="/admin/create" element={<AdminForm />} />
+            <Route path="/admin/orders" element={<OrdersPage />} />
+            <Route path="/admin/edit/:id" element={<AdminForm />} />
+          </Route>
 
-        <Route path="/admin/login" element={<AdminLogin loginSubmit={loginSubmit}/>} />
-        <Route path="/product/:id" element={<ProductPage />} />
-        <Route path="/catalog" element={<Catalog />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/order" element={<Shipping />} />
-        <Route path="/about" element={<AboutRedirect />} />
-        <Route path="/review" element={<Review />} />
-      </Routes>
-    </div>
-    <Footer />
+          <Route path="/admin/login" element={<AdminLogin loginSubmit={loginSubmit} />} />
+          <Route path="/product/:id" element={<ProductPage />} />
+          <Route path="/catalog" element={<Catalog />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/order" element={<Shipping />} />
+          <Route path="/about" element={<AboutRedirect />} />
+          <Route path="/review" element={<Review />} />
+        </Routes>
+      </div>
+      <Footer />
     </>
-  );
+  )
 }
 
-export default App;
+export default App

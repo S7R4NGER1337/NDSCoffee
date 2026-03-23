@@ -4,6 +4,7 @@ import { styled } from "@mui/material/styles";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { deleteProduct as deleteProductApi, changeProductStatus } from "../../api/products";
 
 export default function DataTable({ data }) {
   const [productData, setProductData] = useState(data);
@@ -81,6 +82,7 @@ export default function DataTable({ data }) {
   }));
 
   async function changeStatus(productId) {
+    await changeProductStatus(productId);
     setProductData((prev) =>
       prev.map((item) =>
         item._id === productId ? { ...item, isActive: !item.isActive } : item
@@ -91,31 +93,12 @@ export default function DataTable({ data }) {
         item._id === productId ? { ...item, isActive: !item.isActive } : item
       )
     );
-
-    await fetch(`http://localhost:3030/products/status/${productId}`, {
-      method: "POST",
-    });
   }
 
   async function deleteProduct(productId) {
-      setProductData((prev) =>
-        prev.filter((product) => product._id !== productId)
-      );
-      setFilteredProducts((prev) =>
-        prev.filter((product) => product._id !== productId)
-      );
-      
-      const deletedProct = await fetch(
-      `http://localhost:3030/products/${productId}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-      }
-    );
-
-    return deletedProct;
+    await deleteProductApi(productId);
+    setProductData((prev) => prev.filter((product) => product._id !== productId));
+    setFilteredProducts((prev) => prev.filter((product) => product._id !== productId));
   }
 
   function searchOnChange(e) {

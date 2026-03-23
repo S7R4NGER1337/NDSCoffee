@@ -1,69 +1,48 @@
-const Product = require("../models/Product");
+const Product = require('../models/Product')
 
 exports.getAllProducts = async () => {
-  const products = await Product.find();
-  return products;
-};
+  return Product.find().lean()
+}
 
 exports.getProductsPrice = async (id) => {
-  const product = await Product.findById(id).select("price").lean()
-  
-  return product.price
+  const product = await Product.findById(id).select('price').lean()
+  return product ? product.price : 0
 }
 
 exports.getCartProductById = async (id) => {
-  const product = await Product.findById(id)
-  
-  return product
+  return Product.findById(id).lean()
 }
 
 exports.createProduct = async (productData) => {
-  try {
-    await Product.create(productData);
-  } catch (error) {
-    console.log(error);
-  }
-};
+  return Product.create(productData)
+}
 
 exports.changeProductStatus = async (id) => {
-  const product = await Product.findOneAndUpdate(
+  return Product.findOneAndUpdate(
     { _id: id },
-    [{ $set: { isActive: { $not: "$isActive" } } }],
+    [{ $set: { isActive: { $not: '$isActive' } } }],
     { new: true }
-  );
-
-  return product;
-};
+  )
+}
 
 exports.getProductById = async (id) => {
-  try {
-    const product = await Product.findById(id);
-    return product;
-  } catch (error) {
-    console.log(error);
-  }
-};
+  return Product.findById(id).lean()
+}
 
 exports.deleteProduct = async (id) => {
-  const deletedProduct = await Product.findByIdAndDelete(id);
-
-  return deletedProduct;
-};
+  return Product.findByIdAndDelete(id)
+}
 
 exports.updateProduct = async (id, data) => {
-  const product = await Product.findByIdAndUpdate(id, data);
-
-  return product;
-};
+  return Product.findByIdAndUpdate(id, data, { new: true })
+}
 
 exports.getAvailable = async () => {
-  const availableProducts = await Product.find({ isActive: true }).select('name price _id image description roastLevel');
-
-  return availableProducts;
-};
+  return Product.find({ isActive: true })
+    .select('name price _id image description roastLevel origin')
+    .lean()
+}
 
 exports.getThreeProducts = async () => {
-  const threeProducts = await Product.find({ isActive: true }).limit(3);
-
-  return threeProducts;
-};
+  return Product.find({ isActive: true }).limit(3).lean()
+}

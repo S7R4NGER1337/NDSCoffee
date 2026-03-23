@@ -1,39 +1,40 @@
-import { useEffect, useState } from "react";
-import styles from "./review.module.css";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import ReviewProduct from "./ReviewProduct";
-import { getProductPrices } from "../../api/products";
-import Progress from "./Progress";
-import { showPopUp } from "../../components/PopUp";
+import { useEffect, useState } from 'react'
+import styles from './review.module.css'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import ReviewProduct from './ReviewProduct'
+import { getProductPrices } from '../../api/products'
+import { placeOrder } from '../../api/orders'
+import Progress from './Progress'
+import { showPopUp } from '../../components/PopUp'
 
 export default function Review() {
-  const { state } = useLocation();
-  const navigate = useNavigate();
-  const cart = JSON.parse(localStorage.getItem("cart"));
-  const [sumOfProducts, setSumOfProducts] = useState(0);
+  const { state } = useLocation()
+  const navigate = useNavigate()
+  const cart = JSON.parse(localStorage.getItem('cart'))
+  const [sumOfProducts, setSumOfProducts] = useState(0)
 
   useEffect(() => {
-    if (state === null || cart === null) navigate("/");
+    if (state === null || cart === null) {
+      navigate('/')
+      return
+    }
 
     async function fetchProductPrices() {
-      const price = await getProductPrices(cart);
-      setSumOfProducts(price.sum);
+      const price = await getProductPrices(cart)
+      setSumOfProducts(price.sum)
     }
-    fetchProductPrices();
-  }, [state, cart, navigate]);
+    fetchProductPrices()
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-  async function placeOrder() {
-    await fetch(`http://localhost:3030/products/order/s`, {
-      method: "POST",
-      body: JSON.stringify({ ...state, cart, status: "Pending" }),
-      headers: {
-        "Content-type": "application/json",
-      },
-    });
-
-    localStorage.removeItem("cart");
-    showPopUp("Order successfull");
-    navigate("/");
+  async function handlePlaceOrder() {
+    try {
+      await placeOrder({ ...state, cart, status: 'Pending' })
+      localStorage.removeItem('cart')
+      showPopUp('Order placed successfully!')
+      navigate('/')
+    } catch (error) {
+      showPopUp('Failed to place order. Please try again.')
+    }
   }
 
   return (
@@ -52,9 +53,9 @@ export default function Review() {
             <Link
               to="/cart"
               style={{
-                textDecoration: "none",
-                color: "rgba(255, 140, 58, 1)",
-                alignSelf: "end",
+                textDecoration: 'none',
+                color: 'rgba(255, 140, 58, 1)',
+                alignSelf: 'end',
               }}
             >
               <p>Edit Your Items</p>
@@ -67,34 +68,33 @@ export default function Review() {
             <div className={styles.clientDataContainer}>
               <h1 className={styles.clientDataName}>Shipping Data</h1>
               <div className={styles.clientData}>
-                <p>{state.fullName}</p>
-                <p>{state.phone}</p>
-                <p>{state.city}</p>
-                <p>{state.postalCode}</p>
-                <p>{state.streetAddres}</p>
+                <p>{state?.fullName}</p>
+                <p>{state?.phone}</p>
+                <p>{state?.city}</p>
+                <p>{state?.postalCode}</p>
+                <p>{state?.streetAddress}</p>
               </div>
             </div>
             <div className={styles.clientDataContainer}>
               <h1 className={styles.clientDataName}>Payment Method</h1>
               <div className={styles.paymentData}>
                 <p>
-                  {state.paymentType === "cash"
-                    ? "Cash on Delivery"
-                    : "Paid by card"}
+                  {state?.paymentType === 'cash' ? 'Cash on Delivery' : 'Paid by card'}
                 </p>
                 <img
                   className={styles.paymentIcon}
-                  src={
-                    state.paymentType === "cash"
-                      ? "truck-solid-full.svg"
-                      : "credit-card-solid-full.svg"
-                  }
+                  src={state?.paymentType === 'cash' ? 'truck-solid-full.svg' : 'credit-card-solid-full.svg'}
                   alt="paymentIcon"
                 />
               </div>
             </div>
           </div>
-          <p onClick={() => navigate('/order', {state: state})} className={styles.editShoppingData}>Edit Shipping Data</p>
+          <p
+            onClick={() => navigate('/order', { state })}
+            className={styles.editShoppingData}
+          >
+            Edit Shipping Data
+          </p>
         </div>
         <div className={styles.line}></div>
         <div className={styles.orderSummaryContainer}>
@@ -114,10 +114,10 @@ export default function Review() {
             <p className={styles.orderSummaryTotalPrice}>$ {sumOfProducts + 5}</p>
           </div>
         </div>
-        <button className={styles.placeOrder} onClick={() => placeOrder()}>
+        <button className={styles.placeOrder} onClick={handlePlaceOrder}>
           Place Order
         </button>
       </div>
     </>
-  );
+  )
 }

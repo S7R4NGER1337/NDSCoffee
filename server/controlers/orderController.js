@@ -1,30 +1,48 @@
 const router = require('express').Router()
 const orderManager = require('../managers/orderManager')
+const { requireAuth } = require('../middleware/auth')
 
-router.post('/order/:id', async (req, res) => {
-    const order = orderManager.makeAnOrder(req.body)
-    
-    res.json(order)
-    res.end()
+// ─── Public routes ────────────────────────────────────────────────────────────
+
+router.post('/order', async (req, res) => {
+  try {
+    const order = await orderManager.makeAnOrder(req.body)
+    res.status(201).json(order)
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to place order.' })
+  }
 })
 
+// ─── Admin-only routes ────────────────────────────────────────────────────────
 
-router.get('/order/:id', async (req, res) => {
+router.get('/orders', requireAuth, async (req, res) => {
+  try {
     const orders = await orderManager.getOrders()
     res.json(orders)
-    res.end()
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch orders.' })
+  }
 })
 
-router.post('/changeStatus/:id', async (req, res) => {
+router.post('/changeStatus/:id', requireAuth, async (req, res) => {
+  try {
     const { status } = req.body
-    const id = req.params.id
-    const product = await orderManager.changeProductDeliveryStatus(id, status)
-
-    res.send(product)
+    if (!status) return res.status(400).json({ error: 'Status is required.' })
+    const updated = await orderManager.changeOrderStatus(req.params.id, status)
+    if (!updated) return res.status(404).json({ error: 'Order not found.' })
+    res.json(updated)
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to update order status.' })
+  }
 })
 
-router.get('/deleteOrder/:id', async (req, res) => {
-    const id = req.params.id
-    await orderManager.deleteProduct(id)
+router.delete('/order/:id', requireAuth, async (req, res) => {
+  try {
+    await orderManager.deleteOrder(req.params.id)
+    res.json({ success: true })
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to delete order.' })
+  }
 })
+
 module.exports = router

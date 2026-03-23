@@ -1,104 +1,112 @@
 const router = require('express').Router()
 const productManager = require('../managers/productManager')
+const { requireAuth } = require('../middleware/auth')
 
-router.get('/', async (req, res) => { 
-    const products = await productManager.getAllProducts()
-
-    res.json(products)
-    res.end()
-})
-
-router.post('/create', (req, res) => {
-    try {
-        productManager.createProduct(req.body)
-    } catch (error) {
-        console.log(error);
-    }
-    res.end()
-})
-
-router.post('/price', async (req, res) => {
-    const { ids } = req.body
-
-    const prices = await Promise.all(
-      ids.map((id) => productManager.getProductsPrice(id))
-    );
-
-    const sumOfPrices = prices.reduce((sum, price) => sum + price, 0);
-    
-    res.send({sum: sumOfPrices})
-})
-
-router.post('/cartProduct', async (req, res) => {
-    const { ids } = req.body
-
-    const product = await Promise.all(
-      ids.map((id) => productManager.getCartProductById(id))
-    );
-
-    res.send(product)
-})
+// ─── Public routes ────────────────────────────────────────────────────────────
 
 router.get('/available', async (req, res) => {
+  try {
     const products = await productManager.getAvailable()
-    
     res.json(products)
-    
-    res.end()    
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch products.' })
+  }
 })
 
 router.get('/featured', async (req, res) => {
+  try {
     const products = await productManager.getThreeProducts()
-
     res.json(products)
-    res.end()
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch featured products.' })
+  }
 })
-router.get('/:id', async (req, res) => {
-    const {id} = req.params
-    const product = await productManager.getProductById(id)
 
-    if(!product) throw new Error('This product doesnt exist')
-
-    if(!product){
-        console.log('Error');
-        return
+router.post('/price', async (req, res) => {
+  try {
+    const { ids } = req.body
+    if (!Array.isArray(ids) || ids.length === 0) {
+      return res.status(400).json({ error: 'ids must be a non-empty array.' })
     }
+    const prices = await Promise.all(ids.map((id) => productManager.getProductsPrice(id)))
+    const sumOfPrices = prices.reduce((sum, price) => sum + (price || 0), 0)
+    res.json({ sum: sumOfPrices })
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to calculate prices.' })
+  }
+})
 
+router.post('/cartProduct', async (req, res) => {
+  try {
+    const { ids } = req.body
+    if (!Array.isArray(ids) || ids.length === 0) {
+      return res.status(400).json({ error: 'ids must be a non-empty array.' })
+    }
+    const products = await Promise.all(ids.map((id) => productManager.getCartProductById(id)))
+    res.json(products)
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch cart products.' })
+  }
+})
+
+router.get('/:id', async (req, res) => {
+  try {
+    const product = await productManager.getProductById(req.params.id)
+    if (!product) return res.status(404).json({ error: 'Product not found.' })
     res.json(product)
-    res.end()
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch product.' })
+  }
 })
 
-router.post('/:id', async (req, res) => {
-    const {id} = req.params
+// ─── Admin-only routes (require auth) ────────────────────────────────────────
 
-   await productManager.deleteProduct(id)
-
-    res.end()
+router.get('/', requireAuth, async (req, res) => {
+  try {
+    const products = await productManager.getAllProducts()
+    res.json(products)
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch products.' })
+  }
 })
 
-router.put('/:id', async (req, res) => {
-    const data = req.body
-    const id = req.params.id
-
-    const updatedProduct = await productManager.updateProduct(id, data)
-
-    res.json(updatedProduct)
-    res.end()
+router.post('/create', requireAuth, async (req, res) => {
+  try {
+    const product = await productManager.createProduct(req.body)
+    res.status(201).json(product)
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to create product.' })
+  }
 })
 
-router.post('/edit/:id', async (req, res) => {
-    const data = req.body
-    const id = req.params.id
-    const updatedProduct = await productManager.updateProduct(id, data)
-
-    res.json(updatedProduct)
-    res.end()
+router.post('/edit/:id', requireAuth, async (req, res) => {
+  try {
+    const updated = await productManager.updateProduct(req.params.id, req.body)
+    if (!updated) return res.status(404).json({ error: 'Product not found.' })
+    res.json(updated)
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to update product.' })
+  }
 })
 
-router.post('/status/:id', async (req, res) => {
-    const productId = req.params.id
-    
-    await productManager.changeProductStatus(productId)
-    res.end()
+router.post('/status/:id', requireAuth, async (req, res) => {
+  try {
+    const updated = await productManager.changeProductStatus(req.params.id)
+    if (!updated) return res.status(404).json({ error: 'Product not found.' })
+    res.json(updated)
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to change product status.' })
+  }
 })
+
+router.delete('/:id', requireAuth, async (req, res) => {
+  try {
+    const deleted = await productManager.deleteProduct(req.params.id)
+    if (!deleted) return res.status(404).json({ error: 'Product not found.' })
+    res.json({ success: true })
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to delete product.' })
+  }
+})
+
 module.exports = router

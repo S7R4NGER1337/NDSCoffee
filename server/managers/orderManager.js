@@ -1,27 +1,17 @@
-const Order = require("../models/Order");
+const Order = require('../models/Order')
 
 exports.makeAnOrder = async (userData) => {
-  const order = await Order.create(userData);
-
-  return order;
-};
+  return Order.create(userData)
+}
 
 exports.getOrders = async () => {
-  const order = await Order.find();
+  return Order.find().lean()
+}
 
-  return order;
-};
+exports.changeOrderStatus = async (id, status) => {
+  return Order.findByIdAndUpdate(id, { status }, { new: true })
+}
 
-exports.changeProductDeliveryStatus = async (id, status) => {
-  const product = await Order.findByIdAndUpdate(
-    id,
-    { status },
-  );
-
-  return product;
-};
-
-
-exports.deleteProduct = async (id) => {
-  await Order.findByIdAndDelete(id)
+exports.deleteOrder = async (id) => {
+  return Order.findByIdAndDelete(id)
 }

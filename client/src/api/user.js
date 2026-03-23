@@ -1,14 +1,17 @@
-export const userAuthenticated = async (userData) => {
-    const response = await fetch("http://localhost:3030/login", {
-        method: "POST",
-        body: JSON.stringify({
-            name: userData.username,
-            password: userData.password,
-        }),
-        headers: {
-            "Content-type": "application/json",
-        },
-    });
+import { API_URL } from './config'
 
-    return response.json()
-} 
+export async function userAuthenticated(userData) {
+  const response = await fetch(`${API_URL}/login`, {
+    method: 'POST',
+    body: JSON.stringify({
+      name: userData.username,
+      password: userData.password,
+    }),
+    headers: { 'Content-type': 'application/json' },
+  })
+
+  if (!response.ok) return null
+
+  const data = await response.json()
+  return data.token || null
+}

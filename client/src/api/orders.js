@@ -1,18 +1,36 @@
-export async function changeOrderStatus(id, status){
-    const response = await fetch(`http://localhost:3030/products/changeStatus/${id}`, {
-        method: 'POST',
-        headers: {
-            'Content-type': 'application/json'
-        },
-        body: JSON.stringify({ status })
-    })
+import { API_URL, getAdminHeaders } from './config'
 
-    const changedProduct = await response.json()
+const productsUrl = `${API_URL}/products`
 
-    return changedProduct
+export async function placeOrder(orderData) {
+  const response = await fetch(`${productsUrl}/order`, {
+    method: 'POST',
+    body: JSON.stringify(orderData),
+    headers: { 'Content-type': 'application/json' },
+  })
+  return response.json()
+}
+
+export async function getOrders() {
+  const response = await fetch(`${productsUrl}/orders`, {
+    headers: getAdminHeaders(),
+  })
+  if (!response.ok) return []
+  return response.json()
+}
+
+export async function changeOrderStatus(id, status) {
+  const response = await fetch(`${productsUrl}/changeStatus/${id}`, {
+    method: 'POST',
+    headers: getAdminHeaders(),
+    body: JSON.stringify({ status }),
+  })
+  return response.json()
 }
 
 export async function deleteOrder(id) {
-   await fetch(`http://localhost:3030/products/deleteOrder/${id}`)
-   return
+  return fetch(`${productsUrl}/order/${id}`, {
+    method: 'DELETE',
+    headers: getAdminHeaders(),
+  })
 }
