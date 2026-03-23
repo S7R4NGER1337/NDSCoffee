@@ -10,5 +10,6 @@ export function setOrder(productId, qty) {
   }
 
   localStorage.setItem("cart", JSON.stringify(cartInfo));
+  window.dispatchEvent(new Event("cartUpdated"));
   return cartInfo;
 }

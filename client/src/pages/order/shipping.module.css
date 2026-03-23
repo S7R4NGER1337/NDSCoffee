@@ -58,3 +58,17 @@
 .orderFormSmall{
     width: 47%;
 }
+.orderContainer{
+    max-width: 50rem;
+    margin: 0 auto;
+}
+
+.inputError{
+    border-color: #e53e3e !important;
+}
+
+.errorMsg{
+    color: #e53e3e;
+    font-size: 0.85rem;
+    margin-top: 0.2em;
+}

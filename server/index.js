@@ -29,7 +29,7 @@ const loginLimiter = rateLimit({
 })
 app.use('/login', loginLimiter)
 
-const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/NDSCoffee'
+const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/EcommerseForPortfolio'
 mongoose.connect(mongoUri)
   .then(() => console.log('Database connected'))
   .catch(err => {

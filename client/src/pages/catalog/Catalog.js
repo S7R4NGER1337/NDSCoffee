@@ -5,6 +5,7 @@ import { API_URL } from '../../api/config'
 
 export default function Catalog() {
   const [products, setProducts] = useState([])
+  const [loading, setLoading] = useState(true)
   const [filters, setFilters] = useState({
     roastLevel: '',
     origin: '',
@@ -16,9 +17,14 @@ export default function Catalog() {
       const response = await fetch(`${API_URL}/products/available`)
       const data = await response.json()
       setProducts(data)
+      setLoading(false)
     }
     getProducts()
   }, [])
+
+  const uniqueOrigins = useMemo(() => {
+    return [...new Set(products.map((p) => p.origin).filter(Boolean))].sort()
+  }, [products])
 
   const filteredProducts = useMemo(() => {
     let result = [...products]
@@ -75,16 +81,9 @@ export default function Catalog() {
             onChange={(e) => setFilters({ ...filters, origin: e.target.value })}
           >
             <option value="">All Origins</option>
-            <option value="Colombia">Colombia</option>
-            <option value="Ethiopia">Ethiopia</option>
-            <option value="Brazil">Brazil</option>
-            <option value="Guatemala">Guatemala</option>
-            <option value="Kenya">Kenya</option>
-            <option value="CostaRica">Costa Rica</option>
-            <option value="Indonesia">Indonesia</option>
-            <option value="India">India</option>
-            <option value="Honduras">Honduras</option>
-            <option value="Panama">Panama</option>
+            {uniqueOrigins.map((origin) => (
+              <option key={origin} value={origin}>{origin}</option>
+            ))}
           </select>
           {hasActiveFilters && (
             <button className={styles.resetButton} onClick={resetFilters}>
@@ -107,12 +106,16 @@ export default function Catalog() {
         </div>
       </div>
       <div className={styles.catalogCards}>
-        {filteredProducts.length > 0 ? (
+        {loading ? (
+          Array.from({ length: 6 }).map((_, i) => (
+            <div key={i} className={styles.skeleton} />
+          ))
+        ) : filteredProducts.length > 0 ? (
           filteredProducts.map((product) => (
             <CatalogCard productData={product} key={product._id} />
           ))
         ) : (
-          <p>No products match the selected filters.</p>
+          <p className={styles.emptyText}>No products match the selected filters.</p>
         )}
       </div>
     </div>

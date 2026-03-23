@@ -45,6 +45,7 @@ export function methodsQty(productId, operation, setQty, setCart) {
   }
 
   localStorage.setItem("cart", JSON.stringify(cartInfo));
+  window.dispatchEvent(new Event("cartUpdated"));
 
   setCart(cartInfo);
 

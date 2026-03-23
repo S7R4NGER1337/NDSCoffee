@@ -32,10 +32,22 @@
 .qtyAction {
     cursor: pointer;
     font-size: 1rem;
-    padding: 0.5em 0.6em;
-    border-radius: 5em 5em;
+    padding: 0.3em 0.7em;
+    border-radius: 5em;
     background-color: rgba(128, 128, 128, 0.171);
     border: 0.1em solid rgba(128, 128, 128, 0.219);
+    line-height: 1.4;
+    transition: background-color 0.15s;
+}
+
+.qtyAction:hover {
+    background-color: rgba(255, 140, 58, 0.15);
+    border-color: rgba(255, 140, 58, 0.4);
+}
+
+.trashIcon:hover {
+    opacity: 0.7;
+    transition: opacity 0.15s;
 }
 
 .trashIcon {
